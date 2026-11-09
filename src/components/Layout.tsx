@@ -2,21 +2,45 @@ import { useEffect } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { cicloAtual } from '../data/ciclo';
 import { frase } from '../data/site';
+import { useAuth } from '../lib/auth';
+import { iniciais } from '../lib/iniciais';
 import { useInstalar } from '../lib/instalar';
 import { tempoRestante, useAgora } from '../lib/tempo';
 import { Icone } from './Icone';
 
-const NAV = [
+interface ItemNav {
+  para: string;
+  rotulo: string;
+  rotuloLongo: string;
+  icone: string;
+}
+
+const NAV_BASE: ItemNav[] = [
   { para: '/', rotulo: 'Início', rotuloLongo: 'Vitrine de Obras', icone: 'auto_stories' },
   { para: '/grade', rotulo: 'Grade', rotuloLongo: 'Grade de Leitura', icone: 'checklist_rtl' },
   { para: '/regras', rotulo: 'Regras', rotuloLongo: 'Comunidade & Regras', icone: 'gavel' },
 ];
+const NAV_ADM: ItemNav = { para: '/adm', rotulo: 'ADM', rotuloLongo: 'Painel ADM', icone: 'admin_panel_settings' };
+
+/** Item "Início" também fica ativo nas páginas de obra; "Conta" também em entrar/cadastro. */
+const ativoExtra = (para: string, pathname: string) =>
+  (para === '/' && pathname.startsWith('/obra/')) ||
+  (para === '/conta' && ['/entrar', '/cadastro', '/redefinir-senha'].includes(pathname));
 
 export function Layout() {
   const { pathname } = useLocation();
   const agora = useAgora();
   const restante = tempoRestante(cicloAtual.prazo, agora);
   const { podeInstalar, instalar } = useInstalar();
+  const { sessao, perfil, ehAdm } = useAuth();
+
+  const navTopo = ehAdm ? [...NAV_BASE, NAV_ADM] : NAV_BASE;
+  const navBaixo: ItemNav[] = [
+    ...navTopo,
+    sessao
+      ? { para: '/conta', rotulo: 'Conta', rotuloLongo: 'Minha conta', icone: 'account_circle' }
+      : { para: '/conta', rotulo: 'Entrar', rotuloLongo: 'Entrar', icone: 'login' },
+  ];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,9 +74,9 @@ export function Layout() {
           </Link>
 
           <nav aria-label="Principal" className="hidden lg:flex items-center gap-space-xs p-space-xs rounded-full bg-surface-container-low/60">
-            {NAV.map((n) => {
-            const ativo = n.para === '/' && pathname.startsWith('/obra/');
-            return (
+            {navTopo.map((n) => {
+              const ativo = ativoExtra(n.para, pathname);
+              return (
               <NavLink
                 key={n.para}
                 to={n.para}
@@ -67,7 +91,8 @@ export function Layout() {
               >
                 {n.rotuloLongo}
               </NavLink>
-            ); })}
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-space-sm flex-shrink-0">
@@ -90,6 +115,25 @@ export function Layout() {
               >
                 <Icone nome="install_mobile" className="text-[22px]" />
               </button>
+            )}
+            {sessao ? (
+              <Link to="/conta" className="hidden lg:flex items-center gap-space-sm pl-space-xs group" title="Minha conta">
+                <span className="flex flex-col text-right max-w-[160px]">
+                  <span className="text-label-md text-on-surface group-hover:text-primary transition-colors truncate">
+                    {perfil?.nome || 'Minha conta'}
+                  </span>
+                  <span className="text-label-sm font-medium text-on-surface-variant truncate">
+                    {ehAdm ? (perfil?.primordial ? 'ADM Primordial' : 'ADM') : perfil?.usuario ? `@${perfil.usuario}` : ''}
+                  </span>
+                </span>
+                <span className="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-md shadow-[0_0_12px_rgba(167,139,250,0.3)]">
+                  {iniciais(perfil?.nome || sessao.user.email || '')}
+                </span>
+              </Link>
+            ) : (
+              <Link to="/entrar" className="hidden lg:inline-flex btn-primary py-2">
+                <Icone nome="login" className="text-[17px]" /> Entrar
+              </Link>
             )}
           </div>
         </div>
@@ -121,16 +165,14 @@ export function Layout() {
         className="lg:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-2xl shadow-[0_-8px_32px_rgba(14,11,32,0.7)]"
       >
         <div className="flex justify-around items-center h-[72px] px-space-xs max-w-md mx-auto">
-          {NAV.map((n) => {
-            const ativo = n.para === '/' && pathname.startsWith('/obra/');
-            return (
+          {navBaixo.map((n) => (
             <NavLink
               key={n.para}
               to={n.para}
               end={n.para === '/'}
               className={({ isActive }) =>
-                `flex flex-col items-center justify-center gap-1 min-w-[72px] h-12 transition-all select-none group ${
-                  isActive || ativo
+                `flex flex-col items-center justify-center gap-1 min-w-[60px] h-12 transition-all select-none group ${
+                  isActive || ativoExtra(n.para, pathname)
                     ? 'text-primary font-bold drop-shadow-[0_0_10px_rgba(206,189,255,0.65)]'
                     : 'text-on-surface-variant hover:text-on-surface'
                 }`
@@ -138,12 +180,12 @@ export function Layout() {
             >
               {({ isActive }) => (
                 <>
-                  <Icone nome={n.icone} preenchido={isActive || ativo} className="text-[24px] group-hover:scale-110 transition-transform" />
+                  <Icone nome={n.icone} preenchido={isActive || ativoExtra(n.para, pathname)} className="text-[24px] group-hover:scale-110 transition-transform" />
                   <span className="text-label-sm tracking-wide">{n.rotulo}</span>
                 </>
               )}
             </NavLink>
-          ); })}
+          ))}
         </div>
       </nav>
     </div>

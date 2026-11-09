@@ -1,7 +1,8 @@
 # Constelação Literária
 
 Site estático (React + Vite + Tailwind), responsivo e instalável como app (PWA), para os ciclos de leitura
-recíproca entre autoras e autores do Wattpad. Não tem backend: todo o conteúdo fica em arquivos dentro de `src/data/`.
+recíproca entre autoras e autores do Wattpad. O conteúdo (obras, grade, regras) fica em arquivos dentro de
+`src/data/`; só as **contas** (login, cadastro e aprovação de ADMs) usam o [Supabase](https://supabase.com).
 
 O protótipo original (gerado no Stitch) continua em [`prototipo/`](prototipo/).
 
@@ -13,6 +14,10 @@ O protótipo original (gerado no Stitch) continua em [`prototipo/`](prototipo/).
 | `#/grade`     | Grade de leitura do ciclo, por grupo, com contagem regressiva             |
 | `#/obra/<id>` | Detalhes da obra: sinopse, dados, feedbacks e se está na grade da semana  |
 | `#/regras`    | Como funciona, Protocolo de Honra, regulamento, ritmos e grupos           |
+| `#/entrar`    | Login (abas "Autor & Leitor" e "Mesa ADM") e recuperação de senha         |
+| `#/cadastro`  | Cadastro como leitora/autora ou como ADM                                  |
+| `#/conta`     | Minha conta: dados, status da solicitação de ADM, sair                    |
+| `#/adm`       | Painel ADM: aprovar/recusar novas ADMs e ver membros (só ADMs aprovadas)  |
 
 Na vitrine e na grade, **clicar na capa abre a obra direto no Wattpad** (nova aba).
 O título leva para a página de detalhes.
@@ -29,6 +34,39 @@ O título leva para a página de detalhes.
 - **Textos** (dica da semana, regras, frase do rodapé) → [`src/data/site.ts`](src/data/site.ts)
 
 Na grade, cada pessoa pode marcar as leituras como lidas; isso fica salvo apenas no navegador dela.
+
+## Contas e ADMs
+
+- Leitoras/autoras se cadastram e já podem entrar (depois de confirmar o e-mail).
+- Quem se cadastra como **ADM** fica **pendente** até uma ADM aprovada aprovar no Painel ADM. Enquanto isso, usa o
+  site como leitora/autora. Se for recusada, a conta continua existindo, só que sem acesso ADM.
+- A conta de **julianapelozopacheco@gmail.com** é a **ADM Primordial**: já nasce aprovada.
+- As regras de permissão ficam no banco ([`supabase/schema.sql`](supabase/schema.sql)), e não no site. Assim,
+  ninguém consegue se promover a ADM mexendo no navegador.
+
+### Configurando o Supabase (uma vez só)
+
+1. Crie uma conta e um projeto em [supabase.com](https://supabase.com). Na região, prefira *South America (São Paulo)*.
+2. No painel do projeto, abra **SQL Editor → New query**, cole todo o conteúdo de
+   [`supabase/schema.sql`](supabase/schema.sql) e clique em **Run**.
+3. Em **Authentication → Sign In / Providers → Email**, deixe **Confirm email** ativado. Isso é importante: é a
+   confirmação do e-mail que garante que só a dona do e-mail primordial vira ADM Primordial.
+4. Em **Authentication → URL Configuration**:
+   - **Site URL**: o endereço do site publicado, ex.: `https://SEU-USUARIO.github.io/contelacao-literaria/`
+   - **Redirect URLs**: adicione `https://SEU-USUARIO.github.io/contelacao-literaria/**` e
+     `http://localhost:5173/**`
+5. Em **Project Settings → API**, copie a *Project URL* e a chave *anon public*:
+   - para rodar no seu computador: copie `.env.example` para `.env.local` e preencha;
+   - para o site publicado: no GitHub, abra **Settings → Secrets and variables → Actions → Variables** e crie
+     `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
+
+   A chave *anon* é pública por natureza (vai junto do site). Nunca use a chave *service_role* aqui.
+6. **Conta da Juliana:** abra o site em `#/cadastro`, cadastre-se com `julianapelozopacheco@gmail.com` e confirme o
+   e-mail. A conta já entra como ADM Primordial.
+
+> O envio de e-mails embutido no Supabase tem um limite baixo (poucos e-mails por hora) e serve para testes. Quando
+> a comunidade começar a se cadastrar, configure um SMTP próprio em **Authentication → Emails → SMTP Settings**
+> (ex.: Resend, Brevo). Os textos dos e-mails podem ser traduzidos em **Authentication → Emails → Templates**.
 
 ## Rodando localmente
 
