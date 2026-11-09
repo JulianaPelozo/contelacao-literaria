@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        name="viewport" />
+    <meta content="mobile_tab" name="shell-type" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @layer base {
+
+            html,
+            body {
+                width: 100vw;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                overscroll-behavior: none;
+            }
+
+            .pb-safe {
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+            }
+
+            .pt-safe {
+                padding-top: env(safe-area-inset-top, 0px);
+            }
+
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+        id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-container": "#9e98bd", "inverse-on-surface": "#312e44", "on-secondary-fixed-variant": "#5b00c5", "on-secondary": "#3f008d", "surface-container-lowest": "#0e0b20", "primary": "#cebdff", "surface": "#141125", "on-secondary-fixed": "#250059", "tertiary": "#c8c2e9", "surface-bright": "#3a364d", "on-surface": "#e6dffc", "primary-fixed-dim": "#cebdff", "inverse-surface": "#e6dffc", "surface-container-highest": "#363248", "surface-variant": "#363248", "outline-variant": "#494552", "surface-container": "#201d32", "on-tertiary": "#302c4b", "on-secondary-container": "#c7aaff", "on-primary-fixed": "#21005e", "on-tertiary-fixed": "#1b1735", "tertiary-fixed": "#e5deff", "on-background": "#e6dffc", "secondary-fixed-dim": "#d3bbff", "error": "#ffb4ab", "tertiary-fixed-dim": "#c8c2e9", "surface-dim": "#141125", "secondary-fixed": "#ebddff", "primary-fixed": "#e8ddff", "secondary-container": "#5d03ca", "surface-container-low": "#1c192e", "primary-container": "#a78bfa", "on-error": "#690005", "surface-tint": "#cebdff", "inverse-primary": "#674bb5", "on-primary": "#381385", "outline": "#948e9d", "background": "#141125", "on-surface-variant": "#cac4d4", "secondary": "#d3bbff", "on-tertiary-container": "#34304f", "error-container": "#93000a", "on-error-container": "#ffdad6", "on-tertiary-fixed-variant": "#474363", "surface-container-high": "#2b273d", "on-primary-fixed-variant": "#4f319c", "on-primary-container": "#3c1989" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.25rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "gutter-mobile": "1rem", "margin": "2.5rem", "space-md": "1rem", "gutter": "1.5rem", "space-xl": "2.5rem" }, fontFamily: { "headline-xl": ["Playfair Display"], "headline-xl-mobile": ["Playfair Display"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Playfair Display"], "headline-lg-mobile": ["Playfair Display"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-md": ["Playfair Display"], "headline-lg": ["Playfair Display"] }, fontSize: { "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "0em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+    <header
+        class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(15,10,36,0.5)]">
+        <div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm">
+            <div class="flex items-center gap-space-sm min-w-0"><img alt="Constelação Literária Logo"
+                    class="h-8 w-auto object-contain flex-shrink-0"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9Tl05hNH8SWlpwSCZ571tk2Z-00v8G6E-ffWJ7ynJwkhAUIxUL72OBkLmCly9IOo_mHA6kDLUHyKzp3CusPD1byY30cFTrmmnNPQ87BO-K_yB7j9-33vH5bjeo9g4iY8m6clVz86VUc6f6gJVZ_3rzU0YMqRZQSUk2h4fYhVg4zDJWkbreARo7u16sibx5pl30H0RKgqMHk__GKIwUDMkhwaMKuuJ9X1LrnTRW-r9" />
+                <div class="flex flex-col min-w-0">
+                    <div class="flex items-center gap-space-xs"><span
+                            class="font-headline-sm text-headline-sm text-on-surface truncate">Constelação
+                            Literária</span></div><span
+                        class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span
+                            class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>Painel Adm</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-space-xs flex-shrink-0">
+                <div
+                    class="hidden xs:flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high/70 backdrop-blur-md shadow-[0_0_12px_rgba(167,139,250,0.15)]">
+                    <span class="material-symbols-outlined text-[14px] text-primary">auto_awesome</span><span
+                        class="font-label-sm text-label-sm text-secondary-fixed-dim whitespace-nowrap">Semana 14 • 3d
+                        restantes</span></div><button
+                    class="relative w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/40 active:scale-95 transition-all"><span
+                        class="material-symbols-outlined text-[22px]">notifications</span><span
+                        class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#cebdff]"></span></button><button
+                    class="relative w-11 h-11 flex items-center justify-center rounded-full focus:outline-none"><img
+                        alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_12px_rgba(167,139,250,0.3)]"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQoNj0ZIuggMzfuWo37ynSOgjvjh6BQZc7fauquZ5roHj58anFp1dHID-BdbQVBEXVdEWc5Lw43vrZhkV2YUGjoNupVxHZUULyWAy7za2qaWVXY5oTbHSdfSbccS-mL7N-GdN7Jb9SxYItFB3EjGapqXMLAH0ySX-OLBDnyWRczLp6ijDHYQ9pMl67A1LePUD7HWbbK9SMj-J7fweO9Leh6IWutKA_U-cUNErLugJo" /></button>
+            </div>
+        </div>
+    </header>
+    <main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen">
+        <div class="flex flex-col w-full px-gutter-mobile py-space-md gap-space-lg select-none">
+            <!-- Header & Authority Banner -->
+            <div class="relative overflow-hidden rounded-xl bg-surface-container-high p-space-md shadow-xl">
+                <div
+                    class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-secondary-container/40 blur-3xl pointer-events-none">
+                </div>
+                <div class="relative z-10 flex flex-col gap-space-xs">
+                    <div class="flex items-center justify-between gap-space-xs flex-wrap">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm shadow-[0_0_12px_rgba(206,189,255,0.2)]">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                            Modo Administradora Ativo
+                        </span>
+                        <span class="font-label-sm text-label-sm text-secondary-fixed-dim flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">shield_person</span>
+                            Nível 4 • Supremo
+                        </span>
+                    </div>
+                    <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">
+                        Painel da Moderação &amp; ADM
+                    </h1>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Governança astral de trocas literárias, auditoria de comprovantes e balanceamento da
+                        constelação.
+                    </p>
+                </div>
+            </div>
+            <!-- Executive KPIs Bento Grid -->
+            <section class="flex flex-col gap-space-sm">
+                <div class="flex items-center justify-between">
+                    <h2
+                        class="font-label-md text-label-md text-secondary-fixed tracking-wider uppercase flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[16px] text-primary">monitoring</span>
+                        Indicadores do Ciclo 14
+                    </h2>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Atualizado há 4m</span>
+                </div>
+                <div class="grid grid-cols-2 gap-space-sm">
+                    <!-- KPI 1 -->
+                    <div class="flex flex-col justify-between p-space-sm rounded-xl bg-surface-container shadow-md">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Cumprimento</span>
+                            <span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+                        </div>
+                        <div>
+                            <span class="font-headline-md text-headline-md text-on-surface tracking-tight">88.4%</span>
+                            <div class="flex items-center gap-1 mt-1">
+                                <span
+                                    class="inline-flex items-center text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-surface-container-high text-primary">
+                                    +4.2%
+                                </span>
+                                <span class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">vs. Ciclo
+                                    13</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- KPI 2 -->
+                    <div class="flex flex-col justify-between p-space-sm rounded-xl bg-surface-container shadow-md">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Auditorias</span>
+                            <span class="material-symbols-outlined text-[18px] text-primary">rate_review</span>
+                        </div>
+                        <div>
+                            <span class="font-headline-md text-headline-md text-primary tracking-tight">14</span>
+                            <div class="flex items-center gap-1 mt-1">
+                                <span
+                                    class="inline-flex items-center text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">
+                                    Fila Crítica
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- KPI 3 -->
+                    <div class="flex flex-col justify-between p-space-sm rounded-xl bg-surface-container shadow-md">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Grade Ativa</span>
+                            <span class="material-symbols-outlined text-[18px] text-secondary-fixed">group</span>
+                        </div>
+                        <div>
+                            <span class="font-headline-md text-headline-md text-on-surface tracking-tight">64</span>
+                            <div class="flex items-center gap-1 mt-1">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">32 duetos
+                                    ativos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- KPI 4 -->
+                    <div class="flex flex-col justify-between p-space-sm rounded-xl bg-surface-container shadow-md">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Advertências</span>
+                            <span class="material-symbols-outlined text-[18px] text-error">warning</span>
+                        </div>
+                        <div>
+                            <span class="font-headline-md text-headline-md text-error tracking-tight">3</span>
+                            <div class="flex items-center gap-1 mt-1">
+                                <span
+                                    class="inline-flex items-center text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-error-container text-on-error-container">
+                                    1 greve iminente
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Segmented Navigation Chips -->
+            <section class="flex flex-col gap-space-xs">
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                    <button
+                        class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm whitespace-nowrap shadow-[0_0_16px_rgba(206,189,255,0.4)]">
+                        <span class="material-symbols-outlined text-[16px]">fact_check</span>
+                        Auditoria de Leituras (14)
+                    </button>
+                    <button
+                        class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">diversity_3</span>
+                        Manejo de Autores (64)
+                    </button>
+                    <button
+                        class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">casino</span>
+                        Sortear Nova Grade
+                    </button>
+                </div>
+            </section>
+            <!-- Section 1: Verification Queue -->
+            <section class="flex flex-col gap-space-sm">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px] text-primary">rule</span>
+                        <h2 class="font-headline-sm text-headline-sm text-on-surface">Fila de Auditoria de Leitura</h2>
+                    </div>
+                    <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm">
+                        14 aguardando
+                    </span>
+                </div>
+                <!-- Verification Card 1: Standard Valid Submission -->
+                <div
+                    class="flex flex-col gap-space-sm p-space-md rounded-xl bg-surface-container shadow-lg relative overflow-hidden">
+                    <div class="flex items-start justify-between gap-2">
+                        <div class="flex items-center gap-space-xs min-w-0">
+                            <div
+                                class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold overflow-hidden shadow-inner flex-shrink-0">
+                                <img class="w-full h-full object-cover"
+                                    data-alt="Portrait avatar of author Marina with soft violet cosmic backlighting in a painterly fantasy aesthetic"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuArPXdvmThCPn2wbd7oRE3nN01_G51g2pP8S-I_6124pwrJh2K1FaN5g4ftYlJj-cBcTVH7VBdpDDZBGuheQU-E5UvxYaoqeyK1_kb4ZGO4zdaudSvUN9IyyRTKZ4ih12sSgWVitPoq7UVinFy2PO2cnVLPNZmGh_jw8S3x5XphQsFw9w51JgxWDjKoVvhnDD1iHK06z7zcJ5jBlx4tr8lua9XsmRlhWGXbWkXxYdfz" />
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <div class="flex items-center gap-1 truncate">
+                                    <span
+                                        class="font-label-md text-label-md text-on-surface font-bold">@marina_valente</span>
+                                    <span class="text-on-surface-variant font-body-sm text-body-sm">leu</span>
+                                    <span class="font-label-md text-label-md text-secondary font-bold">@isabela_s</span>
+                                </div>
+                                <span
+                                    class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">schedule</span>
+                                    Enviado há 2 horas • Ciclo 14
+                                </span>
+                            </div>
+                        </div>
+                        <span
+                            class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm flex-shrink-0">
+                            Obra: Alquimia Lunar
+                        </span>
+                    </div>
+                    <!-- Feedback Preview Box -->
+                    <div class="p-space-sm rounded-lg bg-surface-container-low text-on-surface flex flex-col gap-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-label-sm text-label-sm text-secondary-fixed flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">format_quote</span>
+                                Comentário Crítico (184 palavras)
+                            </span>
+                            <span
+                                class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm text-[10px]">
+                                <span class="material-symbols-outlined text-[12px]">attachment</span>
+                                3 prints anexados
+                            </span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant italic line-clamp-2">
+                            "Excelente desenvolvimento dos diálogos e gancho final no capítulo 3. A tensão mágica entre
+                            os protagonistas foi muito bem construída..."
+                        </p>
+                    </div>
+                    <!-- Action Buttons -->
+                    <div class="flex items-center gap-2 pt-1 flex-wrap">
+                        <button
+                            class="flex-1 min-w-[130px] flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm shadow-[0_0_12px_rgba(206,189,255,0.3)] active:scale-95 transition-transform">
+                            <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                            Aprovar Leitura ✓
+                        </button>
+                        <button
+                            class="flex-1 min-w-[120px] flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-surface-container-high text-error font-label-sm text-label-sm active:scale-95 transition-transform">
+                            <span class="material-symbols-outlined text-[16px]">cancel</span>
+                            Recusar / Ajuste
+                        </button>
+                        <button
+                            class="p-2.5 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface">
+                            <span class="material-symbols-outlined text-[18px]">open_in_full</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Verification Card 2: Warning Flagged Submission -->
+                <div
+                    class="flex flex-col gap-space-sm p-space-md rounded-xl bg-surface-container shadow-lg relative overflow-hidden">
+                    <div class="flex items-start justify-between gap-2">
+                        <div class="flex items-center gap-space-xs min-w-0">
+                            <div
+                                class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold overflow-hidden shadow-inner flex-shrink-0">
+                                <img class="w-full h-full object-cover"
+                                    data-alt="Avatar portrait of young male author Pedro in a mystical nighttime library background"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdETqIPmKmQ6A337Tgf6CI4e5cE5ZKeMU5Oq1Fvfx2MFDg5aKabmXxhDWP-mXVP29BLP-RDRkXSScBSedVUWKGfi1DYNNECVXH2qAmynDdXD4sAlwIdo8P7hqdFAgTZezQBv2IVnXqz6VVRPEQWOqg5hWj30Cs2kzATDrt_hzxvoAJJFLIFFhwkHw_wfInI99selE53z8LpWpjRzAYpJp2_9hWcbPNL-cPJF2_oNvB" />
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <div class="flex items-center gap-1 truncate">
+                                    <span class="font-label-md text-label-md text-on-surface font-bold">@pedro_sc</span>
+                                    <span class="text-on-surface-variant font-body-sm text-body-sm">leu</span>
+                                    <span class="font-label-md text-label-md text-secondary font-bold">@clara.luz</span>
+                                </div>
+                                <span
+                                    class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">schedule</span>
+                                    Enviado há 5 horas • Ciclo 14
+                                </span>
+                            </div>
+                        </div>
+                        <span
+                            class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[12px]">flag</span>
+                            Suspeita
+                        </span>
+                    </div>
+                    <!-- Warning Callout Box -->
+                    <div class="p-space-sm rounded-lg bg-error-container/20 text-on-surface flex flex-col gap-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-label-sm text-label-sm text-error flex items-center gap-1 font-bold">
+                                <span class="material-symbols-outlined text-[14px]">warning</span>
+                                Critério Violado: Feedback Insuficiente
+                            </span>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">26 palavras
+                                (mín. 80)</span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant italic">
+                            "Gostei muito da história parabéns continue assim vou acompanhar os próximos capítulos."
+                        </p>
+                    </div>
+                    <!-- Quick Action Buttons -->
+                    <div class="flex items-center gap-2 pt-1">
+                        <button
+                            class="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm shadow-md active:scale-95 transition-transform">
+                            <span class="material-symbols-outlined text-[16px]">notification_important</span>
+                            Avisar Autor (Ajuste)
+                        </button>
+                        <button
+                            class="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm active:scale-95 transition-transform">
+                            <span class="material-symbols-outlined text-[16px]">done</span>
+                            Aprovar Parcial
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 2: Author Management & Status -->
+            <section class="flex flex-col gap-space-sm">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px] text-primary">manage_accounts</span>
+                        <h2 class="font-headline-sm text-headline-sm text-on-surface">Manejo &amp; Status dos Membros
+                        </h2>
+                    </div>
+                    <button class="font-label-sm text-label-sm text-primary flex items-center gap-0.5">
+                        Ver todos
+                        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                    </button>
+                </div>
+                <!-- Mini Author Card 1: Star Performer -->
+                <div class="flex items-center justify-between p-space-sm rounded-xl bg-surface-container">
+                    <div class="flex items-center gap-space-xs min-w-0">
+                        <div class="relative w-11 h-11 flex-shrink-0">
+                            <img class="w-full h-full rounded-full object-cover shadow-md"
+                                data-alt="Stylized celestial profile portrait of author Lucas against deep purple cosmos and starry nebula"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOtxOYm8RK1gz5Wk_1JjxCpD-YfeF0YFVul04Ft1biAgzKhrIQWjzZI6rFsqQL4kT2YbFvk1AJDghUnnRMfspFXk2Zvjss4r31d9m9w0z-nX65WrK5i5Bx_V7ZVDCX0BDvLPUee4G0lsV1T9VXDyaVh71WKfiOAWR6eRCvdEW98UQ0dtJ5T8w9KSGdZKJ7x5wSpInYo-6uoy0XNCrQ5P-Fnj4jCLt50Ve06TJ60c1n" />
+                            <span
+                                class="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-on-primary">
+                                <span class="material-symbols-outlined text-[11px]">star</span>
+                            </span>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <div class="flex items-center gap-1.5">
+                                <span
+                                    class="font-label-md text-label-md text-on-surface font-bold truncate">@lucas_estrela</span>
+                                <span
+                                    class="px-1.5 py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm text-[9px] uppercase tracking-wide">
+                                    Destaque
+                                </span>
+                            </div>
+                            <span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+                                Grade Ativa • 100% histórico (12 ciclos)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1 flex-shrink-0">
+                        <button
+                            class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+                            <span class="material-symbols-outlined text-[16px]">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Mini Author Card 2: Strike / Warning Member -->
+                <div class="flex items-center justify-between p-space-sm rounded-xl bg-surface-container">
+                    <div class="flex items-center gap-space-xs min-w-0">
+                        <div class="relative w-11 h-11 flex-shrink-0">
+                            <img class="w-full h-full rounded-full object-cover opacity-80"
+                                data-alt="Moody celestial portrait of female writer Beatriz surrounded by constellation lines and dark violet haze"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwVkJZsoLSz3FmPdn681qk3mJ_5z6XoJoIfEIguUxpKR0_8XE8rKO69NCBIYU4wTQWPRacbYje0q9sqjdgoD9WAhKelba7nbVykV3-1r1UzEEGk5EWtbE05dqMM_Qvu4RbDnHlfX8cAo2Iz8kidybQAxETt8B9GLniUhI3cMY1yoPWBGj3Xn_p9tBz8B8b9zMFtYOqR4xsUbxU9da-P-nb5FR-WNu971abZxYuqnWv" />
+                            <span
+                                class="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-error flex items-center justify-center text-on-error">
+                                <span class="material-symbols-outlined text-[10px]">priority_high</span>
+                            </span>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <div class="flex items-center gap-1.5">
+                                <span
+                                    class="font-label-md text-label-md text-on-surface font-bold truncate">@beatriz_f</span>
+                                <span
+                                    class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm text-[9px] uppercase tracking-wide">
+                                    1 Strike
+                                </span>
+                            </div>
+                            <span class="font-body-sm text-body-sm text-error flex items-center gap-1">
+                                Atraso no Ciclo 13 • Sob Observação
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1 flex-shrink-0">
+                        <button
+                            class="px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-surface-bright transition-colors">
+                            Resolver
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 3: Automated Pairing Engine (CTA) -->
+            <section
+                class="flex flex-col gap-space-xs p-space-md rounded-xl bg-gradient-to-br from-surface-container-high via-surface-container to-surface-container-low shadow-xl">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[20px] text-primary">auto_fix_high</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Motor de Pareamento Astral</h3>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Gere a matriz da próxima semana cruzando compatibilidade de subgêneros, número de palavras e
+                    reciprocidade justa.
+                </p>
+                <!-- Algorithm parameters badges -->
+                <div class="flex flex-wrap gap-1.5 py-1">
+                    <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">favorite</span>
+                        Sem duplas repetidas (&lt; 3 ciclos)
+                    </span>
+                    <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">auto_stories</span>
+                        Tolerância de capítulos: ±1
+                    </span>
+                    <span
+                        class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">style</span>
+                        Gêneros compatíveis
+                    </span>
+                </div>
+                <!-- Main Generator Trigger Button -->
+                <button
+                    class="mt-2 w-full flex items-center justify-center gap-2 py-3 px-space-md rounded-xl bg-gradient-to-r from-secondary-container to-on-secondary-fixed-variant text-on-secondary-fixed font-headline-sm text-[16px] shadow-[0_4px_24px_rgba(93,3,202,0.5)] active:scale-[0.98] transition-transform">
+                    <span class="material-symbols-outlined text-[20px]">hotel_class</span>
+                    Gerar Grade Automática da Semana 15 ✦
+                </button>
+            </section>
+        </div>
+    </main>
+    <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/80 backdrop-blur-2xl shadow-[0_-8px_32px_rgba(14,11,32,0.7)]"
+        data-active-classes="text-primary font-bold drop-shadow-[0_0_10px_rgba(206,189,255,0.65)]">
+        <div class="flex justify-around items-center h-20 px-space-xs"><a
+                class="flex flex-col items-center justify-center gap-1 min-w-[70px] h-12 text-on-surface-variant hover:text-on-surface transition-all select-none group"
+                data-path="inicio" href="#"><span
+                    class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">auto_stories</span><span
+                    class="font-label-sm text-label-sm tracking-wide">Início</span></a><a
+                class="flex flex-col items-center justify-center gap-1 min-w-[70px] h-12 text-on-surface-variant hover:text-on-surface transition-all select-none group"
+                data-path="grade" href="#"><span
+                    class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">checklist_rtl</span><span
+                    class="font-label-sm text-label-sm tracking-wide">Grade</span></a><a aria-current="page"
+                class="flex flex-col items-center justify-center gap-1 min-w-[70px] h-12 transition-all select-none group text-primary font-bold drop-shadow-[0_0_10px_rgba(206,189,255,0.65)]"
+                data-path="painel-adm" href="#"><span
+                    class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">admin_panel_settings</span><span
+                    class="font-label-sm text-label-sm tracking-wide">Painel ADM</span></a><a
+                class="flex flex-col items-center justify-center gap-1 min-w-[70px] h-12 text-on-surface-variant hover:text-on-surface transition-all select-none group"
+                data-path="meu-perfil" href="#"><span
+                    class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">account_circle</span><span
+                    class="font-label-sm text-label-sm tracking-wide">Meu Perfil</span></a></div>
+    </nav>
+</body>
+
+</html>

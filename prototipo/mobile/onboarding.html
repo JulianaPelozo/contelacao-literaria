@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        name="viewport" />
+    <meta content="mobile_stack" name="shell-type" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @layer base {
+
+            html,
+            body {
+                width: 100vw;
+                margin: 0;
+                padding: 0;
+                background-color: #141125;
+                color: #e6dffc;
+            }
+
+            body {
+                overscroll-behavior-y: none;
+            }
+
+            .pb-safe {
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+            }
+
+            .pt-safe {
+                padding-top: env(safe-area-inset-top, 0px);
+            }
+
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+        id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed-variant": "#474363", "on-tertiary": "#302c4b", "on-primary": "#381385", "primary-fixed": "#e8ddff", "on-secondary-fixed-variant": "#5b00c5", "tertiary-fixed-dim": "#c8c2e9", "secondary-fixed": "#ebddff", "primary-container": "#a78bfa", "on-tertiary-fixed": "#1b1735", "outline": "#948e9d", "on-primary-fixed": "#21005e", "error": "#ffb4ab", "outline-variant": "#494552", "tertiary": "#c8c2e9", "on-surface": "#e6dffc", "on-secondary-container": "#c7aaff", "primary": "#cebdff", "secondary-container": "#5d03ca", "on-primary-container": "#3c1989", "surface-container": "#201d32", "on-secondary-fixed": "#250059", "surface-tint": "#cebdff", "inverse-primary": "#674bb5", "on-tertiary-container": "#34304f", "on-primary-fixed-variant": "#4f319c", "surface": "#141125", "surface-dim": "#141125", "background": "#141125", "tertiary-container": "#9e98bd", "secondary-fixed-dim": "#d3bbff", "on-error-container": "#ffdad6", "on-background": "#e6dffc", "error-container": "#93000a", "primary-fixed-dim": "#cebdff", "surface-container-high": "#2b273d", "surface-container-lowest": "#0e0b20", "inverse-surface": "#e6dffc", "surface-variant": "#363248", "surface-bright": "#3a364d", "on-surface-variant": "#cac4d4", "inverse-on-surface": "#312e44", "secondary": "#d3bbff", "surface-container-low": "#1c192e", "surface-container-highest": "#363248", "on-error": "#690005", "tertiary-fixed": "#e5deff", "on-secondary": "#3f008d" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-sm": "0.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter-mobile": "1rem", "space-md": "1rem", "margin-mobile": "1rem", "margin": "2.5rem", "gutter": "1.5rem" }, fontFamily: { "headline-xl": ["Playfair Display"], "headline-lg": ["Playfair Display"], "body-sm": ["Plus Jakarta Sans"], "headline-md": ["Playfair Display"], "label-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Playfair Display"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-sm": ["Playfair Display"], "headline-xl-mobile": ["Playfair Display"] }, fontSize: { "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "0em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col relative selection:bg-primary-container selection:text-on-primary-container">
+    <header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+        <div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm">
+            <div class="flex items-center gap-space-xs"><button aria-label="Voltar"
+                    class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center text-on-surface hover:text-primary hover:bg-surface-container active:scale-95 transition-all"
+                    onclick="history.back()" type="button"><span
+                        class="material-symbols-outlined text-[24px]">arrow_back</span></button>
+                <h1 class="font-headline-sm text-headline-sm text-on-surface font-medium truncate max-w-[180px]">
+                    Onboarding Perfil</h1>
+            </div>
+            <div class="flex items-center gap-space-sm">
+                <div
+                    class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(167,139,250,0.35)]">
+                    <span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-16 pb-safe bg-surface">
+        <div class="flex flex-col w-full pb-28">
+            <!-- Subtle Ambient Glow -->
+            <div
+                class="absolute -top-10 left-1/2 -translate-x-1/2 w-80 h-44 bg-gradient-to-b from-primary-container/20 to-transparent blur-3xl pointer-events-none rounded-full">
+            </div>
+            <!-- Header & Cosmic Stepper -->
+            <section class="relative flex flex-col gap-space-sm pt-2 pb-space-md">
+                <div
+                    class="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full bg-surface-container-high text-primary text-label-sm font-label-sm shadow-[0_0_12px_rgba(167,139,250,0.15)]">
+                    <span class="material-symbols-outlined text-[14px]"
+                        style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    <span>JORNADA DE INICIAÇÃO ASTRAL • CICLO 2025</span>
+                </div>
+                <div>
+                    <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Aliança dos Novos
+                        Escritores</h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Sincronize seu manuscrito do
+                        Wattpad e sele o pacto de leituras recíprocas.</p>
+                </div>
+                <!-- Compact Progress Bar & Stepper -->
+                <div class="bg-surface-container-low rounded-xl p-3.5 shadow-sm mt-1 flex flex-col gap-2.5">
+                    <div class="flex justify-between items-center text-label-sm font-label-sm">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                            Fase 2 de 4: Wattpad &amp; Obra
+                        </span>
+                        <span class="text-on-surface-variant">50% Concluído</span>
+                    </div>
+                    <div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+                        <div
+                            class="bg-gradient-to-r from-secondary to-primary-container h-full rounded-full w-1/2 shadow-[0_0_8px_rgba(167,139,250,0.5)]">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-1 pt-1">
+                        <div class="flex items-center gap-1 text-on-surface-variant text-[11px] font-label-sm">
+                            <span class="material-symbols-outlined text-[13px] text-primary"
+                                style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span class="truncate">Dados</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-primary text-[11px] font-label-sm font-bold">
+                            <span
+                                class="w-2.5 h-2.5 rounded-full bg-primary flex items-center justify-center text-[8px] text-on-primary font-bold">2</span>
+                            <span class="truncate">Obra</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-on-surface-variant/60 text-[11px] font-label-sm">
+                            <span
+                                class="w-2.5 h-2.5 rounded-full bg-surface-container-highest flex items-center justify-center text-[8px]">3</span>
+                            <span class="truncate">Clã</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-on-surface-variant/60 text-[11px] font-label-sm">
+                            <span
+                                class="w-2.5 h-2.5 rounded-full bg-surface-container-highest flex items-center justify-center text-[8px]">4</span>
+                            <span class="truncate">Honra</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 1: Wattpad Connection -->
+            <section class="flex flex-col gap-space-sm mt-space-md">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface">1. Conexão Astral Wattpad</h3>
+                    </div>
+                    <span
+                        class="text-label-sm font-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-md">Passo
+                        Ativo</span>
+                </div>
+                <div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+                    <label class="font-label-md text-label-md text-on-surface-variant" for="wattpad-handle">Nome de
+                        Usuário Público</label>
+                    <div class="flex gap-2">
+                        <div class="relative flex-1">
+                            <span
+                                class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-sm font-body-sm">@</span>
+                            <input
+                                class="w-full bg-surface-container-lowest text-on-surface pl-7 pr-3 py-2.5 rounded-lg text-body-md font-body-md focus:outline-none focus:bg-surface-container transition-all"
+                                id="wattpad-handle" placeholder="seu_usuario" type="text" value="marinavalente_autor" />
+                        </div>
+                        <button
+                            class="px-4 py-2.5 bg-surface-bright hover:bg-surface-container-high text-primary font-label-md text-label-md rounded-lg flex items-center gap-1.5 transition-all active:scale-95 shadow-sm"
+                            type="button">
+                            <span class="material-symbols-outlined text-[16px]">sync</span>
+                            <span>Sincronizar</span>
+                        </button>
+                    </div>
+                    <!-- Sync Success Card -->
+                    <div class="mt-1 bg-surface-container/90 rounded-lg p-3 flex items-center gap-3 shadow-inner">
+                        <div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0 shadow-md">
+                            <img class="w-full h-full object-cover"
+                                data-alt="Close-up portrait of a young female sci-fi author with soft ethereal purple lighting, starlight reflections in her dark eyes, cozy midnight creative vibe, photorealistic digital painting in cosmic hues."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgPNNQDjB1n0cgEOAqMQqX7ODKszo38pGAbPE3dIqB3pV3sk5s8gvvxcvCqfyni8k3mOV1GAaewCfUgTYjmas02EXc-mZGbK58GTu1Y6hS__Bt39lZG0TUD0DFjTeZhQUge5JxQOJsitRXG_mm4FoKXLgRsgTyZNDV8IbJJWyULAwGJbZIdubYvWylsYWDX8roROvSOnFSuJRyNK5-pPA8IpIwRHGN2CK_q2cp00Kq" />
+                            <div
+                                class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]">
+                            </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span
+                                    class="font-body-md text-body-md font-semibold text-on-surface truncate">@marinavalente_autor</span>
+                                <span
+                                    class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-label-sm font-bold">
+                                    <span class="material-symbols-outlined text-[11px]"
+                                        style="font-variation-settings: 'FILL' 1;">hotel_class</span>
+                                    Wattpad Star
+                                </span>
+                            </div>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant truncate">3 obras públicas •
+                                48.2k leituras</p>
+                            <div class="flex items-center gap-1 mt-0.5 text-primary text-[11px] font-label-sm">
+                                <span class="material-symbols-outlined text-[13px]"
+                                    style="font-variation-settings: 'FILL' 1;">verified</span>
+                                <span>Manuscrito validado para o Ciclo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 2: Book Submission Details -->
+            <section class="flex flex-col gap-space-sm mt-space-lg">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">auto_stories</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">2. Submissão do Manuscrito</h3>
+                </div>
+                <div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+                    <!-- Title Input -->
+                    <div class="flex flex-col gap-1.5">
+                        <label class="font-label-md text-label-md text-on-surface-variant" for="book-title">Título do
+                            Livro no Wattpad</label>
+                        <input
+                            class="w-full bg-surface-container-lowest text-on-surface px-3 py-2.5 rounded-lg text-body-md font-body-md focus:outline-none focus:bg-surface-container transition-all"
+                            id="book-title" type="text" value="O Sussurro do Eclipse Prateado" />
+                    </div>
+                    <!-- Story Link -->
+                    <div class="flex flex-col gap-1.5">
+                        <label class="font-label-md text-label-md text-on-surface-variant" for="book-url">Link Direto da
+                            História</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">link</span>
+                            <input
+                                class="w-full bg-surface-container-lowest text-on-surface pl-9 pr-3 py-2.5 rounded-lg text-body-sm font-body-sm focus:outline-none focus:bg-surface-container transition-all"
+                                id="book-url" type="url" value="https://wattpad.com/story/39201948-sussurro-eclipse" />
+                        </div>
+                    </div>
+                    <!-- 2 Compact Numeric Fields -->
+                    <div class="grid grid-cols-2 gap-space-sm">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="font-label-md text-label-md text-on-surface-variant"
+                                for="chapter-count">Capítulos</label>
+                            <div class="flex items-center bg-surface-container-lowest rounded-lg px-3 py-2">
+                                <span
+                                    class="material-symbols-outlined text-primary text-[18px] mr-2">format_list_numbered</span>
+                                <input
+                                    class="w-full bg-transparent text-on-surface text-body-md font-body-md font-semibold focus:outline-none"
+                                    id="chapter-count" type="number" value="14" />
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="font-label-md text-label-md text-on-surface-variant" for="word-avg">Média
+                                Palavras/Cap.</label>
+                            <div class="flex items-center bg-surface-container-lowest rounded-lg px-3 py-2">
+                                <span class="material-symbols-outlined text-primary text-[18px] mr-2">notes</span>
+                                <input
+                                    class="w-full bg-transparent text-on-surface text-body-md font-body-md font-semibold focus:outline-none"
+                                    id="word-avg" type="text" value="~1.850" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Subgenre Chips -->
+                    <div class="flex flex-col gap-2">
+                        <label class="font-label-md text-label-md text-on-surface-variant">Subgênero Principal</label>
+                        <div class="flex flex-wrap gap-2" id="subgenre-container">
+                            <button
+                                class="genre-pill px-3 py-1.5 rounded-full text-label-sm font-label-sm bg-primary-container text-on-primary-container shadow-[0_0_10px_rgba(167,139,250,0.35)] transition-all"
+                                type="button">
+                                Fantasia Sombria
+                            </button>
+                            <button
+                                class="genre-pill px-3 py-1.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-all"
+                                type="button">
+                                Romance Gótico
+                            </button>
+                            <button
+                                class="genre-pill px-3 py-1.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-all"
+                                type="button">
+                                Ficção Especulativa
+                            </button>
+                            <button
+                                class="genre-pill px-3 py-1.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-all"
+                                type="button">
+                                Distopia Cósmica
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Synopsis with Counter -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center">
+                            <label class="font-label-md text-label-md text-on-surface-variant"
+                                for="book-synopsis">Sinopse Sintética da Iniciação</label>
+                            <span class="font-label-sm text-label-sm text-primary" id="synopsis-counter">212 /
+                                280</span>
+                        </div>
+                        <textarea
+                            class="w-full bg-surface-container-lowest text-on-surface p-3 rounded-lg text-body-sm font-body-sm focus:outline-none focus:bg-surface-container transition-all resize-none"
+                            id="book-synopsis" maxlength="280"
+                            rows="3">Quando duas luas colidem sob o céu de Aethelgard, a herdeira da dinastia estelar precisa sacrificar suas memórias mortais para decifrar a profecia escrita nas constelações proibidas antes do solstício negro.</textarea>
+                    </div>
+                    <!-- Cover Preview & Re-upload Card -->
+                    <div class="flex flex-col gap-2">
+                        <label class="font-label-md text-label-md text-on-surface-variant">Arte de Capa
+                            Detectada</label>
+                        <div class="bg-surface-container-lowest rounded-xl p-3 flex gap-3.5 items-center">
+                            <div
+                                class="relative w-20 h-28 rounded-lg overflow-hidden shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+                                <img class="w-full h-full object-cover"
+                                    data-alt="Vertical fantasy book cover design showing a glowing silver solar eclipse in a cosmic purple starlit galaxy with an elegant silhouette of an elven sorceress wearing silver celestial crown, ultra detailed typography style."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3GlAoBLfQ-N-AzeOoLPyNjQdmKR9ht0aq7H7YxjEX5Cx0VhQ4XVGg45Dr1v8rYXkaOxxLb7cGLkASqyC-2cvU9XI-pwat9ybOLeTFoPMN-tXDOP7rtx0cA2lMv7io8THt9jPI85yJQqVl3kOA7-UQfGgfY0GPzUM6tLlYU94ji1vPqe0lmD4YoQDtzGzwSbTUeqNYsTc3CfOeQAeqNQFO_XShnnzYpg7Zpwc26fCR" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent">
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2 flex-1 min-w-0">
+                                <div>
+                                    <p class="font-body-sm text-body-sm font-semibold text-on-surface truncate">
+                                        capa_oficial_v2_final.png</p>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant">Proporção 3:4 • Alta
+                                        Definição</p>
+                                </div>
+                                <button
+                                    class="self-start px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-primary font-label-sm text-label-sm flex items-center gap-1.5 transition-all active:scale-95"
+                                    type="button">
+                                    <span class="material-symbols-outlined text-[15px]">photo_library</span>
+                                    <span>Substituir Arte</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content Rating Chips -->
+                    <div class="flex flex-col gap-2">
+                        <label class="font-label-md text-label-md text-on-surface-variant">Classificação Etária</label>
+                        <div class="grid grid-cols-3 gap-2" id="rating-container">
+                            <button
+                                class="rating-btn flex flex-col items-center justify-center p-2 rounded-lg bg-surface-container-highest text-on-surface-variant transition-all text-center"
+                                type="button">
+                                <span class="font-label-md text-label-md font-bold text-on-surface">+14</span>
+                                <span class="text-[10px] font-label-sm">Geral Jovem</span>
+                            </button>
+                            <button
+                                class="rating-btn flex flex-col items-center justify-center p-2 rounded-lg bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(167,139,250,0.3)] transition-all text-center"
+                                type="button">
+                                <span class="font-label-md text-label-md font-bold">+16</span>
+                                <span class="text-[10px] font-label-sm">Tensão / Ação</span>
+                            </button>
+                            <button
+                                class="rating-btn flex flex-col items-center justify-center p-2 rounded-lg bg-surface-container-highest text-on-surface-variant transition-all text-center"
+                                type="button">
+                                <span class="font-label-md text-label-md font-bold text-on-surface">+18</span>
+                                <span class="text-[10px] font-label-sm">Conteúdo Adulto</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 3: Stellar Clan & Orbit Cadence -->
+            <section class="flex flex-col gap-space-sm mt-space-lg">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">groups</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">3. Clã Estelar &amp; Ritmo da Órbita
+                    </h3>
+                </div>
+                <!-- Clan Selection Cards -->
+                <div class="flex flex-col gap-2.5" id="clan-container">
+                    <!-- Orion Clan (Active) -->
+                    <div
+                        class="clan-card relative bg-surface-container rounded-xl p-3.5 shadow-md flex items-center justify-between cursor-pointer transition-all">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-[0_0_12px_rgba(167,139,250,0.4)]">
+                                <span class="material-symbols-outlined text-[22px]">flare</span>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-body-md text-body-md font-bold text-on-surface">Clã Órion</span>
+                                    <span
+                                        class="text-[10px] font-label-sm px-1.5 py-0.5 rounded-full bg-primary/20 text-primary">Recomendado</span>
+                                </div>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">Fantasia Épica, Sci-Fi
+                                    &amp; Speculative</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="text-label-sm font-label-sm font-semibold text-primary">2 vagas</span>
+                            <span class="text-[10px] text-on-surface-variant">8/10 autores</span>
+                        </div>
+                    </div>
+                    <!-- Andromeda Clan -->
+                    <div
+                        class="clan-card relative bg-surface-container-low rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all hover:bg-surface-container">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-surface-container-highest text-on-surface-variant flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[22px]">favorite</span>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-body-md text-body-md font-semibold text-on-surface">Clã
+                                        Andrômeda</span>
+                                </div>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">Romance Astral, Drama
+                                    &amp; Poesia</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="text-label-sm font-label-sm font-semibold text-on-surface-variant">1
+                                vaga</span>
+                            <span class="text-[10px] text-on-surface-variant">9/10 autores</span>
+                        </div>
+                    </div>
+                    <!-- Cassiopeia Clan -->
+                    <div
+                        class="clan-card relative bg-surface-container-low rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all hover:bg-surface-container">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-surface-container-highest text-on-surface-variant flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[22px]">psychology_alt</span>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-body-md text-body-md font-semibold text-on-surface">Clã
+                                        Cassiopeia</span>
+                                </div>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">Mistério, Thriller &amp;
+                                    Dark Academy</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="text-label-sm font-label-sm font-semibold text-on-surface-variant">4
+                                vagas</span>
+                            <span class="text-[10px] text-on-surface-variant">6/10 autores</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Orbit Cadence Segmented Pill -->
+                <div class="bg-surface-container-low rounded-xl p-3 shadow-md mt-1 flex flex-col gap-2">
+                    <label class="font-label-md text-label-md text-on-surface-variant">Ritmo da Órbita Semanal</label>
+                    <div class="grid grid-cols-2 gap-2 bg-surface-container-lowest p-1 rounded-xl">
+                        <button
+                            class="py-2.5 px-2 rounded-lg bg-surface-container-high text-on-surface text-center flex flex-col items-center justify-center shadow-sm"
+                            type="button">
+                            <span class="font-label-md text-label-md font-semibold text-primary">Ciclo Padrão</span>
+                            <span class="text-[10px] font-label-sm text-on-surface-variant">3 caps / semana</span>
+                        </button>
+                        <button
+                            class="py-2.5 px-2 rounded-lg text-on-surface-variant text-center flex flex-col items-center justify-center hover:text-on-surface"
+                            type="button">
+                            <span class="font-label-md text-label-md font-semibold">Ciclo Intensivo</span>
+                            <span class="text-[10px] font-label-sm text-on-surface-variant">5 caps / semana</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 4: Honor Protocol & Oath -->
+            <section class="flex flex-col gap-space-sm mt-space-lg mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">4. Protocolo de Honra Astral</h3>
+                </div>
+                <div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-3">
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        A Constelação opera sobre a reciprocidade sagrada. Marque cada pacto para validar sua submissão:
+                    </p>
+                    <!-- Checklist Item 1 -->
+                    <label
+                        class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container cursor-pointer select-none">
+                        <input checked=""
+                            class="mt-0.5 w-4 h-4 rounded text-primary-container bg-surface-container-lowest accent-primary focus:ring-0"
+                            type="checkbox" />
+                        <div class="flex-1">
+                            <span class="font-body-sm text-body-sm font-semibold text-on-surface block">Fórmula de
+                                Feedback 2+1</span>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Mínimo de 2
+                                pontos fortes detalhados e 1 sugestão construtiva por capítulo.</span>
+                        </div>
+                    </label>
+                    <!-- Checklist Item 2 -->
+                    <label
+                        class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container cursor-pointer select-none">
+                        <input checked=""
+                            class="mt-0.5 w-4 h-4 rounded text-primary-container bg-surface-container-lowest accent-primary focus:ring-0"
+                            type="checkbox" />
+                        <div class="flex-1">
+                            <span class="font-body-sm text-body-sm font-semibold text-on-surface block">Extensão Mínima
+                                de Resenha</span>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Comentários
+                                aprofundados com pelo menos 150 palavras no capítulo auditado.</span>
+                        </div>
+                    </label>
+                    <!-- Checklist Item 3 -->
+                    <label
+                        class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container cursor-pointer select-none">
+                        <input checked=""
+                            class="mt-0.5 w-4 h-4 rounded text-primary-container bg-surface-container-lowest accent-primary focus:ring-0"
+                            type="checkbox" />
+                        <div class="flex-1">
+                            <span class="font-body-sm text-body-sm font-semibold text-on-surface block">Comprovação via
+                                Prints</span>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Envio do
+                                print da interação e votos no mural do clã dentro do prazo de 48h.</span>
+                        </div>
+                    </label>
+                    <!-- Checklist Item 4 -->
+                    <label
+                        class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container cursor-pointer select-none">
+                        <input checked=""
+                            class="mt-0.5 w-4 h-4 rounded text-primary-container bg-surface-container-lowest accent-primary focus:ring-0"
+                            type="checkbox" />
+                        <div class="flex-1">
+                            <span class="font-body-sm text-body-sm font-semibold text-on-surface block">Ciência da
+                                Política de Strikes</span>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">2 atrasos não
+                                justificados resultam em expulsão do clã e perda de votos acumulados.</span>
+                        </div>
+                    </label>
+                </div>
+            </section>
+            <!-- Sticky Mobile Action Bar -->
+            <aside
+                class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/90 backdrop-blur-xl px-gutter-mobile py-3 flex items-center gap-3 shadow-[0_-4px_24px_rgba(0,0,0,0.6)]">
+                <button
+                    class="px-4 py-3 rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all active:scale-95"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">bookmark</span>
+                    <span>Rascunho</span>
+                </button>
+                <button
+                    class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-secondary-container via-primary-container to-secondary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(167,139,250,0.4)] transition-all active:scale-95"
+                    id="submit-btn" type="button">
+                    <span>Finalizar &amp; Enviar Auditoria</span>
+                    <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+                </button>
+            </aside>
+        </div>
+        <script>
+            // Interactive Pill Selector
+            document.querySelectorAll('.genre-pill').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.genre-pill').forEach(b => {
+                        b.className = 'genre-pill px-3 py-1.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-all';
+                    });
+                    btn.className = 'genre-pill px-3 py-1.5 rounded-full text-label-sm font-label-sm bg-primary-container text-on-primary-container shadow-[0_0_10px_rgba(167,139,250,0.35)] transition-all';
+                });
+            });
+
+            // Interactive Age Rating Selector
+            document.querySelectorAll('.rating-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.rating-btn').forEach(b => {
+                        b.className = 'rating-btn flex flex-col items-center justify-center p-2 rounded-lg bg-surface-container-highest text-on-surface-variant transition-all text-center';
+                    });
+                    btn.className = 'rating-btn flex flex-col items-center justify-center p-2 rounded-lg bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(167,139,250,0.3)] transition-all text-center';
+                });
+            });
+
+            // Synopsis dynamic counter
+            const synopsisEl = document.getElementById('book-synopsis');
+            const counterEl = document.getElementById('synopsis-counter');
+            if (synopsisEl && counterEl) {
+                synopsisEl.addEventListener('input', (e) => {
+                    counterEl.textContent = `${e.target.value.length} / 280`;
+                });
+            }
+
+            // Clan Selection Cards
+            document.querySelectorAll('.clan-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.clan-card').forEach(c => {
+                        c.className = 'clan-card relative bg-surface-container-low rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all hover:bg-surface-container';
+                    });
+                    card.className = 'clan-card relative bg-surface-container rounded-xl p-3.5 shadow-md flex items-center justify-between cursor-pointer transition-all shadow-[0_0_16px_rgba(167,139,250,0.2)]';
+                });
+            });
+
+            // Submission Toast Micro-interaction
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', () => {
+                    submitBtn.innerHTML = `
+        <span class="inline-block animate-spin mr-1">🪐</span>
+        <span>Validando Iniciação...</span>
+      `;
+                    setTimeout(() => {
+                        submitBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          <span>Enviado com Sucesso!</span>
+        `;
+                        submitBtn.classList.remove('from-secondary-container');
+                        submitBtn.classList.add('bg-emerald-600', 'text-white');
+                    }, 1200);
+                });
+            }
+        </script>
+    </main>
+</body>
+
+</html>

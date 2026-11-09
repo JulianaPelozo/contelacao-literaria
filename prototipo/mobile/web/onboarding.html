@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,600&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @layer base {
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                overscroll-behavior: none;
+            }
+
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+        id="tailwind-config">tailwind.config = { "darkMode": "class", "theme": { "extend": { "colors": { "on-primary-fixed-variant": "#4f319c", "surface-container-lowest": "#0e0b20", "on-surface-variant": "#cac4d4", "tertiary-fixed": "#e5deff", "surface-variant": "#363248", "on-secondary-container": "#c7aaff", "on-surface": "#e6dffc", "surface-dim": "#141125", "background": "#141125", "on-primary-container": "#3c1989", "primary-fixed-dim": "#cebdff", "outline": "#948e9d", "inverse-primary": "#674bb5", "on-tertiary": "#302c4b", "inverse-on-surface": "#312e44", "on-secondary-fixed": "#250059", "on-background": "#e6dffc", "surface-container-high": "#2b273d", "surface": "#141125", "primary-fixed": "#e8ddff", "secondary": "#d3bbff", "on-error": "#690005", "error": "#ffb4ab", "outline-variant": "#494552", "tertiary": "#c8c2e9", "on-tertiary-container": "#34304f", "on-primary": "#381385", "primary": "#cebdff", "secondary-fixed-dim": "#d3bbff", "inverse-surface": "#e6dffc", "on-tertiary-fixed-variant": "#474363", "surface-container-highest": "#363248", "surface-tint": "#cebdff", "surface-container": "#201d32", "on-error-container": "#ffdad6", "secondary-fixed": "#ebddff", "secondary-container": "#5d03ca", "surface-bright": "#3a364d", "tertiary-container": "#9e98bd", "on-tertiary-fixed": "#1b1735", "tertiary-fixed-dim": "#c8c2e9", "on-secondary": "#3f008d", "on-secondary-fixed-variant": "#5b00c5", "primary-container": "#a78bfa", "surface-container-low": "#1c192e", "error-container": "#93000a", "on-primary-fixed": "#21005e" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-xl": "2.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "margin-mobile": "1rem", "gutter": "1.5rem", "margin": "2.5rem", "space-lg": "1.5rem" }, "fontFamily": { "headline-md": ["Playfair Display"], "headline-lg-mobile": ["Playfair Display"], "headline-lg": ["Playfair Display"], "body-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Playfair Display"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-xl": ["Playfair Display"], "headline-sm": ["Playfair Display"] }, "fontSize": { "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "0em", "fontWeight": "600" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }] } } } }</script>
+</head>
+
+<body
+    class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-secondary-container selection:text-on-secondary-container">
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/70 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]">
+        <div class="h-16 w-full px-margin-mobile lg:px-margin flex items-center justify-between">
+            <div class="flex items-center gap-space-sm">
+                <div
+                    class="w-9 h-9 rounded-xl bg-surface-container-high/80 flex items-center justify-center text-primary shadow-[0_0_16px_rgba(167,139,250,0.35)]">
+                    <span class="material-symbols-outlined text-[20px]">auto_awesome</span></div>
+                <div class="flex flex-col"><span
+                        class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">Constelação</span><span
+                        class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Literária</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-space-md">
+                <nav class="hidden sm:flex items-center gap-space-md" data-active-classes="text-primary font-bold"><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="ajuda-e-suporte" href="#">Ajuda e Suporte</a><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="manifesto-literario" href="#">Manifesto</a></nav>
+                <div class="flex items-center gap-space-sm"><button aria-label="Suporte e Dúvidas"
+                        class="h-9 px-space-sm rounded-lg bg-surface-container-high/60 hover:bg-surface-container-highest hover:text-on-surface text-on-surface-variant transition-colors flex items-center gap-space-xs font-body-sm text-body-sm"
+                        type="button"><span class="material-symbols-outlined text-[18px]">help</span><span
+                            class="hidden md:inline font-label-md text-label-md">Ajuda</span></button>
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(206,189,255,0.4)]">
+                        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="w-full pt-16 flex-1 flex flex-col justify-center bg-surface relative">
+        <div class="flex flex-col w-full relative">
+            <!-- Ambient Atmospheric Nebulae -->
+            <div
+                class="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-secondary-container/20 rounded-full blur-[140px] pointer-events-none -z-10">
+            </div>
+            <div
+                class="absolute top-[480px] right-4 w-[480px] h-[480px] bg-on-primary-fixed-variant/15 rounded-full blur-[160px] pointer-events-none -z-10">
+            </div>
+            <div
+                class="absolute bottom-32 left-8 w-[520px] h-[400px] bg-primary-container/10 rounded-full blur-[150px] pointer-events-none -z-10">
+            </div>
+            <!-- Main Content Container with Starlit Cadence -->
+            <div class="w-full max-w-6xl mx-auto px-margin-mobile lg:px-margin py-space-xl flex flex-col gap-space-xl">
+                <!-- Hero / Welcome Header -->
+                <header class="flex flex-col items-center text-center max-w-3xl mx-auto">
+                    <div
+                        class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-high/80 text-primary text-label-sm font-label-sm uppercase tracking-widest shadow-md">
+                        <span class="material-symbols-outlined text-[15px]"
+                            style="font-variation-settings: 'FILL' 1;">flare</span>
+                        <span>Jornada de Iniciação Astral • Ciclo de Leituras 2025</span>
+                    </div>
+                    <h1 class="mt-space-md font-headline-xl text-headline-xl text-on-surface tracking-tight">
+                        Aliança dos Novos Escritores
+                    </h1>
+                    <p class="mt-space-sm font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        Bem-vindo à aliança cósmica! Vamos calibrar suas coordenadas cósmicas, sincronizar seu
+                        manuscrito do Wattpad e selar o pacto recíproco de leituras analíticas.
+                    </p>
+                    <!-- Dynamic Constellation SVG Decorative Bar -->
+                    <div class="w-full flex items-center justify-center mt-space-md text-primary/30">
+                        <svg class="w-64 h-6" fill="none" viewbox="0 0 240 24">
+                            <circle class="text-primary animate-pulse" cx="20" cy="12" fill="currentColor" r="2.5">
+                            </circle>
+                            <line stroke="currentColor" stroke-dasharray="3 3" x1="20" x2="80" y1="12" y2="12"></line>
+                            <circle class="text-secondary" cx="80" cy="12" fill="currentColor" r="3.5"></circle>
+                            <line stroke="currentColor" stroke-dasharray="3 3" x1="80" x2="160" y1="12" y2="12"></line>
+                            <polygon class="text-primary-fixed" fill="currentColor" points="160,8 164,12 160,16 156,12">
+                            </polygon>
+                            <line stroke="currentColor" stroke-dasharray="3 3" x1="160" x2="220" y1="12" y2="12"></line>
+                            <circle class="text-primary" cx="220" cy="12" fill="currentColor" r="2"></circle>
+                        </svg>
+                    </div>
+                </header>
+                <!-- Multi-Step Cosmic Stepper Navigation -->
+                <nav aria-label="Progresso da Inscrição"
+                    class="w-full bg-surface-container-lowest/80 backdrop-blur-2xl rounded-2xl p-space-md shadow-xl">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-space-sm">
+                        <!-- Step 1: Concluído -->
+                        <div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container/40">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 shadow-sm">
+                                <span class="material-symbols-outlined text-[20px]"
+                                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span
+                                    class="text-label-sm font-label-sm uppercase tracking-wider text-primary font-bold">Fase
+                                    I • Feito</span>
+                                <span class="text-body-sm font-body-sm text-on-surface truncate font-medium">Dados do
+                                    Autor</span>
+                            </div>
+                        </div>
+                        <!-- Step 2: Ativo -->
+                        <div
+                            class="flex items-center gap-space-sm p-space-sm rounded-xl bg-secondary-container/40 shadow-[0_0_24px_-4px_rgba(93,3,202,0.4)]">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-md">
+                                <span class="material-symbols-outlined text-[20px]">stars</span>
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span
+                                    class="text-label-sm font-label-sm uppercase tracking-wider text-secondary-fixed font-bold">Fase
+                                    II • Atual</span>
+                                <span class="text-body-sm font-body-sm text-on-surface truncate font-semibold">Wattpad
+                                    &amp; Manuscrito</span>
+                            </div>
+                        </div>
+                        <!-- Step 3: Próximo -->
+                        <div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low/40">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-surface-container-highest/60 text-on-surface-variant flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">hub</span>
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span class="text-label-sm font-label-sm uppercase tracking-wider text-outline">Fase
+                                    III</span>
+                                <span class="text-body-sm font-body-sm text-on-surface-variant truncate">Constelação
+                                    &amp; Gênero</span>
+                            </div>
+                        </div>
+                        <!-- Step 4: Próximo -->
+                        <div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low/40">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-surface-container-highest/60 text-on-surface-variant flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-[20px]">verified</span>
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span class="text-label-sm font-label-sm uppercase tracking-wider text-outline">Fase
+                                    IV</span>
+                                <span class="text-body-sm font-body-sm text-on-surface-variant truncate">Protocolo de
+                                    Honra</span>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Main Form Grid Layout -->
+                <form class="flex flex-col gap-space-xl" id="onboarding-form" onsubmit="event.preventDefault();">
+                    <!-- SEÇÃO A: Conexão Wattpad -->
+                    <section
+                        class="bg-surface-container-low/70 backdrop-blur-xl rounded-2xl p-space-lg lg:p-space-xl flex flex-col gap-space-md shadow-xl relative overflow-hidden">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+                            <div class="flex items-center gap-space-sm">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shadow-inner">
+                                    <span class="material-symbols-outlined text-[22px]">cyclone</span>
+                                </div>
+                                <div>
+                                    <h2 class="font-headline-md text-headline-md text-on-surface">1. Conexão Astral com
+                                        o Wattpad</h2>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">Sincronize seu usuário
+                                        para validarmos contagem de palavras e leituras comunitárias.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">
+                                <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+                                <span>API Wattpad v3 • Conectada</span>
+                            </div>
+                        </div>
+                        <!-- Input & Sync Bar -->
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-end">
+                            <div class="lg:col-span-8 flex flex-col gap-space-xs">
+                                <label
+                                    class="font-label-md text-label-md text-on-surface flex items-center gap-space-xs"
+                                    for="wattpad_username">
+                                    <span>Seu Nome de Usuário Público</span>
+                                    <span class="text-primary">*</span>
+                                </label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute left-4 text-on-surface-variant font-semibold">@</span>
+                                    <input
+                                        class="w-full bg-surface-container-lowest/90 text-on-surface pl-10 pr-space-md py-3 rounded-xl font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-all"
+                                        id="wattpad_username" placeholder="ex: seu_perfil" type="text"
+                                        value="marinavalente_autor" />
+                                </div>
+                            </div>
+                            <div class="lg:col-span-4">
+                                <button
+                                    class="w-full h-[48px] px-space-md rounded-xl bg-secondary-container text-on-secondary-container hover:bg-secondary-container/90 transition-all font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-space-sm shadow-md"
+                                    type="button">
+                                    <span class="material-symbols-outlined text-[18px]">sync</span>
+                                    <span>Verificar e Sincronizar</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Sync Result Card (Glass Badge) -->
+                        <div
+                            class="p-space-md rounded-xl bg-surface-container-highest/60 flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+                            <div class="flex items-center gap-space-md">
+                                <div class="w-12 h-12 rounded-full bg-cover bg-center ring-2 ring-primary/40 shrink-0"
+                                    data-alt="Portrait photography of Marina Valente, a thoughtful Brazilian female author with dark wavy hair in soft moody purple rim lighting."
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrvCkAhpRPJPfeRl0Th7uOzUe-36mDRFXcdISHzr3hRfrW92GLBh3wqQrdtMIPMI02C09y34cstavtm9pDjxuNajScaHI5HTJY7-Hy_MXfPzNT0IIoZnJOAcDWkzdX_QUPfkHMY_RasTfzrFSRrSSvnUn5lJCXduET4aje_LEKl4OcnZo2ZCeBf0SCu4Xhoneyt5PBPIbmtchotwbLduoh5nlFvF5_cnP2o_c8nhSA')">
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="flex items-center gap-space-xs">
+                                        <span class="font-body-md text-body-md text-on-surface font-semibold">Marina
+                                            Valente</span>
+                                        <span class="material-symbols-outlined text-[16px] text-primary"
+                                            style="font-variation-settings: 'FILL' 1;">verified</span>
+                                        <span
+                                            class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-[10px] font-label-sm text-secondary-fixed">Wattpad
+                                            Star</span>
+                                    </div>
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Sincronizado: 3
+                                        histórias públicas • 48.2k leituras acumuladas</span>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-space-xs text-secondary-fixed text-label-sm font-label-sm">
+                                <span class="material-symbols-outlined text-[18px]">cloud_done</span>
+                                <span>Manuscrito validado há 4 min</span>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- SEÇÃO B: Cadastro da Obra Participante -->
+                    <section
+                        class="bg-surface-container-low/70 backdrop-blur-xl rounded-2xl p-space-lg lg:p-space-xl flex flex-col gap-space-lg shadow-xl">
+                        <div class="flex items-center gap-space-sm">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shadow-inner">
+                                <span class="material-symbols-outlined text-[22px]">auto_stories</span>
+                            </div>
+                            <div>
+                                <h2 class="font-headline-md text-headline-md text-on-surface">2. Cadastro da Obra no
+                                    Ciclo Atual</h2>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Esta será a história
+                                    submetida à leitura mútua e avaliações profundas.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+                            <!-- Left Column: Book Details Inputs -->
+                            <div class="lg:col-span-8 flex flex-col gap-space-md">
+                                <!-- Título do Livro -->
+                                <div class="flex flex-col gap-space-xs">
+                                    <label class="font-label-md text-label-md text-on-surface" for="book_title">
+                                        Título do Livro no Wattpad <span class="text-primary">*</span>
+                                    </label>
+                                    <input
+                                        class="w-full bg-surface-container-lowest/90 text-on-surface px-space-md py-3 rounded-xl font-body-md text-body-md placeholder:text-outline focus:outline-none"
+                                        id="book_title" placeholder="Ex: Crônicas de Nebulosa" type="text"
+                                        value="O Sussurro do Eclipse Prateado" />
+                                </div>
+                                <!-- Link Direto da História -->
+                                <div class="flex flex-col gap-space-xs">
+                                    <label class="font-label-md text-label-md text-on-surface" for="wattpad_link">
+                                        Link Direto da História <span class="text-primary">*</span>
+                                    </label>
+                                    <div class="relative flex items-center">
+                                        <span
+                                            class="absolute left-4 text-on-surface-variant material-symbols-outlined text-[18px]">link</span>
+                                        <input
+                                            class="w-full bg-surface-container-lowest/90 text-on-surface pl-11 pr-space-md py-3 rounded-xl font-body-md text-body-md placeholder:text-outline focus:outline-none"
+                                            id="wattpad_link" placeholder="https://wattpad.com/story/..." type="url"
+                                            value="https://www.wattpad.com/story/392019402-o-sussurro-do-eclipse-prateado" />
+                                    </div>
+                                </div>
+                                <!-- Capítulos & Média de Palavras -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface" for="chapters_count">
+                                            Capítulos Já Publicados
+                                        </label>
+                                        <div class="relative flex items-center">
+                                            <span
+                                                class="absolute left-4 text-on-surface-variant material-symbols-outlined text-[18px]">format_list_numbered</span>
+                                            <input
+                                                class="w-full bg-surface-container-lowest/90 text-on-surface pl-11 pr-space-md py-3 rounded-xl font-body-md text-body-md focus:outline-none"
+                                                id="chapters_count" max="150" min="1" type="number" value="14" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface" for="words_avg">
+                                            Média de Palavras por Capítulo
+                                        </label>
+                                        <div class="relative flex items-center">
+                                            <span
+                                                class="absolute left-4 text-on-surface-variant material-symbols-outlined text-[18px]">speed</span>
+                                            <input
+                                                class="w-full bg-surface-container-lowest/90 text-on-surface pl-11 pr-space-md py-3 rounded-xl font-body-md text-body-md focus:outline-none"
+                                                id="words_avg" type="text" value="~1.850 palavras" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Gênero Principal e Tags de Busca -->
+                                <div class="flex flex-col gap-space-xs">
+                                    <label class="font-label-md text-label-md text-on-surface">
+                                        Subgênero Principal &amp; Atmosfera
+                                    </label>
+                                    <div class="flex flex-wrap gap-space-xs">
+                                        <button
+                                            class="px-space-md py-space-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md shadow-sm"
+                                            type="button">Fantasia Sombria</button>
+                                        <button
+                                            class="px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md"
+                                            type="button">Romance Gótico</button>
+                                        <button
+                                            class="px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md"
+                                            type="button">Ficção Especulativa</button>
+                                        <button
+                                            class="px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md"
+                                            type="button">Mistério Astral</button>
+                                        <button
+                                            class="px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md"
+                                            type="button">Distopia</button>
+                                    </div>
+                                </div>
+                                <!-- Sinopse para Vitrine -->
+                                <div class="flex flex-col gap-space-xs">
+                                    <div class="flex justify-between items-center">
+                                        <label class="font-label-md text-label-md text-on-surface" for="synopsis">
+                                            Sinopse Sintética para a Vitrine Cósmica (Até 280 caracteres)
+                                        </label>
+                                        <span class="font-label-sm text-label-sm text-outline">212 / 280</span>
+                                    </div>
+                                    <textarea
+                                        class="w-full bg-surface-container-lowest/90 text-on-surface p-space-md rounded-xl font-body-sm text-body-sm placeholder:text-outline focus:outline-none resize-none leading-relaxed"
+                                        id="synopsis"
+                                        rows="3">Em uma corte estelar governada por constelações esquecidas, Elian precisa quebrar a profecia da lua de sangue antes que o véu da noite devore as memórias de seu reino. Uma dança perigosa entre magia, conspiração e poder.</textarea>
+                                </div>
+                                <!-- Classificação Indicativa & Gatilhos -->
+                                <div class="flex flex-col gap-space-sm pt-space-xs">
+                                    <span class="font-label-md text-label-md text-on-surface">Classificação Etária
+                                        Oficial</span>
+                                    <div class="grid grid-cols-3 gap-space-sm">
+                                        <label
+                                            class="cursor-pointer flex items-center justify-between p-space-sm rounded-xl bg-surface-container-high/50 hover:bg-surface-container-high">
+                                            <div class="flex items-center gap-space-xs">
+                                                <span
+                                                    class="w-7 h-7 rounded-lg bg-surface-variant text-on-surface flex items-center justify-center font-bold text-label-md">+14</span>
+                                                <span class="font-body-sm text-body-sm text-on-surface">Geral
+                                                    Jovem</span>
+                                            </div>
+                                            <input class="accent-primary" name="rating" type="radio" />
+                                        </label>
+                                        <label
+                                            class="cursor-pointer flex items-center justify-between p-space-sm rounded-xl bg-secondary-container/30 shadow-sm">
+                                            <div class="flex items-center gap-space-xs">
+                                                <span
+                                                    class="w-7 h-7 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-label-md">+16</span>
+                                                <span
+                                                    class="font-body-sm text-body-sm text-on-surface font-semibold">Tensão
+                                                    &amp; Violência Leve</span>
+                                            </div>
+                                            <input checked="" class="accent-primary" name="rating" type="radio" />
+                                        </label>
+                                        <label
+                                            class="cursor-pointer flex items-center justify-between p-space-sm rounded-xl bg-surface-container-high/50 hover:bg-surface-container-high">
+                                            <div class="flex items-center gap-space-xs">
+                                                <span
+                                                    class="w-7 h-7 rounded-lg bg-surface-variant text-on-surface flex items-center justify-center font-bold text-label-md">+18</span>
+                                                <span class="font-body-sm text-body-sm text-on-surface">Conteúdo
+                                                    Adulto</span>
+                                            </div>
+                                            <input class="accent-primary" name="rating" type="radio" />
+                                        </label>
+                                    </div>
+                                    <div class="flex flex-col gap-space-xs mt-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface-variant"
+                                            for="triggers">
+                                            Avisos de Gatilho / Sensibilidade (Opcional, mas recomendado)
+                                        </label>
+                                        <input
+                                            class="w-full bg-surface-container-lowest/90 text-on-surface px-space-md py-2.5 rounded-xl font-body-sm text-body-sm focus:outline-none"
+                                            id="triggers" type="text"
+                                            value="Luto familiar, cenas de combate com espadas, menção breve a perseguição política." />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Right Column: Interactive 3:4 Stellar Book Cover Preview -->
+                            <div class="lg:col-span-4 flex flex-col items-center">
+                                <span class="font-label-md text-label-md text-on-surface mb-space-sm self-start">Vitrine
+                                    Interativa da Capa</span>
+                                <!-- Book Cover Wrapper (Aspect 3:4) -->
+                                <div
+                                    class="relative w-full max-w-[260px] aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl group flex flex-col justify-end p-space-md bg-surface-container-highest">
+                                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                                        data-alt="Dark fantasy Wattpad book cover of a celestial queen standing beneath a shattered violet moon. Intricate typography, glittering nebula dust in deep violet, indigo, and soft lavender highlights, ethereal book aesthetic."
+                                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDaAT9WbenxL_oZgTskohDE8l-cRphHeeJgVH2sZMBmKyAEMT61B_BQrPlMYZN2fV5TT32wCK04AYqr6lO5uIxV1R_JfU6c5PlRmqKp2yw64kvJ9mD1-Me16bBO5PWonpkDIhksIlLsdbM0wp0uHSXNAH90NFRylj31rI8tidPYjzH4j4e8Tf8j65u2KojKRqbNYJurP-zThW0Ow3P97E3rPiY9sbMYoLhep0hKdX45')">
+                                    </div>
+                                    <!-- Shimmer Scrim Overlay -->
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-transparent">
+                                    </div>
+                                    <!-- Floating Pill Info -->
+                                    <div class="relative z-10 flex flex-col gap-space-xs">
+                                        <span
+                                            class="px-space-xs py-0.5 rounded-md bg-primary-container text-on-primary-container font-label-sm text-label-sm w-fit font-bold shadow-sm">
+                                            Capa Ativa
+                                        </span>
+                                        <span
+                                            class="font-headline-sm text-headline-sm text-on-surface line-clamp-1 leading-snug">
+                                            O Sussurro do Eclipse
+                                        </span>
+                                        <span class="font-body-sm text-body-sm text-primary">por Marina Valente</span>
+                                    </div>
+                                </div>
+                                <!-- Upload / Re-link Controls -->
+                                <div class="w-full max-w-[260px] flex flex-col gap-space-xs mt-space-md">
+                                    <button
+                                        class="w-full py-2.5 px-space-md rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-label-md font-label-md flex items-center justify-center gap-space-xs transition-colors"
+                                        type="button">
+                                        <span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+                                        <span>Substituir Arte da Capa</span>
+                                    </button>
+                                    <span class="text-center font-label-sm text-label-sm text-outline">Proporção 3:4 •
+                                        PNG ou JPEG até 5MB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- SEÇÃO C: Constelação e Preferências de Leitura -->
+                    <section
+                        class="bg-surface-container-low/70 backdrop-blur-xl rounded-2xl p-space-lg lg:p-space-xl flex flex-col gap-space-lg shadow-xl">
+                        <div class="flex items-center gap-space-sm">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shadow-inner">
+                                <span class="material-symbols-outlined text-[22px]">explore</span>
+                            </div>
+                            <div>
+                                <h2 class="font-headline-md text-headline-md text-on-surface">3. Escolha de Constelação
+                                    &amp; Ritmo dos Ciclos</h2>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Sua constelação definirá o
+                                    clã de autores com quem trocará pareceres quinzenais.</p>
+                            </div>
+                        </div>
+                        <!-- Constellation Group Affinity Selector (Cards) -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+                            <!-- Órion: Selecionado -->
+                            <div
+                                class="cursor-pointer relative p-space-md rounded-2xl bg-surface-container-high/90 flex flex-col justify-between gap-space-md shadow-lg">
+                                <div class="flex items-center justify-between">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-md">
+                                        <span class="material-symbols-outlined text-[20px]">shield</span>
+                                    </div>
+                                    <span class="material-symbols-outlined text-[22px] text-primary"
+                                        style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-headline-sm text-headline-sm text-on-surface">Clã Órion</span>
+                                    <span
+                                        class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold mt-1">Fantasia
+                                        &amp; Sci-Fi</span>
+                                    <p
+                                        class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs leading-relaxed">
+                                        Foco em worldbuilding, coerência de sistemas mágicos e arcos heróicos ou
+                                        sombrios.
+                                    </p>
+                                </div>
+                                <div
+                                    class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+                                    <span>Membros: 18/24</span>
+                                    <span class="text-secondary font-bold">4 vagas abertas</span>
+                                </div>
+                            </div>
+                            <!-- Andrômeda -->
+                            <div
+                                class="cursor-pointer relative p-space-md rounded-2xl bg-surface-container/60 hover:bg-surface-container-high/60 flex flex-col justify-between gap-space-md transition-all">
+                                <div class="flex items-center justify-between">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-surface-container-highest text-on-surface-variant flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-[22px] text-outline">radio_button_unchecked</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-headline-sm text-headline-sm text-on-surface">Clã Andrômeda</span>
+                                    <span
+                                        class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold mt-1">Romance
+                                        &amp; Drama</span>
+                                    <p
+                                        class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs leading-relaxed">
+                                        Aprofundamento de química interpessoal, tensões emotivas e desenvolvimento
+                                        psicológico.
+                                    </p>
+                                </div>
+                                <div
+                                    class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+                                    <span>Membros: 22/24</span>
+                                    <span class="text-on-surface-variant">2 vagas abertas</span>
+                                </div>
+                            </div>
+                            <!-- Cassiopeia -->
+                            <div
+                                class="cursor-pointer relative p-space-md rounded-2xl bg-surface-container/60 hover:bg-surface-container-high/60 flex flex-col justify-between gap-space-md transition-all">
+                                <div class="flex items-center justify-between">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-surface-container-highest text-on-surface-variant flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[20px]">psychology_alt</span>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-[22px] text-outline">radio_button_unchecked</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-headline-sm text-headline-sm text-on-surface">Clã
+                                        Cassiopeia</span>
+                                    <span
+                                        class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold mt-1">Suspense
+                                        &amp; Mistério</span>
+                                    <p
+                                        class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs leading-relaxed">
+                                        Construção de pistas falsas (red herrings), ritmo de revelação e atmosfera de
+                                        tensão constante.
+                                    </p>
+                                </div>
+                                <div
+                                    class="pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+                                    <span>Membros: 15/24</span>
+                                    <span class="text-secondary font-bold">9 vagas abertas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ritmo Semanal de Leitura -->
+                        <div class="flex flex-col gap-space-sm pt-space-xs">
+                            <span class="font-label-md text-label-md text-on-surface">Velocidade da Órbita de
+                                Leitura</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                                <label
+                                    class="cursor-pointer p-space-md rounded-xl bg-surface-container-high/90 flex items-start gap-space-md shadow-md">
+                                    <input checked="" class="mt-1 accent-primary" name="tempo_cycle" type="radio" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-space-xs">
+                                            <span class="font-body-md text-body-md text-on-surface font-bold">Ciclo
+                                                Padrão</span>
+                                            <span
+                                                class="px-space-xs py-0.5 rounded-full bg-primary-container/30 text-primary text-[11px] font-label-sm">Recomendado</span>
+                                        </div>
+                                        <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">3
+                                            capítulos por semana • Ideal para conciliar escrita e rotina</span>
+                                    </div>
+                                </label>
+                                <label
+                                    class="cursor-pointer p-space-md rounded-xl bg-surface-container/60 hover:bg-surface-container-high/60 flex items-start gap-space-md transition-all">
+                                    <input class="mt-1 accent-primary" name="tempo_cycle" type="radio" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-space-xs">
+                                            <span class="font-body-md text-body-md text-on-surface font-bold">Ciclo
+                                                Intensivo</span>
+                                            <span
+                                                class="px-space-xs py-0.5 rounded-full bg-surface-container-highest text-secondary text-[11px] font-label-sm">Acelerado</span>
+                                        </div>
+                                        <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">5
+                                            capítulos por semana • Para escritores dedicados em ritmo integral</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- SEÇÃO D: Protocolo de Honra das ADMs (Reciprocidade Estrita) -->
+                    <section
+                        class="bg-surface-container-low/70 backdrop-blur-xl rounded-2xl p-space-lg lg:p-space-xl flex flex-col gap-space-md shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+                            <div class="flex items-center gap-space-sm">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shadow-inner">
+                                    <span class="material-symbols-outlined text-[22px]">gavel</span>
+                                </div>
+                                <div>
+                                    <h2 class="font-headline-md text-headline-md text-on-surface">4. Protocolo de Honra
+                                        &amp; Juramento Recíproco</h2>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">Nosso coletivo vive da
+                                        sinceridade técnica e do compromisso mútuo.</p>
+                                </div>
+                            </div>
+                            <span
+                                class="px-space-md py-space-xs rounded-full bg-error-container/20 text-error font-label-sm text-label-sm flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-[16px]">warning</span>
+                                <span>Todos os itens são obrigatórios</span>
+                            </span>
+                        </div>
+                        <div class="flex flex-col gap-space-sm mt-space-xs">
+                            <!-- Term 1: Fórmula 2+1 -->
+                            <label
+                                class="p-space-md rounded-xl bg-surface-container/60 hover:bg-surface-container-high/60 transition-all flex items-start gap-space-md cursor-pointer">
+                                <input checked="" class="w-5 h-5 mt-0.5 rounded accent-primary cursor-pointer shrink-0"
+                                    required="" type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="font-body-md text-body-md text-on-surface font-semibold">
+                                        Fórmula de Retorno 2+1
+                                    </span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                                        Comprometo-me a formular pelo menos 2 elogios analíticos e embasados seguidos
+                                        por 1 crítica construtiva pontual e respeitosa em cada avaliação.
+                                    </p>
+                                </div>
+                            </label>
+                            <!-- Term 2: Extensão Mínima -->
+                            <label
+                                class="p-space-md rounded-xl bg-surface-container/60 hover:bg-surface-container-high/60 transition-all flex items-start gap-space-md cursor-pointer">
+                                <input checked="" class="w-5 h-5 mt-0.5 rounded accent-primary cursor-pointer shrink-0"
+                                    required="" type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="font-body-md text-body-md text-on-surface font-semibold">
+                                        Extensão Mínima de 150 Palavras por Parecer
+                                    </span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                                        Não serão aceitos pareceres superficiais como "adorei continue". Respeitarei a
+                                        extensão detalhando impressões sobre enredo, dicção dos personagens e coerência.
+                                    </p>
+                                </div>
+                            </label>
+                            <!-- Term 3: Prova por Capturas -->
+                            <label
+                                class="p-space-md rounded-xl bg-surface-container/60 hover:bg-surface-container-high/60 transition-all flex items-start gap-space-md cursor-pointer">
+                                <input checked="" class="w-5 h-5 mt-0.5 rounded accent-primary cursor-pointer shrink-0"
+                                    required="" type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="font-body-md text-body-md text-on-surface font-semibold">
+                                        Comprovação Semanal de Interações nos Parágrafos do Wattpad
+                                    </span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                                        Anexarei as capturas de tela comprovando comentários contextuais ao longo dos
+                                        capítulos até as 23h59 de todo domingo na área do autor.
+                                    </p>
+                                </div>
+                            </label>
+                            <!-- Term 4: Política de Strikes -->
+                            <label
+                                class="p-space-md rounded-xl bg-surface-container/60 hover:bg-surface-container-high/60 transition-all flex items-start gap-space-md cursor-pointer">
+                                <input checked="" class="w-5 h-5 mt-0.5 rounded accent-primary cursor-pointer shrink-0"
+                                    required="" type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="font-body-md text-body-md text-on-surface font-semibold">
+                                        Ciência Plena da Política de Strikes e Congelamento de Vitrine
+                                    </span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                                        Estou ciente de que atrasos sem aviso prévio de 48h implicam em advertência
+                                        direta (strike). Com 2 strikes, minha obra tem as leituras pausadas pela
+                                        coordenação.
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                    </section>
+                    <!-- Sticky / Bottom Floating Action Bar -->
+                    <footer
+                        class="bg-surface-container-lowest/90 backdrop-blur-2xl p-space-md rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-space-md shadow-2xl">
+                        <div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+                            <span class="material-symbols-outlined text-[18px] text-primary">shield_lock</span>
+                            <span>Seus dados e termos serão criptografados e arquivados no banco da Aliança.</span>
+                        </div>
+                        <div class="flex items-center gap-space-sm w-full sm:w-auto">
+                            <button
+                                class="w-full sm:w-auto px-space-md py-3 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-space-xs"
+                                type="button">
+                                <span class="material-symbols-outlined text-[18px]">save</span>
+                                <span>Salvar Rascunho</span>
+                            </button>
+                            <button
+                                class="w-full sm:w-auto px-space-lg py-3 rounded-xl bg-gradient-to-r from-secondary-container to-on-primary-fixed-variant hover:opacity-95 text-on-surface font-label-md text-label-md font-bold uppercase tracking-wider transition-all shadow-[0_0_24px_rgba(93,3,202,0.6)] flex items-center justify-center gap-space-sm"
+                                type="submit">
+                                <span>Finalizar Onboarding e Enviar para Auditoria</span>
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                            </button>
+                        </div>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="w-full bg-surface-container-lowest/80 backdrop-blur-xl">
+        <div
+            class="w-full px-margin-mobile lg:px-margin py-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md">
+            <div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm"><span
+                    class="material-symbols-outlined text-[16px] text-primary">nights_stay</span><span>Constelação
+                    Literária © 2025. O cosmos das narrativas autorais.</span></div>
+            <div class="flex items-center gap-space-lg"><a
+                    class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+                    data-path="termos-de-uso" href="#">Termos Cósmicos</a><a
+                    class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+                    data-path="politica-de-privacidade" href="#">Privacidade Astral</a><a
+                    class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+                    data-path="diretrizes-comunitarias" href="#">Diretrizes</a></div>
+        </div>
+    </footer>
+</body>
+
+</html>

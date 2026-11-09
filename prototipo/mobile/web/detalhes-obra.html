@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @layer base {
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                overscroll-behavior: none;
+            }
+
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#674bb5",
+                        "on-tertiary": "#302c4b",
+                        "on-primary": "#381385",
+                        "surface-bright": "#3a364d",
+                        "secondary-fixed-dim": "#d3bbff",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#3f008d",
+                        "background": "#141125",
+                        "primary-fixed": "#e8ddff",
+                        "surface-container-low": "#1c192e",
+                        "on-surface-variant": "#cac4d4",
+                        "on-primary-fixed-variant": "#4f319c",
+                        "on-primary-fixed": "#21005e",
+                        "outline-variant": "#494552",
+                        "on-secondary-fixed": "#250059",
+                        "secondary-fixed": "#ebddff",
+                        "on-error": "#690005",
+                        "surface": "#141125",
+                        "on-tertiary-container": "#34304f",
+                        "primary-fixed-dim": "#cebdff",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#141125",
+                        "on-secondary-fixed-variant": "#5b00c5",
+                        "inverse-on-surface": "#312e44",
+                        "tertiary-fixed": "#e5deff",
+                        "on-tertiary-fixed-variant": "#474363",
+                        "primary": "#cebdff",
+                        "outline": "#948e9d",
+                        "tertiary-container": "#9e98bd",
+                        "primary-container": "#a78bfa",
+                        "surface-container": "#201d32",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#c8c2e9",
+                        "on-secondary-container": "#c7aaff",
+                        "surface-variant": "#363248",
+                        "on-surface": "#e6dffc",
+                        "on-tertiary-fixed": "#1b1735",
+                        "on-primary-container": "#3c1989",
+                        "surface-container-highest": "#363248",
+                        "surface-container-lowest": "#0e0b20",
+                        "tertiary": "#c8c2e9",
+                        "secondary": "#d3bbff",
+                        "surface-container-high": "#2b273d",
+                        "on-background": "#e6dffc",
+                        "secondary-container": "#5d03ca",
+                        "surface-tint": "#cebdff",
+                        "inverse-surface": "#e6dffc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-xs": "0.25rem",
+                        "space-xl": "2.5rem",
+                        "margin-mobile": "1rem",
+                        "gutter-mobile": "1rem",
+                        "space-md": "1rem",
+                        "space-lg": "1.5rem",
+                        "margin": "2.5rem",
+                        "gutter": "1.5rem",
+                        "space-sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-xl": [
+                            "Playfair Display"
+                        ],
+                        "label-sm": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "body-md": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "headline-md": [
+                            "Playfair Display"
+                        ],
+                        "headline-lg": [
+                            "Playfair Display"
+                        ],
+                        "headline-xl-mobile": [
+                            "Playfair Display"
+                        ],
+                        "headline-lg-mobile": [
+                            "Playfair Display"
+                        ],
+                        "body-sm": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "label-md": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "body-lg": [
+                            "Plus Jakarta Sans"
+                        ],
+                        "headline-sm": [
+                            "Playfair Display"
+                        ]
+                    },
+                    "fontSize": {
+                        "headline-xl": [
+                            "48px",
+                            {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "label-sm": [
+                            "11px",
+                            {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.06em",
+                                "fontWeight": "700"
+                            }
+                        ],
+                        "body-md": [
+                            "15px",
+                            {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "headline-md": [
+                            "24px",
+                            {
+                                "lineHeight": "32px",
+                                "fontWeight": "500"
+                            }
+                        ],
+                        "headline-lg": [
+                            "36px",
+                            {
+                                "lineHeight": "44px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "headline-xl-mobile": [
+                            "32px",
+                            {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "headline-lg-mobile": [
+                            "26px",
+                            {
+                                "lineHeight": "34px",
+                                "letterSpacing": "0em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "body-sm": [
+                            "13px",
+                            {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "label-md": [
+                            "12px",
+                            {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.04em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "body-lg": [
+                            "18px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "headline-sm": [
+                            "20px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "500"
+                            }
+                        ]
+                    }
+                }
+            }
+        }</script>
+</head>
+
+<body
+    class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(10,7,27,0.45)]">
+        <div class="h-20 w-full px-margin flex items-center justify-between gap-space-md">
+            <div class="flex items-center gap-space-lg shrink-0"><a
+                    class="flex items-center gap-space-sm group focus:outline-none" href="#"><span
+                        class="material-symbols-outlined text-primary text-[28px] group-hover:rotate-45 transition-transform duration-500">auto_awesome</span>
+                    <div class="flex flex-col"><span
+                            class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-medium">Constelação
+                            Literária</span><span
+                            class="font-label-sm text-label-sm uppercase tracking-widest text-primary/70">Aliança
+                            Wattpad</span></div>
+                </a>
+                <div
+                    class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-high/60 text-secondary-fixed-dim">
+                    <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span
+                        class="font-label-sm text-label-sm">Ciclo 14 Ativo • Faltam 3 dias</span></div>
+            </div>
+            <div
+                class="hidden lg:flex items-center flex-1 max-w-xs xl:max-w-sm px-space-sm py-space-xs rounded-full bg-surface-container/70 focus-within:bg-surface-container-high focus-within:ring-1 focus-within:ring-primary-container transition-all">
+                <span
+                    class="material-symbols-outlined text-outline text-[18px] mr-space-xs ml-space-xs">search</span><input
+                    class="w-full bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none"
+                    placeholder="Buscar obras, autores ou tags..." type="text" /></div>
+            <nav class="hidden 2xl:flex items-center gap-space-xs p-space-xs rounded-full bg-surface-container-low/60"
+                data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-full"><a
+                    aria-current="page"
+                    class="px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-semibold rounded-full"
+                    data-path="vitrine-de-obras" href="#">Vitrine de Obras</a><a
+                    class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+                    data-path="minha-grade-e-leituras" href="#">Minha Grade &amp; Leituras</a><a
+                    class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+                    data-path="painel-adm-e-auditoria" href="#">Painel ADM &amp; Auditoria</a><a
+                    class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+                    data-path="comunidade-e-regras" href="#">Comunidade &amp; Regras</a></nav>
+            <div class="flex items-center gap-space-md shrink-0">
+                <div
+                    class="hidden sm:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-container/50 text-secondary-fixed-dim">
+                    <span class="material-symbols-outlined text-[16px] text-secondary">shield_person</span><span
+                        class="font-label-sm text-label-sm uppercase tracking-wide">ADM Suprema / Autora</span></div>
+                <button aria-label="Notificações"
+                    class="relative p-space-xs rounded-full hover:bg-surface-container-high transition-colors focus:outline-none"
+                    type="button"><span
+                        class="material-symbols-outlined text-on-surface-variant text-[22px]">notifications</span><span
+                        class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-surface-container-lowest"></span></button>
+                <div class="flex items-center gap-space-sm pl-space-xs cursor-pointer group">
+                    <div class="hidden md:flex flex-col text-right"><span
+                            class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Marina
+                            Valente</span><span
+                            class="font-label-sm text-label-sm text-on-surface-variant">@marinawrites</span></div>
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span
+                            class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span
+                        class="material-symbols-outlined text-outline text-[18px] group-hover:text-on-surface transition-colors">expand_more</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="w-full pt-20 bg-surface flex-1">
+        <div class="flex flex-col w-full">
+            <!-- Top Ambient Nebula Glow Overlay (Bounded within viewport) -->
+            <div class="relative w-full overflow-hidden">
+                <div
+                    class="absolute -top-40 left-1/4 w-[650px] h-[650px] bg-primary-container/15 rounded-full blur-[140px] pointer-events-none -z-10">
+                </div>
+                <div
+                    class="absolute top-20 right-10 w-[500px] h-[500px] bg-secondary-container/20 rounded-full blur-[120px] pointer-events-none -z-10">
+                </div>
+                <div class="w-full px-margin py-space-md">
+                    <!-- Breadcrumb Bar -->
+                    <nav aria-label="Breadcrumb"
+                        class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant mb-space-lg">
+                        <a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+                            <span class="material-symbols-outlined text-[16px]">auto_stories</span>
+                            <span>Vitrine de Obras</span>
+                        </a>
+                        <span class="text-outline-variant font-bold select-none">•</span>
+                        <a class="hover:text-primary transition-colors" href="#">Ficção Científica</a>
+                        <span class="text-outline-variant font-bold select-none">•</span>
+                        <span class="text-primary font-semibold truncate max-w-xs">Ecos de Nebulosa</span>
+                    </nav>
+                    <!-- HERO SECTION: 2-Column Cosmic Masterpiece Card -->
+                    <section
+                        class="relative w-full rounded-xl bg-surface-container-low/75 backdrop-blur-2xl shadow-2xl p-space-xl mb-space-xl overflow-hidden">
+                        <!-- Subtle Astral Grid Line Pattern inside panel -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary-container/10 pointer-events-none">
+                        </div>
+                        <div class="relative grid grid-cols-12 gap-space-xl items-start">
+                            <!-- LEFT COLUMN: Book Cover & Quick Meta Actions (Cols 1-4) -->
+                            <div class="col-span-12 lg:col-span-4 flex flex-col gap-space-md">
+                                <!-- Book Cover Wrapper (3:4 ratio) with Starlight Glow -->
+                                <div
+                                    class="relative group rounded-xl overflow-hidden shadow-[0_16px_48px_-8px_rgba(93,3,202,0.45)] bg-surface-container-lowest">
+                                    <div class="w-full aspect-[3/4] relative">
+                                        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            data-alt="Digital art illustration book cover of a deep space sci-fi dark fantasy titled Ecos de Nebulosa, glowing purple and violet cosmic stardust, silhouetted astronaut gazing into a majestic swirling lavender nebula, ethereal cinematic starlight, high contrast, fine details, fantasy book aesthetics"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrPbFoVv9htZwCM7nG7umZoelW0RXIzXxau6mEyi0hjUOWRV4ran3hhDq9pSkSwGAS6tpUaWiqq9fJM2db-tBM4CdeUUBwYT43Wk-0jEXsi_n0a_cZ5CqPouteEANPiV1PDbSY4PbSHnLyw0_cD150s-4Vs8n7871wNZA5dvq57mpI80RGOzxj0Z_1DLgP06N2wt6PWMYWekj1FQgJo0pAoJJ7YRu0T5_4lbOiL0tF" />
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/20 opacity-80">
+                                        </div>
+                                        <!-- Wattpad Rank Floating Badge -->
+                                        <div
+                                            class="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest/85 backdrop-blur-md shadow-lg">
+                                            <span
+                                                class="material-symbols-outlined text-secondary text-[16px]">local_fire_department</span>
+                                            <span
+                                                class="font-label-sm text-label-sm text-secondary tracking-wider uppercase font-bold">#12
+                                                em Sci-Fi Wattpad</span>
+                                        </div>
+                                        <!-- Verified Badge on Cover Top Right -->
+                                        <div
+                                            class="absolute top-4 right-4 flex items-center justify-center w-8 h-8 rounded-full bg-secondary-container/80 text-secondary-fixed-dim backdrop-blur-md shadow-md">
+                                            <span class="material-symbols-outlined text-[18px]">verified</span>
+                                        </div>
+                                        <!-- Cover Bottom Overlay Stats -->
+                                        <div
+                                            class="absolute bottom-4 left-4 right-4 flex items-center justify-between px-space-md py-space-sm rounded-lg bg-surface-container-high/85 backdrop-blur-md text-on-surface shadow-md">
+                                            <div class="flex items-center gap-1.5">
+                                                <span
+                                                    class="material-symbols-outlined text-secondary-fixed-dim text-[20px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span
+                                                    class="font-headline-sm text-headline-sm font-semibold text-secondary-fixed-dim">4.9</span>
+                                                <span class="font-label-sm text-label-sm text-on-surface-variant">(34
+                                                    avaliações)</span>
+                                            </div>
+                                            <div class="h-4 w-px bg-surface-variant"></div>
+                                            <div class="flex items-center gap-1.5">
+                                                <span
+                                                    class="material-symbols-outlined text-primary text-[18px]">group</span>
+                                                <span
+                                                    class="font-label-md text-label-md text-on-surface font-semibold">18
+                                                    no coletivo</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Action Buttons Suite -->
+                                <div class="flex flex-col gap-space-xs mt-space-xs">
+                                    <!-- Primary Astral Button (External Wattpad Link) -->
+                                    <a class="w-full flex items-center justify-center gap-2 py-3.5 px-space-md rounded-lg bg-gradient-to-r from-secondary-container via-primary-container to-secondary-container bg-[length:200%_auto] hover:bg-right transition-all duration-500 shadow-[0_8px_24px_rgba(93,3,202,0.4)] text-on-secondary-container font-label-md text-label-md uppercase tracking-wider font-bold group"
+                                        href="https://wattpad.com" rel="noopener noreferrer" target="_blank">
+                                        <span>Ler no Wattpad</span>
+                                        <span
+                                            class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">open_in_new</span>
+                                    </a>
+                                    <!-- Secondary & Auxiliary Grid -->
+                                    <div class="grid grid-cols-2 gap-space-xs">
+                                        <button
+                                            class="flex items-center justify-center gap-1.5 py-2.5 px-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors font-label-md text-label-md"
+                                            id="btn-mark-reading" onclick="toggleReadingState(this)">
+                                            <span
+                                                class="material-symbols-outlined text-primary text-[18px]">bookmark_add</span>
+                                            <span>Marcar Leitura</span>
+                                        </button>
+                                        <button
+                                            class="flex items-center justify-center gap-1.5 py-2.5 px-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors font-label-md text-label-md"
+                                            id="btn-save-list" onclick="toggleSaveList(this)">
+                                            <span
+                                                class="material-symbols-outlined text-secondary text-[18px]">favorite</span>
+                                            <span>Salvar na Lista</span>
+                                        </button>
+                                    </div>
+                                    <button
+                                        class="w-full flex items-center justify-center gap-2 py-2 px-space-md rounded-lg bg-surface-container-lowest/60 hover:bg-surface-container transition-colors text-on-surface-variant hover:text-primary font-label-md text-label-md">
+                                        <span class="material-symbols-outlined text-[18px]">flare</span>
+                                        <span>Indicar para Outra Constelação</span>
+                                    </button>
+                                </div>
+                                <!-- Author Mini Card Bar -->
+                                <div
+                                    class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container/60 mt-space-xs">
+                                    <div class="flex items-center gap- space-sm">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-headline-sm font-semibold shadow-inner">
+                                            MV
+                                        </div>
+                                        <div class="flex flex-col ml-3">
+                                            <span
+                                                class="font-label-md text-label-md text-on-surface font-semibold">Marina
+                                                Valente</span>
+                                            <span class="font-label-sm text-label-sm text-primary">@marina_valente •
+                                                Autora</span>
+                                        </div>
+                                    </div>
+                                    <a class="p-2 rounded-full hover:bg-surface-container-high text-primary transition-colors"
+                                        href="#" title="Ver perfil da autora">
+                                        <span class="material-symbols-outlined text-[20px]">send</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- RIGHT COLUMN: Book Synopsis, Galaxy Allocation & Metadata (Cols 5-12) -->
+                            <div class="col-span-12 lg:col-span-8 flex flex-col gap-space-lg">
+                                <!-- Supertitle and Participation Status Ribbon -->
+                                <div class="flex flex-col gap-space-xs">
+                                    <!-- Allocation Pill -->
+                                    <div
+                                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high/80 text-secondary-fixed-dim w-fit shadow-sm">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+                                        <span
+                                            class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">
+                                            Alocada no Grupo Cassiopeia • Ciclo 14 (3 leitores designados com prazo
+                                            domingo)
+                                        </span>
+                                    </div>
+                                    <!-- Main Title with Negative Tracking and Playfair Display -->
+                                    <div class="flex flex-col mt-space-sm">
+                                        <span
+                                            class="font-label-sm text-label-sm text-primary/80 uppercase tracking-widest">Série
+                                            Órbita Profunda • Livro 1</span>
+                                        <h1
+                                            class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">
+                                            Ecos de Nebulosa
+                                        </h1>
+                                    </div>
+                                    <!-- Genre Badges & Content Warnings -->
+                                    <div class="flex flex-wrap items-center gap-space-xs mt-space-xs">
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium">
+                                            Fantasia Sombria
+                                        </span>
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-secondary-container/50 text-secondary-fixed-dim font-label-sm text-label-sm font-medium">
+                                            Sci-Fi
+                                        </span>
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium">
+                                            Espaço Profundo
+                                        </span>
+                                        <span
+                                            class="px-2.5 py-1 rounded-full bg-error-container/70 text-on-error-container font-label-sm text-label-sm font-bold">
+                                            +16 Violência &amp; Temas Sensíveis
+                                        </span>
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm">
+                                            18 Capítulos Publicados
+                                        </span>
+                                        <span
+                                            class="px-3 py-1 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm">
+                                            Em Andamento
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- Novel Synopsis with Refined Typography -->
+                                <div
+                                    class="flex flex-col gap-space-sm p-space-lg rounded-xl bg-surface-container-lowest/50 shadow-inner">
+                                    <div class="flex items-center justify-between pb-space-xs">
+                                        <div class="flex items-center gap-2 text-primary">
+                                            <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                                            <span
+                                                class="font-label-md text-label-md font-bold uppercase tracking-wider text-on-surface">Sinopse
+                                                Oficial</span>
+                                        </div>
+                                        <span class="font-label-sm text-label-sm text-on-surface-variant">Wattpad ID:
+                                            #9842109</span>
+                                    </div>
+                                    <div
+                                        class="space-y-3 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                        <p>
+                                            No limiar do setor estelar de Antares, a estação de pesquisa <em
+                                                class="text-on-surface">Astraea VII</em> perde contato após registrar
+                                            uma flutuação gravitacional sem precedentes no interior da Nebulosa de
+                                            Tiamat. A capitã Elora Vance, veterana de guerras coloniais que jurou jamais
+                                            retornar ao espaço profundo, é convocada para liderar uma missão de resgate
+                                            de emergência com tripulação reduzida.
+                                        </p>
+                                        <p>
+                                            O que parecia um colapso tecnológico comum revela-se um pesadelo metafísico:
+                                            a poeira cósmica que circunda a estação não apenas reflete radiações
+                                            proibidas, mas sintetiza ecos perceptivos — manifestações sonoras e físicas
+                                            das memórias mais dolorosas de qualquer um que se aproxime.
+                                        </p>
+                                        <p>
+                                            Enquanto a nave é atraída para o vórtice silencioso de Tiamat, Elora precisa
+                                            escolher entre enfrentar as visões que a assombram há uma década ou permitir
+                                            que a entidade adormecida no núcleo da nebulosa expanda sua canção até
+                                            devorar o restante dos quadrantes habitados.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Alliance Assignment Progress & Cohort Quick Info -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-xs">
+                                    <div class="p-space-md rounded-lg bg-surface-container/70 flex flex-col gap-1">
+                                        <div class="flex items-center justify-between text-on-surface-variant">
+                                            <span class="font-label-sm text-label-sm uppercase tracking-wide">Prazo de
+                                                Auditoria</span>
+                                            <span
+                                                class="material-symbols-outlined text-primary text-[18px]">event_available</span>
+                                        </div>
+                                        <span
+                                            class="font-headline-sm text-headline-sm font-semibold text-on-surface">Domingo,
+                                            23:59</span>
+                                        <span class="font-label-sm text-label-sm text-primary">Ciclo 14 • Restam 3
+                                            dias</span>
+                                    </div>
+                                    <div class="p-space-md rounded-lg bg-surface-container/70 flex flex-col gap-1">
+                                        <div class="flex items-center justify-between text-on-surface-variant">
+                                            <span class="font-label-sm text-label-sm uppercase tracking-wide">Meta do
+                                                Coletivo</span>
+                                            <span
+                                                class="material-symbols-outlined text-secondary text-[18px]">checklist</span>
+                                        </div>
+                                        <span class="font-headline-sm text-headline-sm font-semibold text-on-surface">5
+                                            Capítulos / Leitor</span>
+                                        <span class="font-label-sm text-label-sm text-on-surface-variant">Mínimo 8
+                                            comentários/cap.</span>
+                                    </div>
+                                    <div class="p-space-md rounded-lg bg-surface-container/70 flex flex-col gap-1">
+                                        <div class="flex items-center justify-between text-on-surface-variant">
+                                            <span class="font-label-sm text-label-sm uppercase tracking-wide">Status de
+                                                Validação</span>
+                                            <span
+                                                class="material-symbols-outlined text-secondary-fixed-dim text-[18px]">verified_user</span>
+                                        </div>
+                                        <span
+                                            class="font-headline-sm text-headline-sm font-semibold text-secondary-fixed-dim">2
+                                            de 3 Entregues</span>
+                                        <div
+                                            class="w-full bg-surface-container-highest rounded-full h-1.5 mt-1 overflow-hidden">
+                                            <div class="bg-primary-container h-full rounded-full w-2/3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- LOWER SPLIT SECTION (65% Critical Verified Feedbacks / 35% Action & Wattpad Analytics) -->
+                    <div class="grid grid-cols-12 gap-space-xl items-start pb-space-xl">
+                        <!-- LEFT WIDE COLUMN (65%): Critical Feedback Wall Verified by ADM (Cols 1-8 approx 66%) -->
+                        <section class="col-span-12 xl:col-span-8 flex flex-col gap-space-lg">
+                            <!-- Section Header with Filters -->
+                            <div
+                                class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-md pb-space-xs">
+                                <div class="flex flex-col">
+                                    <div class="flex items-center gap-space-xs">
+                                        <span
+                                            class="material-symbols-outlined text-primary text-[24px]">rate_review</span>
+                                        <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+                                            Feedbacks Críticos Verificados pela ADM
+                                        </h2>
+                                    </div>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                        Resenhas auditadas e aprovadas pelo conselho moderador da Constelação. Análises
+                                        fundamentadas nos critérios de prosa, imersão e coerência interna.
+                                    </p>
+                                </div>
+                                <!-- Filter Pills -->
+                                <div
+                                    class="flex items-center gap-space-xs shrink-0 self-start sm:self-auto bg-surface-container-low p-1 rounded-lg">
+                                    <button
+                                        class="px-3 py-1.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold shadow-sm">
+                                        Mais Úteis
+                                    </button>
+                                    <button
+                                        class="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm">
+                                        Recentes
+                                    </button>
+                                    <button
+                                        class="px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm">
+                                        Ciclo 14
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Feedbacks List Stack -->
+                            <div class="flex flex-col gap-space-md">
+                                <!-- FEEDBACK CARD 1: ADM / Mentor Review -->
+                                <article
+                                    class="p-space-lg rounded-xl bg-surface-container-low/90 backdrop-blur-md shadow-lg flex flex-col gap-space-md relative overflow-hidden transition-all duration-300 hover:shadow-[0_8px_32px_rgba(93,3,202,0.25)]">
+                                    <!-- Golden Starlight Accent Line on Top -->
+                                    <div
+                                        class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary-container via-primary-container to-secondary">
+                                    </div>
+                                    <!-- Author Header & Verification Meta -->
+                                    <div class="flex flex-wrap items-start justify-between gap-space-sm">
+                                        <div class="flex items-center gap-space-sm">
+                                            <div
+                                                class="w-12 h-12 rounded-full bg-secondary-container text-secondary-fixed flex items-center justify-center font-headline-sm font-bold shadow-md">
+                                                TL
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <div class="flex items-center gap-2">
+                                                    <span
+                                                        class="font-label-md text-label-md font-bold text-on-surface">Thiago
+                                                        Leal</span>
+                                                    <span
+                                                        class="px-2 py-0.5 rounded-full bg-secondary-container text-secondary-fixed-dim font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+                                                        <span
+                                                            class="material-symbols-outlined text-[13px]">shield_person</span>
+                                                        ADM Auditor
+                                                    </span>
+                                                </div>
+                                                <span
+                                                    class="font-label-sm text-label-sm text-on-surface-variant">@thiago_sci
+                                                    • Grupo Cassiopeia • Analisou Capítulos 1 ao 5</span>
+                                            </div>
+                                        </div>
+                                        <!-- Star Rating Badge -->
+                                        <div
+                                            class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-high text-secondary-fixed-dim">
+                                            <div class="flex text-secondary-fixed-dim">
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star_half</span>
+                                            </div>
+                                            <span class="font-label-md text-label-md font-bold ml-1">4.8 / 5.0</span>
+                                        </div>
+                                    </div>
+                                    <!-- Critique Text -->
+                                    <div
+                                        class="space-y-2.5 font-body-md text-body-md text-on-surface/90 leading-relaxed">
+                                        <h4 class="font-headline-sm text-headline-sm text-primary font-medium">
+                                            "Construção de atmosfera imersiva com forte rigor sensorial e mistério
+                                            genuíno"
+                                        </h4>
+                                        <p>
+                                            A abertura do manuscrito impressiona pela capacidade de balancear a
+                                            terminologia técnica espacial com o peso dramático das lembranças de Elora.
+                                            A cena no Capítulo 3, em que a câmara estática capta sussurros de
+                                            frequências mortas há vinte anos, é digna dos grandes clássicos da ficção
+                                            cósmica psicológica.
+                                        </p>
+                                        <p>
+                                            <strong>Pontos Fortes:</strong> O ritmo da prosa no clímax do Capítulo 4
+                                            acelera de forma magistral sem perder a precisão dos diálogos. As reações da
+                                            tripulação à perda de sinal são críveis e evitam clichês de pânico
+                                            desordenado.
+                                        </p>
+                                        <p>
+                                            <strong>Sugestão Crítica Construtiva:</strong> No Capítulo 2, atente-se à
+                                            transição de perspectiva do copiloto Dante; há um breve deslize de ponto de
+                                            vista que quebra a proximidade visceral com Elora antes do salto
+                                            gravitacional.
+                                        </p>
+                                    </div>
+                                    <!-- Verification Stamp & Helpful Counter Bar -->
+                                    <div
+                                        class="flex items-center justify-between pt-space-xs border-t border-surface-variant/40 mt-space-xs">
+                                        <div
+                                            class="flex items-center gap-2 text-secondary-fixed-dim font-label-sm text-label-sm">
+                                            <span class="material-symbols-outlined text-[16px]">verified</span>
+                                            <span>Verificação ADM: Cumprimento estrito do protocolo de comentários
+                                                inline no Wattpad</span>
+                                        </div>
+                                        <div class="flex items-center gap-space-xs">
+                                            <button
+                                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface font-label-sm text-label-sm"
+                                                onclick="incrementHelpful(this)">
+                                                <span
+                                                    class="material-symbols-outlined text-[16px] text-primary">thumb_up</span>
+                                                <span>Útil</span>
+                                                <span class="font-bold ml-1 text-primary counter">24</span>
+                                            </button>
+                                            <button
+                                                class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"
+                                                title="Compartilhar ou citar">
+                                                <span class="material-symbols-outlined text-[18px]">share</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- FEEDBACK CARD 2: Peer Reviewer from Alliance -->
+                                <article
+                                    class="p-space-lg rounded-xl bg-surface-container-low/90 backdrop-blur-md shadow-lg flex flex-col gap-space-md relative overflow-hidden transition-all duration-300 hover:shadow-[0_8px_32px_rgba(93,3,202,0.2)]">
+                                    <!-- Author Header & Verification Meta -->
+                                    <div class="flex flex-wrap items-start justify-between gap-space-sm">
+                                        <div class="flex items-center gap-space-sm">
+                                            <div
+                                                class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-sm font-bold shadow-md">
+                                                CS
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <div class="flex items-center gap-2">
+                                                    <span
+                                                        class="font-label-md text-label-md font-bold text-on-surface">Clarice
+                                                        Salles</span>
+                                                    <span
+                                                        class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+                                                        <span
+                                                            class="material-symbols-outlined text-[13px]">menu_book</span>
+                                                        Leitora Crítica
+                                                    </span>
+                                                </div>
+                                                <span
+                                                    class="font-label-sm text-label-sm text-on-surface-variant">@clarice_s
+                                                    • Grupo Cassiopeia • Analisou Capítulos 1 ao 5</span>
+                                            </div>
+                                        </div>
+                                        <!-- Star Rating Badge -->
+                                        <div
+                                            class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-high text-secondary-fixed-dim">
+                                            <div class="flex text-secondary-fixed-dim">
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                            </div>
+                                            <span class="font-label-md text-label-md font-bold ml-1">5.0 / 5.0</span>
+                                        </div>
+                                    </div>
+                                    <!-- Critique Text -->
+                                    <div
+                                        class="space-y-2.5 font-body-md text-body-md text-on-surface/90 leading-relaxed">
+                                        <h4 class="font-headline-sm text-headline-sm text-primary font-medium">
+                                            "Sensação claustrofóbica única: a nebulosa parece viva e voraz"
+                                        </h4>
+                                        <p>
+                                            Deixei 22 comentários parágrafo a parágrafo no Wattpad porque era impossível
+                                            não reagir aos ganchos de final de capítulo. A forma como você personifica o
+                                            silêncio da Astraea VII através de ruídos mecânicos e despressurização
+                                            gradual cria uma tensão palpável.
+                                        </p>
+                                        <p>
+                                            O arco interpessoal entre Elora e o especialista Kaelen é carregado de
+                                            subtexto. Nada soa forçado para criar romance barato — a prioridade deles é
+                                            pura sobrevivência psicológica. Aguardando ansiosamente a liberação dos
+                                            Capítulos 6 a 10 no próximo ciclo!
+                                        </p>
+                                    </div>
+                                    <!-- Verification Stamp & Helpful Counter Bar -->
+                                    <div
+                                        class="flex items-center justify-between pt-space-xs border-t border-surface-variant/40 mt-space-xs">
+                                        <div class="flex items-center gap-2 text-primary font-label-sm text-label-sm">
+                                            <span class="material-symbols-outlined text-[16px]">task_alt</span>
+                                            <span>Ciclo 14 • Leitura integral certificada com notas de rodapé
+                                                aprovadas</span>
+                                        </div>
+                                        <div class="flex items-center gap-space-xs">
+                                            <button
+                                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface font-label-sm text-label-sm"
+                                                onclick="incrementHelpful(this)">
+                                                <span
+                                                    class="material-symbols-outlined text-[16px] text-primary">thumb_up</span>
+                                                <span>Útil</span>
+                                                <span class="font-bold ml-1 text-primary counter">18</span>
+                                            </button>
+                                            <button
+                                                class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"
+                                                title="Compartilhar ou citar">
+                                                <span class="material-symbols-outlined text-[18px]">share</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- FEEDBACK CARD 3: Archive Historical Review -->
+                                <article
+                                    class="p-space-lg rounded-xl bg-surface-container-low/70 backdrop-blur-md flex flex-col gap-space-md relative overflow-hidden transition-all duration-300">
+                                    <div class="flex flex-wrap items-start justify-between gap-space-sm">
+                                        <div class="flex items-center gap-space-sm">
+                                            <div
+                                                class="w-12 h-12 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-headline-sm font-bold shadow-inner">
+                                                RA
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <div class="flex items-center gap-2">
+                                                    <span
+                                                        class="font-label-md text-label-md font-bold text-on-surface">Rodrigo
+                                                        Alencastro</span>
+                                                    <span
+                                                        class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+                                                        Leitor Convidado
+                                                    </span>
+                                                </div>
+                                                <span
+                                                    class="font-label-sm text-label-sm text-on-surface-variant">@rodrigo_fic
+                                                    • Ciclo 13 (Concluído) • Capítulos 1 ao 3</span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-high text-secondary-fixed-dim">
+                                            <div class="flex text-secondary-fixed-dim">
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span class="material-symbols-outlined text-[16px]"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span
+                                                    class="material-symbols-outlined text-[16px] text-outline-variant">star</span>
+                                            </div>
+                                            <span class="font-label-md text-label-md font-bold ml-1">4.0 / 5.0</span>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2 font-body-md text-body-md text-on-surface/90 leading-relaxed">
+                                        <p>
+                                            Excelente introdução com ritmo cinematográfico. A única observação feita
+                                            diretamente no Wattpad foi a repetição da expressão "vácuo púrpura" nos dois
+                                            primeiros capítulos, algo facilmente ajustável na revisão de pré-publicação
+                                            da antologia.
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="flex items-center justify-between pt-space-xs border-t border-surface-variant/40 mt-space-xs">
+                                        <div
+                                            class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+                                            <span class="material-symbols-outlined text-[16px]">history_edu</span>
+                                            <span>Ciclo 13 • Arquivado no Histórico de Leituras da Aliança</span>
+                                        </div>
+                                        <button
+                                            class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface font-label-sm text-label-sm"
+                                            onclick="incrementHelpful(this)">
+                                            <span
+                                                class="material-symbols-outlined text-[16px] text-primary">thumb_up</span>
+                                            <span>Útil</span>
+                                            <span class="font-bold ml-1 text-primary counter">9</span>
+                                        </button>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+                        <!-- RIGHT NARROW COLUMN (35%): Feedback Submission Form & Live Wattpad Analytics (Cols 9-12 approx 34%) -->
+                        <aside class="col-span-12 xl:col-span-4 flex flex-col gap-space-lg">
+                            <!-- PANEL A: Submit Feedback Modal/Form Card -->
+                            <div
+                                class="p-space-lg rounded-xl bg-surface-container-low/95 backdrop-blur-xl shadow-xl flex flex-col gap-space-md border-t-2 border-primary-container">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-primary text-[22px]">draw</span>
+                                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                            Deixar seu Feedback</h3>
+                                    </div>
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-secondary-container text-secondary-fixed-dim font-label-sm text-label-sm font-bold uppercase">
+                                        Ciclo 14
+                                    </span>
+                                </div>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                                    Você está na escala do <strong>Grupo Cassiopeia</strong>. Seu feedback conta
+                                    diretamente para o índice de assiduidade e desbloqueia novos capítulos na sua
+                                    estante.
+                                </p>
+                                <form class="flex flex-col gap-space-sm mt-space-xs" id="critique-form"
+                                    onsubmit="event.preventDefault(); submitFeedbackToast();">
+                                    <!-- Chapter Selector -->
+                                    <div class="flex flex-col gap-1">
+                                        <label class="font-label-md text-label-md text-on-surface font-semibold"
+                                            for="chapter-range">Capítulos Auditados</label>
+                                        <select
+                                            class="w-full bg-surface-container-lowest/80 text-on-surface font-body-sm text-body-sm p-2.5 rounded-lg border border-outline-variant/30 focus:border-primary-container focus:outline-none"
+                                            id="chapter-range">
+                                            <option>Capítulos 1 a 5 (Meta Atual do Ciclo)</option>
+                                            <option>Capítulos 6 a 10 (Leitura Adiantada)</option>
+                                            <option>Obra Completa (18 Capítulos)</option>
+                                        </select>
+                                    </div>
+                                    <!-- Rating Selection Star Input -->
+                                    <div class="flex flex-col gap-1">
+                                        <label
+                                            class="font-label-md text-label-md text-on-surface font-semibold">Avaliação
+                                            Qualitativa</label>
+                                        <div
+                                            class="flex items-center gap-1.5 p-2 rounded-lg bg-surface-container-lowest/60">
+                                            <div class="flex items-center gap-1 text-secondary-fixed cursor-pointer">
+                                                <span
+                                                    class="material-symbols-outlined text-[24px] hover:text-primary transition-colors"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span
+                                                    class="material-symbols-outlined text-[24px] hover:text-primary transition-colors"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span
+                                                    class="material-symbols-outlined text-[24px] hover:text-primary transition-colors"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span
+                                                    class="material-symbols-outlined text-[24px] hover:text-primary transition-colors"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                                <span
+                                                    class="material-symbols-outlined text-[24px] hover:text-primary transition-colors"
+                                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                            </div>
+                                            <span class="font-label-sm text-label-sm text-primary ml-auto font-bold">5.0
+                                                Impecável</span>
+                                        </div>
+                                    </div>
+                                    <!-- Form Review Fields -->
+                                    <div class="flex flex-col gap-1">
+                                        <label class="font-label-md text-label-md text-on-surface font-semibold"
+                                            for="review-title">Título Resumo da Crítica</label>
+                                        <input
+                                            class="w-full bg-surface-container-lowest/80 text-on-surface placeholder:text-outline font-body-sm text-body-sm p-2.5 rounded-lg border border-outline-variant/30 focus:border-primary-container focus:outline-none"
+                                            id="review-title"
+                                            placeholder="Ex: Tensão cósmica impecável e diálogos afiados" required=""
+                                            type="text" />
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <label class="font-label-md text-label-md text-on-surface font-semibold"
+                                            for="review-body">Análise Construtiva Detalhada</label>
+                                        <textarea
+                                            class="w-full bg-surface-container-lowest/80 text-on-surface placeholder:text-outline font-body-sm text-body-sm p-2.5 rounded-lg border border-outline-variant/30 focus:border-primary-container focus:outline-none resize-none"
+                                            id="review-body"
+                                            placeholder="Mencione pontos fortes, coerência com as regras da sci-fi, coerência de ritmo e sugestões gentis para a autora..."
+                                            required="" rows="4"></textarea>
+                                    </div>
+                                    <!-- Checkbox verification -->
+                                    <label class="flex items-start gap-2.5 mt-1 cursor-pointer">
+                                        <input checked="" class="mt-1 accent-primary-container rounded"
+                                            type="checkbox" />
+                                        <span class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+                                            Confirmo que deixei comentários inline correspondentes no Wattpad e votei
+                                            nos capítulos avaliados.
+                                        </span>
+                                    </label>
+                                    <!-- Submit Button -->
+                                    <button
+                                        class="w-full py-3 mt-space-xs rounded-lg bg-primary-container hover:bg-secondary-container text-on-primary-container hover:text-on-secondary-container font-label-md text-label-md font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_4px_16px_rgba(167,139,250,0.3)] flex items-center justify-center gap-2"
+                                        type="submit">
+                                        <span class="material-symbols-outlined text-[18px]">send</span>
+                                        <span>Enviar para Auditoria ADM</span>
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- PANEL B: Live Wattpad Engagement Analytics (SVG Visualizations) -->
+                            <div
+                                class="p-space-lg rounded-xl bg-surface-container-low/95 backdrop-blur-xl shadow-xl flex flex-col gap-space-md">
+                                <div class="flex items-center justify-between pb-space-xs">
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="material-symbols-outlined text-secondary text-[22px]">query_stats</span>
+                                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                                            Métricas no Wattpad</h3>
+                                    </div>
+                                    <span
+                                        class="font-label-sm text-label-sm text-primary flex items-center gap-1 font-bold">
+                                        <span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span> Live
+                                        Sync
+                                    </span>
+                                </div>
+                                <!-- Global High-Level Numbers Grid -->
+                                <div class="grid grid-cols-3 gap-2 text-center">
+                                    <div
+                                        class="p-space-sm rounded-lg bg-surface-container-lowest/70 flex flex-col items-center">
+                                        <span
+                                            class="font-headline-sm text-headline-sm font-bold text-on-surface">14.2k</span>
+                                        <span
+                                            class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-0.5">Leituras</span>
+                                    </div>
+                                    <div
+                                        class="p-space-sm rounded-lg bg-surface-container-lowest/70 flex flex-col items-center">
+                                        <span
+                                            class="font-headline-sm text-headline-sm font-bold text-secondary-fixed-dim">1.8k</span>
+                                        <span
+                                            class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-0.5">Votos
+                                            ★</span>
+                                    </div>
+                                    <div
+                                        class="p-space-sm rounded-lg bg-surface-container-lowest/70 flex flex-col items-center">
+                                        <span
+                                            class="font-headline-sm text-headline-sm font-bold text-primary">642</span>
+                                        <span
+                                            class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-0.5">Comentários</span>
+                                    </div>
+                                </div>
+                                <!-- Visualization 1: SVG Retention Curve Chart across Chapters -->
+                                <div class="flex flex-col gap-space-xs mt-space-xs">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-label-md text-label-md font-semibold text-on-surface">Retenção
+                                            de Leitura por Capítulo</span>
+                                        <span class="font-label-sm text-label-sm text-primary font-bold">88.4%
+                                            retenção</span>
+                                    </div>
+                                    <div class="w-full bg-surface-container-lowest p-3 rounded-lg flex flex-col gap-2">
+                                        <!-- SVG Area Curve -->
+                                        <svg class="w-full h-20 overflow-visible" preserveaspectratio="none"
+                                            viewbox="0 0 320 80">
+                                            <defs>
+                                                <lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+                                                    <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.45"></stop>
+                                                    <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.0"></stop>
+                                                </lineargradient>
+                                            </defs>
+                                            <!-- Shaded background beneath line -->
+                                            <path d="M 0,15 Q 40,18 80,24 T 160,32 T 240,36 T 320,42 L 320,80 L 0,80 Z"
+                                                fill="url(#chartGradient)"></path>
+                                            <!-- Primary Data Trend Line -->
+                                            <path d="M 0,15 Q 40,18 80,24 T 160,32 T 240,36 T 320,42" fill="none"
+                                                stroke="#cebdff" stroke-linecap="round" stroke-width="2.5"></path>
+                                            <!-- Data Points with Aura -->
+                                            <circle cx="0" cy="15" fill="#a78bfa" r="3.5"></circle>
+                                            <circle cx="80" cy="24" fill="#a78bfa" r="3.5"></circle>
+                                            <circle cx="160" cy="32" fill="#a78bfa" r="3.5"></circle>
+                                            <circle cx="240" cy="36" fill="#a78bfa" r="3.5"></circle>
+                                            <circle cx="320" cy="42" fill="#d3bbff" r="4.5" stroke="#141125"
+                                                stroke-width="1.5"></circle>
+                                        </svg>
+                                        <div
+                                            class="flex justify-between font-label-sm text-label-sm text-on-surface-variant px-1">
+                                            <span>Prólogo</span>
+                                            <span>Cap. 3</span>
+                                            <span>Cap. 7</span>
+                                            <span>Cap. 12</span>
+                                            <span>Cap. 18</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Visualization 2: Comments per Chapter Bar Breakdown -->
+                                <div class="flex flex-col gap-space-xs mt-space-xs">
+                                    <div class="flex items-center justify-between">
+                                        <span
+                                            class="font-label-md text-label-md font-semibold text-on-surface">Comentários
+                                            Coletivo x Orgânico</span>
+                                        <span class="font-label-sm text-label-sm text-on-surface-variant">Top 4
+                                            Capítulos</span>
+                                    </div>
+                                    <!-- Bar 1 -->
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex justify-between font-label-sm text-label-sm text-on-surface">
+                                            <span>Capítulo 1: O Silêncio de Antares</span>
+                                            <span class="font-bold text-primary">184 com.</span>
+                                        </div>
+                                        <div
+                                            class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden flex">
+                                            <div class="bg-secondary-container h-full" style="width: 65%"
+                                                title="Comunidade Aliança"></div>
+                                            <div class="bg-primary h-full" style="width: 35%" title="Orgânico Wattpad">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Bar 2 -->
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex justify-between font-label-sm text-label-sm text-on-surface">
+                                            <span>Capítulo 3: Frequências Fantasmas</span>
+                                            <span class="font-bold text-primary">142 com.</span>
+                                        </div>
+                                        <div
+                                            class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden flex">
+                                            <div class="bg-secondary-container h-full" style="width: 72%"></div>
+                                            <div class="bg-primary h-full" style="width: 28%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Bar 3 -->
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex justify-between font-label-sm text-label-sm text-on-surface">
+                                            <span>Capítulo 4: O Vórtice de Tiamat</span>
+                                            <span class="font-bold text-primary">119 com.</span>
+                                        </div>
+                                        <div
+                                            class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden flex">
+                                            <div class="bg-secondary-container h-full" style="width: 80%"></div>
+                                            <div class="bg-primary h-full" style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Legend -->
+                                    <div class="flex items-center justify-center gap-space-md pt-2">
+                                        <div
+                                            class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+                                            <span class="w-2.5 h-2.5 rounded bg-secondary-container"></span>
+                                            <span>Membros da Aliança</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+                                            <span class="w-2.5 h-2.5 rounded bg-primary"></span>
+                                            <span>Leitores Wattpad</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Toast / Success feedback notification target -->
+                                <div class="hidden p-space-sm rounded-lg bg-primary-container text-on-primary-container text-center font-label-md text-label-md font-semibold transition-all"
+                                    id="feedback-alert">
+                                    Feedback enviado com sucesso para a moderação!
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+            <!-- Interactive Logic for Buttons and Counters -->
+            <script>
+                function toggleReadingState(btn) {
+                    const isMarked = btn.getAttribute('data-marked') === 'true';
+                    const icon = btn.querySelector('.material-symbols-outlined');
+                    const text = btn.querySelector('span:last-child');
+
+                    if (!isMarked) {
+                        btn.setAttribute('data-marked', 'true');
+                        btn.classList.add('bg-primary-container', 'text-on-primary-container');
+                        btn.classList.remove('bg-surface-container', 'text-on-surface');
+                        icon.textContent = 'bookmark_added';
+                        text.textContent = 'Lendo Atualmente';
+                    } else {
+                        btn.setAttribute('data-marked', 'false');
+                        btn.classList.remove('bg-primary-container', 'text-on-primary-container');
+                        btn.classList.add('bg-surface-container', 'text-on-surface');
+                        icon.textContent = 'bookmark_add';
+                        text.textContent = 'Marcar Leitura';
+                    }
+                }
+
+                function toggleSaveList(btn) {
+                    const isSaved = btn.getAttribute('data-saved') === 'true';
+                    const icon = btn.querySelector('.material-symbols-outlined');
+                    const text = btn.querySelector('span:last-child');
+
+                    if (!isSaved) {
+                        btn.setAttribute('data-saved', 'true');
+                        icon.style.fontVariationSettings = "'FILL' 1";
+                        text.textContent = 'Salvo';
+                    } else {
+                        btn.setAttribute('data-saved', 'false');
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                        text.textContent = 'Salvar na Lista';
+                    }
+                }
+
+                function incrementHelpful(button) {
+                    if (button.getAttribute('data-voted') === 'true') return;
+                    const counterSpan = button.querySelector('.counter');
+                    if (counterSpan) {
+                        let current = parseInt(counterSpan.textContent.trim(), 10) || 0;
+                        counterSpan.textContent = current + 1;
+                        button.setAttribute('data-voted', 'true');
+                        button.classList.add('bg-primary-container/20', 'text-primary');
+                    }
+                }
+
+                function submitFeedbackToast() {
+                    const alertBox = document.getElementById('feedback-alert');
+                    if (alertBox) {
+                        alertBox.classList.remove('hidden');
+                        setTimeout(() => {
+                            alertBox.classList.add('hidden');
+                        }, 4000);
+                    }
+                    document.getElementById('critique-form').reset();
+                }
+            </script>
+        </div>
+    </main>
+    <footer class="w-full bg-surface-container-lowest/90 mt-auto">
+        <div class="w-full px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+            <div class="flex items-center gap-space-sm"><span
+                    class="material-symbols-outlined text-primary text-[20px]">hotel_class</span>
+                <p class="font-body-sm text-body-sm text-on-surface-variant"><span
+                        class="font-headline-sm text-headline-sm font-medium text-on-surface">Constelação
+                        Literária</span> — Escrever é acender faróis no infinito • 2025</p>
+            </div>
+            <nav class="flex items-center gap-space-lg"><a
+                    class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Código de Conduta</a><a
+                    class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Diretrizes de Auditoria</a><a
+                    class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Suporte aos Autores</a><a
+                    class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                    href="#">Wattpad Sync</a></nav>
+        </div>
+    </footer>
+</body>
+
+</html>
