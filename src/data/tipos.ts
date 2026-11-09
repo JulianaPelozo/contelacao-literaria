@@ -14,11 +14,14 @@ export interface Obra {
   /** Identificador único, usado na URL (#/obra/<id>). Só letras minúsculas, números e hífens. */
   id: string;
   titulo: string;
-  autora: string;
+  /** Nome de autoria. Se ficar vazio, o site mostra só o @usuario. */
+  autora?: string;
   /** Usuário no Wattpad, sem o @ */
   usuario: string;
   /** Link da obra no Wattpad (para onde as miniaturas redirecionam) */
   wattpad: string;
+  /** Número da história no Wattpad (usado pelo script de atualização) */
+  wattpadId?: string;
   /** URL da capa. Se ficar vazio, o site gera uma capa ilustrada automaticamente. */
   capa?: string;
   generos: string[];

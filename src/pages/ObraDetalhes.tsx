@@ -4,7 +4,7 @@ import { Capa } from '../components/Capa';
 import { Icone } from '../components/Icone';
 import { LinkWattpad, SeloWattpad } from '../components/LinkWattpad';
 import { cicloAtual } from '../data/ciclo';
-import { obraPorId } from '../data/obras';
+import { autoria, obraPorId } from '../data/obras';
 import type { Obra } from '../data/tipos';
 import { formatarPrazo } from '../lib/tempo';
 import { NaoEncontrada } from './NaoEncontrada';
@@ -29,7 +29,7 @@ function Detalhes({ obra }: { obra: Obra }) {
     const url = window.location.href;
     try {
       if (navigator.share) {
-        await navigator.share({ title: obra.titulo, text: `${obra.titulo}, de ${obra.autora}`, url });
+        await navigator.share({ title: obra.titulo, text: `${obra.titulo}, de ${autoria(obra)}`, url });
         return;
       }
       await navigator.clipboard.writeText(url);
@@ -96,11 +96,11 @@ function Detalhes({ obra }: { obra: Obra }) {
             </h1>
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-label-md">
-                {iniciais(obra.autora)}
+                {iniciais(obra.autora ?? obra.usuario)}
               </div>
               <div>
-                <p className="text-body-md text-on-surface font-semibold leading-tight">{obra.autora}</p>
-                <p className="text-label-sm font-medium text-on-surface-variant">@{obra.usuario}</p>
+                <p className="text-body-md text-on-surface font-semibold leading-tight">{autoria(obra)}</p>
+                {obra.autora && <p className="text-label-sm font-medium text-on-surface-variant">@{obra.usuario}</p>}
               </div>
             </div>
           </header>
@@ -125,7 +125,7 @@ function Detalhes({ obra }: { obra: Obra }) {
               <Icone nome="auto_awesome" className="text-primary text-[20px]" />
               <h2 className="font-display text-headline-sm text-on-surface">Sinopse</h2>
             </div>
-            <div className={`flex flex-col gap-space-sm text-body-md text-on-surface-variant ${longa && !sinopseAberta ? 'line-clamp-5 lg:line-clamp-none' : ''}`}>
+            <div className={`flex flex-col gap-space-sm text-body-md text-on-surface-variant ${longa && !sinopseAberta ? 'max-h-40 overflow-hidden [mask-image:linear-gradient(to_bottom,black_55%,transparent)] lg:max-h-none lg:overflow-visible lg:[mask-image:none]' : ''}`}>
               {paragrafos.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}

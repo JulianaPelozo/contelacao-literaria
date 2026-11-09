@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { autoria } from '../data/obras';
 import type { Obra } from '../data/tipos';
 
 const PALETAS = [
@@ -76,7 +77,7 @@ export function Capa({ obra, className = '', zoom = true }: Props) {
           {obra.titulo}
         </span>
         <span className="font-sans uppercase tracking-widest" style={{ color: c, fontSize: '5.5cqw', opacity: 0.75 }}>
-          {obra.autora}
+          {autoria(obra)}
         </span>
       </div>
     </div>

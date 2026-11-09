@@ -24,13 +24,26 @@ O título leva para a página de detalhes.
 
 ## Como editar o conteúdo
 
-- **Obras** → [`src/data/obras.ts`](src/data/obras.ts)
-  As obras atuais são fictícias. Para cada obra real, preencha `wattpad` com o link da história e, se quiser a
-  capa original, `capa` com o endereço da imagem (no Wattpad: botão direito na capa → "Copiar endereço da imagem").
-  Sem `capa`, o site desenha uma capa automática com o título.
-  `destaque: true` coloca a obra em "Constelações em Destaque"; `nova: true`, em "Recém-chegadas".
+- **Obras** → [`src/data/obras.json`](src/data/obras.json)
+  Para cadastrar uma história nova, basta o link do Wattpad:
+
+  ```bash
+  npm run obra:adicionar -- https://www.wattpad.com/story/123456789-titulo
+  ```
+
+  O script busca título, @, sinopse, capa, capítulos, status e classificação, e já marca a obra como
+  recém-chegada (`"nova": true`). Depois, revise no JSON os gêneros, os `avisos` de conteúdo e a sinopse (às vezes
+  ela traz notas do autor). Para atualizar capítulos, status e capa de todas as obras de uma vez:
+
+  ```bash
+  npm run obras:atualizar
+  ```
+
+  Outros campos que você pode mudar à mão: `"destaque": true` (vai para "Constelações em Destaque"), remover
+  `"nova"` (sai de "Recém-chegadas") e `"autora"` (nome exibido; sem ele, aparece só o @).
 - **Grade da semana** → [`src/data/ciclo.ts`](src/data/ciclo.ts)
-  Número do ciclo, datas de início/prazo e as leituras de cada grupo (usando o `id` da obra).
+  Número do ciclo, datas de início/prazo e as leituras de cada grupo (usando o `id` da obra, que aparece no
+  `obras.json` e na URL `#/obra/<id>`). Com a lista de grupos vazia, a página mostra "grade em preparação".
 - **Textos** (dica da semana, regras, frase do rodapé) → [`src/data/site.ts`](src/data/site.ts)
 
 Na grade, cada pessoa pode marcar as leituras como lidas; isso fica salvo apenas no navegador dela.

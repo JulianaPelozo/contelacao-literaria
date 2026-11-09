@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Autoria } from '../components/Autoria';
 import { Capa } from '../components/Capa';
 import { Icone } from '../components/Icone';
 import { LinkWattpad } from '../components/LinkWattpad';
@@ -52,6 +53,7 @@ export function Grade() {
             </div>
           </div>
 
+          {visiveis.length > 0 && (
           <div className="lg:w-80 flex-shrink-0 p-space-md rounded-xl bg-surface-container-lowest/70 backdrop-blur-md">
             <div className="flex items-center justify-between">
               <span className="text-label-sm text-on-surface-variant">Seu progresso</span>
@@ -77,8 +79,22 @@ export function Grade() {
               As marcações ficam salvas só neste aparelho.
             </p>
           </div>
+          )}
         </div>
       </section>
+
+      {cicloAtual.grupos.length === 0 && (
+        <div className="card p-space-xl text-center flex flex-col items-center gap-space-sm">
+          <Icone nome="hourglass_empty" className="text-[44px] text-primary/60" />
+          <h2 className="font-display text-headline-sm text-on-surface">Grade em preparação</h2>
+          <p className="text-body-sm text-on-surface-variant max-w-md">
+            As ADMs ainda estão montando os grupos deste ciclo. Enquanto isso, conheça as obras na vitrine.
+          </p>
+          <Link to="/" className="btn-ghost mt-1">
+            <Icone nome="auto_stories" className="text-[18px]" /> Ver vitrine
+          </Link>
+        </div>
+      )}
 
       {cicloAtual.grupos.length > 1 && (
         <div
@@ -210,9 +226,7 @@ function CardLeitura({
             {obra.titulo}
           </Link>
         </h3>
-        <p className="text-label-sm text-tertiary-fixed-dim">
-          por {obra.autora} <span className="text-outline font-medium">@{obra.usuario}</span>
-        </p>
+        <Autoria obra={obra} />
         <p className="text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
           <Icone nome="menu_book" className="text-[15px] text-primary" />
           Meta: capítulos {leitura.capitulos}

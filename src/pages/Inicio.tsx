@@ -19,7 +19,7 @@ const normalizar = (s: string) =>
 function combina(o: Obra, busca: string, genero: string) {
   if (genero !== TODOS && !o.generos.includes(genero)) return false;
   if (!busca) return true;
-  const alvo = normalizar([o.titulo, o.autora, o.usuario, ...o.generos, o.sinopse].join(' '));
+  const alvo = normalizar([o.titulo, o.autora ?? '', o.usuario, ...o.generos, o.sinopse].join(' '));
   return normalizar(busca)
     .split(/\s+/)
     .every((p) => alvo.includes(p.replace(/^@/, '')));
@@ -202,8 +202,12 @@ function Hero() {
                 />
               </div>
             </Metrica>
-            <Metrica icone="menu_book" rotulo="Leituras na grade" valor={`${totalLeituras} obras`} />
-            <Metrica icone="groups" rotulo="Grupos ativos" valor={`${cicloAtual.grupos.length} constelações`} />
+            <Metrica icone="auto_stories" rotulo="Obras no projeto" valor={`${obras.length} obras`} />
+            <Metrica
+              icone="menu_book"
+              rotulo="Grade da semana"
+              valor={totalLeituras ? `${totalLeituras} leituras` : 'Em preparação'}
+            />
           </div>
 
           <div className="flex flex-wrap gap-2 pt-2">

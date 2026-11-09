@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "obra:adicionar": "node scripts/obras.mjs adicionar",
+    "obras:atualizar": "node scripts/obras.mjs atualizar"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",

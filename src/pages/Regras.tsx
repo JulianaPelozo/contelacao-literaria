@@ -96,6 +96,9 @@ export function Regras() {
 
       <section className="flex flex-col gap-space-md">
         <h2 className="font-display text-headline-sm lg:text-headline-md text-on-surface">Grupos do ciclo {cicloAtual.numero}</h2>
+        {cicloAtual.grupos.length === 0 && (
+          <p className="text-body-sm text-on-surface-variant">Os grupos deste ciclo ainda estão sendo definidos pelas ADMs.</p>
+        )}
         <div className="grid sm:grid-cols-3 gap-space-md">
           {cicloAtual.grupos.map((g) => (
             <div key={g.nome} className="card p-space-md">

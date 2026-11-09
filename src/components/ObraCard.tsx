@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Obra } from '../data/tipos';
+import { Autoria } from './Autoria';
 import { Capa } from './Capa';
 import { Icone } from './Icone';
 import { LinkWattpad, SeloWattpad } from './LinkWattpad';
@@ -38,9 +39,7 @@ export function ObraCard({ obra, meta, className = '' }: Props) {
           {obra.titulo}
         </Link>
       </h3>
-      <p className="text-label-sm text-tertiary-fixed-dim mt-0.5 mb-2">
-        por {obra.autora} <span className="text-outline font-medium">@{obra.usuario}</span>
-      </p>
+      <Autoria obra={obra} className="mt-0.5 mb-2" />
       <p className="text-body-sm text-on-surface-variant line-clamp-2">{obra.sinopse}</p>
 
       <div className="mt-auto pt-4 flex items-center gap-2">
