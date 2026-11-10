@@ -160,3 +160,73 @@ select u.id,
 update public.perfis
    set tipo = 'adm', status = 'ativo', primordial = true
  where lower(email) = 'julianapelozopacheco@gmail.com';
+
+-- =====================================================================
+-- Ciclos e grade de leitura da semana
+--   • grupos   = lista de grupos, cada um com suas leituras:
+--                [{ "nome": "...", "descricao": "...",
+--                   "leituras": [{ "obra": "<id da obra>", "capitulos": "1 ao 5" }] }]
+--   • qualquer pessoa (mesmo sem conta) vê os ciclos publicados
+--   • só ADMs aprovadas veem rascunhos e criam/editam/excluem ciclos
+-- =====================================================================
+create table if not exists public.ciclos (
+  numero         integer primary key check (numero > 0),
+  inicio         timestamptz not null,
+  prazo          timestamptz not null,
+  grupos         jsonb not null default '[]'::jsonb check (jsonb_typeof(grupos) = 'array'),
+  publicado      boolean not null default false,
+  atualizado_por uuid references public.perfis (id) on delete set null,
+  atualizado_em  timestamptz not null default now(),
+  criado_em      timestamptz not null default now(),
+  constraint ciclos_prazo_depois_do_inicio check (prazo > inicio)
+);
+
+alter table public.ciclos enable row level security;
+
+-- Registra quem mexeu por último e quando.
+create or replace function public.ciclos_carimbo()
+returns trigger
+language plpgsql set search_path = public
+as $$
+begin
+  new.atualizado_por := auth.uid();
+  new.atualizado_em  := now();
+  return new;
+end;
+$$;
+
+drop trigger if exists ciclos_carimbo on public.ciclos;
+create trigger ciclos_carimbo
+  before insert or update on public.ciclos
+  for each row execute function public.ciclos_carimbo();
+
+drop policy if exists "ciclos: ver publicados" on public.ciclos;
+create policy "ciclos: ver publicados" on public.ciclos
+  for select to anon, authenticated
+  using (publicado);
+
+drop policy if exists "ciclos: ADM vê todos" on public.ciclos;
+create policy "ciclos: ADM vê todos" on public.ciclos
+  for select to authenticated
+  using (public.eh_adm());
+
+drop policy if exists "ciclos: ADM cria" on public.ciclos;
+create policy "ciclos: ADM cria" on public.ciclos
+  for insert to authenticated
+  with check (public.eh_adm());
+
+drop policy if exists "ciclos: ADM edita" on public.ciclos;
+create policy "ciclos: ADM edita" on public.ciclos
+  for update to authenticated
+  using (public.eh_adm())
+  with check (public.eh_adm());
+
+drop policy if exists "ciclos: ADM exclui" on public.ciclos;
+create policy "ciclos: ADM exclui" on public.ciclos
+  for delete to authenticated
+  using (public.eh_adm());
+
+revoke all on public.ciclos from anon, authenticated;
+grant select on public.ciclos to anon, authenticated;
+grant insert, update, delete on public.ciclos to authenticated;
+revoke execute on function public.ciclos_carimbo() from public, anon, authenticated;

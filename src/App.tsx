@@ -1,6 +1,8 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { AuthProvider } from './lib/auth';
+import { CicloProvider } from './lib/ciclo';
+import { EditorGrade } from './pages/EditorGrade';
 import { Cadastro } from './pages/Cadastro';
 import { Conta } from './pages/Conta';
 import { Entrar } from './pages/Entrar';
@@ -18,6 +20,7 @@ export default function App() {
   return (
     <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AuthProvider>
+      <CicloProvider>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Inicio />} />
@@ -29,9 +32,11 @@ export default function App() {
           <Route path="redefinir-senha" element={<RedefinirSenha />} />
           <Route path="conta" element={<Conta />} />
           <Route path="adm" element={<PainelAdm />} />
+          <Route path="adm/grade" element={<EditorGrade />} />
           <Route path="*" element={<NaoEncontrada />} />
         </Route>
       </Routes>
+      </CicloProvider>
       </AuthProvider>
     </HashRouter>
   );

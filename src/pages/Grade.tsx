@@ -4,16 +4,19 @@ import { Autoria } from '../components/Autoria';
 import { Capa } from '../components/Capa';
 import { Icone } from '../components/Icone';
 import { LinkWattpad } from '../components/LinkWattpad';
-import { cicloAtual } from '../data/ciclo';
 import { obraPorId } from '../data/obras';
 import { comoComprovar, regrasCiclo } from '../data/site';
 import type { Leitura, Obra } from '../data/tipos';
 import { useLidas } from '../lib/lidas';
 import { formatarPrazo, progressoCiclo, tempoRestante, useAgora } from '../lib/tempo';
+import { useAuth } from '../lib/auth';
+import { useCiclo } from '../lib/ciclo';
 
 const TODOS = 'Todos os grupos';
 
 export function Grade() {
+  const { ciclo: cicloAtual } = useCiclo();
+  const { ehAdm } = useAuth();
   const agora = useAgora();
   const restante = tempoRestante(cicloAtual.prazo, agora);
   const decorrido = progressoCiclo(cicloAtual.inicio, cicloAtual.prazo, agora);
@@ -38,6 +41,11 @@ export function Grade() {
             <h1 className="font-display text-headline-lg-mobile sm:text-headline-lg text-on-surface">
               Grade de Leitura • Ciclo {cicloAtual.numero}
             </h1>
+            {ehAdm && (
+              <Link to="/adm/grade" className="btn-ghost w-fit py-1.5">
+                <Icone nome="edit_calendar" className="text-[17px]" /> Editar grade
+              </Link>
+            )}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-body-sm text-on-surface-variant">
               <span className="inline-flex items-center gap-1">
                 <Icone nome="schedule" className="text-[16px] text-primary" />

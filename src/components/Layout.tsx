@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { cicloAtual } from '../data/ciclo';
 import { frase } from '../data/site';
 import { useAuth } from '../lib/auth';
 import { iniciais } from '../lib/iniciais';
@@ -9,6 +8,7 @@ import { tempoRestante, useAgora } from '../lib/tempo';
 import logo from '../assets/logo.webp';
 import { Icone } from './Icone';
 import { SeletorTema } from './SeletorTema';
+import { useCiclo } from '../lib/ciclo';
 
 interface ItemNav {
   para: string;
@@ -27,9 +27,11 @@ const NAV_ADM: ItemNav = { para: '/adm', rotulo: 'ADM', rotuloLongo: 'Painel ADM
 /** Item "Início" também fica ativo nas páginas de obra; "Conta" também em entrar/cadastro. */
 const ativoExtra = (para: string, pathname: string) =>
   (para === '/' && pathname.startsWith('/obra/')) ||
-  (para === '/conta' && ['/entrar', '/cadastro', '/redefinir-senha'].includes(pathname));
+  (para === '/conta' && ['/entrar', '/cadastro', '/redefinir-senha'].includes(pathname)) ||
+  (para === '/adm' && pathname.startsWith('/adm/'));
 
 export function Layout() {
+  const { ciclo: cicloAtual } = useCiclo();
   const { pathname } = useLocation();
   const agora = useAgora();
   const restante = tempoRestante(cicloAtual.prazo, agora);

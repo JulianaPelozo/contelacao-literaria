@@ -3,11 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { Capa } from '../components/Capa';
 import { Icone } from '../components/Icone';
 import { LinkWattpad, SeloWattpad } from '../components/LinkWattpad';
-import { cicloAtual } from '../data/ciclo';
 import { autoria, obraPorId } from '../data/obras';
 import type { Obra } from '../data/tipos';
 import { formatarPrazo } from '../lib/tempo';
 import { NaoEncontrada } from './NaoEncontrada';
+import { useCiclo } from '../lib/ciclo';
 
 export function ObraDetalhes() {
   const { id = '' } = useParams();
@@ -17,6 +17,7 @@ export function ObraDetalhes() {
 }
 
 function Detalhes({ obra }: { obra: Obra }) {
+  const { ciclo: cicloAtual } = useCiclo();
   const [sinopseAberta, setSinopseAberta] = useState(false);
   const [aviso, setAviso] = useState('');
   const naGrade = cicloAtual.grupos.flatMap((g) =>

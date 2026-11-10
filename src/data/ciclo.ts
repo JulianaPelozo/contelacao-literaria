@@ -1,6 +1,10 @@
 import type { Ciclo } from './tipos';
 
 /**
+ * RESERVA: a grade de verdade é criada pelas ADMs no site (Painel ADM → Grade da semana)
+ * e fica na tabela `ciclos` do Supabase. Este arquivo só é usado enquanto não houver
+ * nenhum ciclo publicado lá (ou se o Supabase não estiver configurado).
+ *
  * Grade de leitura do ciclo atual.
  * A cada semana, atualize o número, as datas e as leituras de cada grupo.
  * O campo `obra` deve ser o `id` de uma obra de obras.json.

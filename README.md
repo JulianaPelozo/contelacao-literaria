@@ -18,6 +18,7 @@ O protótipo original (gerado no Stitch) continua em [`prototipo/`](prototipo/).
 | `#/cadastro`  | Cadastro como leitora/autora ou como ADM                                  |
 | `#/conta`     | Minha conta: dados, status da solicitação de ADM, sair                    |
 | `#/adm`       | Painel ADM: aprovar/recusar novas ADMs e ver membros (só ADMs aprovadas)  |
+| `#/adm/grade` | Editor da grade da semana: criar ciclos, montar grupos e publicar (ADMs)  |
 
 Na vitrine e na grade, **clicar na capa abre a obra direto no Wattpad** (nova aba).
 O título leva para a página de detalhes.
@@ -41,9 +42,13 @@ O título leva para a página de detalhes.
 
   Outros campos que você pode mudar à mão: `"destaque": true` (vai para "Constelações em Destaque"), remover
   `"nova"` (sai de "Recém-chegadas") e `"autora"` (nome exibido; sem ele, aparece só o @).
-- **Grade da semana** → [`src/data/ciclo.ts`](src/data/ciclo.ts)
-  Número do ciclo, datas de início/prazo e as leituras de cada grupo (usando o `id` da obra, que aparece no
-  `obras.json` e na URL `#/obra/<id>`). Com a lista de grupos vazia, a página mostra "grade em preparação".
+- **Grade da semana** → pelo próprio site, em **Painel ADM → Grade da semana** (`#/adm/grade`).
+  As ADMs criam o ciclo (número, início e prazo, em horário de Brasília), montam os grupos escolhendo as obras da
+  vitrine e os capítulos de cada uma e então publicam. Rascunhos só aparecem para ADMs. O site mostra o ciclo
+  publicado de maior número que já começou. Se nenhum começou ainda, mostra o próximo a começar. Um ciclo novo já
+  vem com as datas da semana seguinte, e há o botão "Copiar grupos do ciclo anterior".
+  As grades ficam na tabela `ciclos` do Supabase. O arquivo [`src/data/ciclo.ts`](src/data/ciclo.ts) é usado
+  só como reserva, enquanto não houver nenhum ciclo publicado ou se o Supabase não estiver configurado.
 - **Textos** (dica da semana, regras, frase do rodapé) → [`src/data/site.ts`](src/data/site.ts)
 
 Na grade, cada pessoa pode marcar as leituras como lidas; isso fica salvo apenas no navegador dela.

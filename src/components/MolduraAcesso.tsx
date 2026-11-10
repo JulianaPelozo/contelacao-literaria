@@ -1,13 +1,14 @@
 import type { ReactNode } from 'react';
-import { cicloAtual } from '../data/ciclo';
 import { obras } from '../data/obras';
 import { frase } from '../data/site';
 import { supabaseConfigurado } from '../lib/supabase';
 import { Alerta } from './Formulario';
 import { Icone } from './Icone';
+import { useCiclo } from '../lib/ciclo';
 
 /** Layout das telas de login/cadastro: apresentação à esquerda (desktop) e cartão do formulário. */
 export function MolduraAcesso({ children, titulo, subtitulo }: { children: ReactNode; titulo: string; subtitulo?: string }) {
+  const { ciclo: cicloAtual } = useCiclo();
   const leituras = cicloAtual.grupos.reduce((n, g) => n + g.leituras.length, 0);
   return (
     <div className="relative max-w-7xl mx-auto px-gutter-mobile lg:px-margin pt-space-md lg:pt-space-xl">

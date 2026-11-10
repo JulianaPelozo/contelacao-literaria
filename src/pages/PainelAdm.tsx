@@ -98,6 +98,24 @@ export function PainelAdm() {
         </div>
       </header>
 
+      <Link
+        to="/adm/grade"
+        className="card p-space-md sm:p-space-lg flex items-center gap-space-md group hover:bg-surface-container transition-colors"
+      >
+        <span className="w-12 h-12 rounded-full bg-primary-container/20 text-primary flex items-center justify-center flex-shrink-0">
+          <Icone nome="edit_calendar" className="text-[24px]" />
+        </span>
+        <span className="flex-1 min-w-0">
+          <span className="block font-display text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+            Grade da semana
+          </span>
+          <span className="block text-body-sm text-on-surface-variant">
+            Crie o próximo ciclo, monte os grupos e publique a grade de leitura.
+          </span>
+        </span>
+        <Icone nome="chevron_right" className="text-[24px] text-on-surface-variant group-hover:text-primary" />
+      </Link>
+
       <Alerta tipo="erro">{erro}</Alerta>
       <Alerta tipo="sucesso">{ok}</Alerta>
 

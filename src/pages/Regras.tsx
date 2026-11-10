@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Icone } from '../components/Icone';
-import { cicloAtual } from '../data/ciclo';
 import { comoComprovar, regrasCiclo, regrasHonra, ritmos } from '../data/site';
+import { useCiclo } from '../lib/ciclo';
 
 const PASSOS = [
   { icone: 'how_to_reg', titulo: 'Inscrição', texto: 'Sua obra do Wattpad entra no projeto e é validada pelas ADMs.' },
@@ -11,6 +11,7 @@ const PASSOS = [
 ];
 
 export function Regras() {
+  const { ciclo: cicloAtual } = useCiclo();
   return (
     <div className="max-w-5xl mx-auto px-gutter-mobile lg:px-margin pt-space-md lg:pt-space-lg flex flex-col gap-space-xl">
       <header className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface-container-high via-surface-container to-surface-container-lowest p-space-md sm:p-space-lg shadow-xl">

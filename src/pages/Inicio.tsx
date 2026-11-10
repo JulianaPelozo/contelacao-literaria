@@ -5,11 +5,11 @@ import { Icone } from '../components/Icone';
 import { ObraCard, ObraLinha } from '../components/ObraCard';
 import { RegrasResumo } from '../components/RegrasResumo';
 import { Secao } from '../components/Secao';
-import { cicloAtual } from '../data/ciclo';
 import { generos, obras } from '../data/obras';
 import { dicaDaSemana, frase } from '../data/site';
 import type { Obra } from '../data/tipos';
 import { formatarPrazo, progressoCiclo, tempoRestante, useAgora } from '../lib/tempo';
+import { useCiclo } from '../lib/ciclo';
 
 const TODOS = 'Todos';
 
@@ -166,6 +166,7 @@ export function Inicio() {
 }
 
 function Hero() {
+  const { ciclo: cicloAtual } = useCiclo();
   const agora = useAgora();
   const restante = tempoRestante(cicloAtual.prazo, agora);
   const progresso = progressoCiclo(cicloAtual.inicio, cicloAtual.prazo, agora);

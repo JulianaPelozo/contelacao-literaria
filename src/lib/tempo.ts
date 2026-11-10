@@ -41,3 +41,38 @@ export function formatarPrazo(prazoISO: string) {
   const hora = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' });
   return `${dia.charAt(0).toUpperCase()}${dia.slice(1)}, ${data} às ${hora}`;
 }
+
+/** Data ('AAAA-MM-DD') e hora ('HH:MM') de um instante, no horário de Brasília. */
+export function partesBrasilia(iso: string) {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Sao_Paulo',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    })
+      .formatToParts(new Date(iso))
+      .map((x) => [x.type, x.value]),
+  );
+  return { data: `${p.year}-${p.month}-${p.day}`, hora: `${p.hour}:${p.minute}` };
+}
+
+/** Monta um instante ISO a partir de data e hora de Brasília (sem horário de verão desde 2019). */
+export const deBrasilia = (data: string, hora = '00:00') => `${data}T${hora}:00-03:00`;
+
+/** Soma dias a uma data 'AAAA-MM-DD'. */
+export function somarDias(data: string, dias: number) {
+  const d = new Date(`${data}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + dias);
+  return d.toISOString().slice(0, 10);
+}
+
+/** Segunda-feira da semana atual (Brasília), como 'AAAA-MM-DD'. */
+export function segundaDestaSemana(agora = Date.now()) {
+  const hoje = partesBrasilia(new Date(agora).toISOString()).data;
+  const diaSemana = new Date(`${hoje}T12:00:00Z`).getUTCDay(); // 0 = domingo
+  return somarDias(hoje, diaSemana === 0 ? -6 : 1 - diaSemana);
+}
