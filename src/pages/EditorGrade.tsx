@@ -7,6 +7,7 @@ import { autoria, obraPorId, obras } from '../data/obras';
 import type { Grupo } from '../data/tipos';
 import { useAuth } from '../lib/auth';
 import { useCiclo, type LinhaCiclo } from '../lib/ciclo';
+import { normalizarUsuario } from '../lib/grade';
 import { supabase, traduzirErro } from '../lib/supabase';
 import { deBrasilia, partesBrasilia, segundaDestaSemana, somarDias } from '../lib/tempo';
 
@@ -103,7 +104,11 @@ const paraGrupos = (f: Form): Grupo[] =>
   f.grupos.map((g) => ({
     nome: g.nome.trim(),
     ...(g.descricao.trim() ? { descricao: g.descricao.trim() } : {}),
-    leituras: g.leituras.map((l) => ({ obra: l.obra, capitulos: l.capitulos.trim() })),
+    leituras: g.leituras.map((l) => {
+      const o = obraPorId(l.obra);
+      // título e @ vão junto: o banco usa o @ para saber de quem é a obra (metas e feedbacks)
+      return { obra: l.obra, capitulos: l.capitulos.trim(), titulo: o?.titulo ?? l.obra, usuario: o?.usuario ?? '' };
+    }),
   }));
 
 const dataCurta = (iso: string) =>
@@ -126,6 +131,8 @@ export function EditorGrade() {
   const [erro, setErro] = useState('');
   const [ok, setOk] = useState('');
   const [salvando, setSalvando] = useState(false);
+  /** @ das contas do site, para avisar quando a autora de uma obra ainda não tem conta */
+  const [contas, setContas] = useState<Set<string> | null>(null);
 
   const atual = typeof selecionado === 'number' ? ciclos?.find((c) => c.numero === selecionado) : undefined;
   const ultimo = ciclos?.[0];
@@ -156,7 +163,12 @@ export function EditorGrade() {
   );
 
   useEffect(() => {
-    if (ehAdm) carregar();
+    if (!ehAdm || !supabase) return;
+    carregar();
+    supabase
+      .from('perfis')
+      .select('usuario')
+      .then(({ data }) => data && setContas(new Set(data.map((p) => normalizarUsuario(p.usuario)).filter(Boolean))));
   }, [ehAdm, carregar]);
 
   // Aviso ao fechar a aba com alterações não salvas
@@ -231,7 +243,12 @@ export function EditorGrade() {
     setSalvando(true);
     const { error } = await supabase.from('ciclos').delete().eq('numero', selecionado);
     setSalvando(false);
-    if (error) return setErro(traduzirErro(error));
+    if (error)
+      return setErro(
+        error.code === '23503'
+          ? 'Este ciclo já tem feedbacks enviados e não pode ser excluído (apagaria os selos). Você pode despublicá-lo.'
+          : traduzirErro(error),
+      );
     setOk(`Ciclo ${selecionado} excluído.`);
     setBase(assinatura(form)); // evita o aviso de "não salvo"
     await carregar();
@@ -383,8 +400,10 @@ export function EditorGrade() {
                 <span className="text-label-md text-on-surface-variant">Leituras</span>
                 {g.leituras.map((l, j) => {
                   const obra = obraPorId(l.obra);
+                  const semConta = !!obra && !!contas && !contas.has(normalizarUsuario(obra.usuario));
                   return (
-                    <div key={l.k} className="flex flex-col sm:flex-row sm:items-center gap-2 p-2 rounded-xl bg-surface-container-lowest/60">
+                    <div key={l.k} className="flex flex-col gap-1 p-2 rounded-xl bg-surface-container-lowest/60">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                       <select
                         aria-label={`Obra ${j + 1} do grupo ${g.nome || i + 1}`}
                         value={l.obra}
@@ -419,6 +438,14 @@ export function EditorGrade() {
                           onClick={() => mudarGrupo(g.k, (x) => ({ ...x, leituras: x.leituras.filter((y) => y.k !== l.k) }))}
                         />
                       </div>
+                    </div>
+                    {semConta && (
+                      <p className="flex items-center gap-1 px-1 text-label-sm font-medium text-on-surface-variant">
+                        <Icone nome="person_off" className="text-[14px] text-error/80" />
+                        @{obra.usuario} ainda não tem conta no site (ou usa outro @): a obra entra na grade, mas a
+                        autoria fica sem meta e sem selos.
+                      </p>
+                    )}
                     </div>
                   );
                 })}

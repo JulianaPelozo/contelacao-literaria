@@ -7,7 +7,8 @@ import { LinkWattpad } from '../components/LinkWattpad';
 import { obraPorId } from '../data/obras';
 import { comoComprovar, regrasCiclo } from '../data/site';
 import type { Leitura, Obra } from '../data/tipos';
-import { useLidas } from '../lib/lidas';
+import { useMeusFeedbacks } from '../lib/feedbacks';
+import { autorDaLeitura, normalizarUsuario, situacaoNaGrade } from '../lib/grade';
 import { formatarPrazo, progressoCiclo, tempoRestante, useAgora } from '../lib/tempo';
 import { useAuth } from '../lib/auth';
 import { useCiclo } from '../lib/ciclo';
@@ -16,17 +17,21 @@ const TODOS = 'Todos os grupos';
 
 export function Grade() {
   const { ciclo: cicloAtual } = useCiclo();
-  const { ehAdm } = useAuth();
+  const { ehAdm, sessao, perfil } = useAuth();
   const agora = useAgora();
   const restante = tempoRestante(cicloAtual.prazo, agora);
   const decorrido = progressoCiclo(cicloAtual.inicio, cicloAtual.prazo, agora);
-  const { lidas, alternar } = useLidas(cicloAtual.numero);
+  const meus = useMeusFeedbacks();
+  const enviados = new Set((meus.dados ?? []).filter((f) => f.ciclo === cicloAtual.numero).map((f) => f.obra));
+  const situacao = situacaoNaGrade(cicloAtual, perfil?.usuario);
+  const eu = normalizarUsuario(perfil?.usuario);
   const [grupo, setGrupo] = useState(TODOS);
 
   const grupos = cicloAtual.grupos.filter((g) => grupo === TODOS || g.nome === grupo);
-  const visiveis = grupos.flatMap((g) => g.leituras.map((l) => chave(g.nome, l)));
-  const feitas = visiveis.filter((k) => lidas.has(k)).length;
-  const pct = visiveis.length ? Math.round((feitas / visiveis.length) * 100) : 0;
+  const metaTotal = situacao.alvos.length;
+  const feitas = situacao.alvos.filter((a) => enviados.has(a.leitura.obra)).length;
+  const pct = metaTotal ? Math.round((feitas / metaTotal) * 100) : 0;
+  const cumpriu = metaTotal > 0 && feitas >= metaTotal;
 
   return (
     <div className="max-w-7xl mx-auto px-gutter-mobile lg:px-margin pt-space-md lg:pt-space-lg flex flex-col gap-space-lg">
@@ -61,32 +66,53 @@ export function Grade() {
             </div>
           </div>
 
-          {visiveis.length > 0 && (
-          <div className="lg:w-80 flex-shrink-0 p-space-md rounded-xl bg-surface-container-lowest/70 backdrop-blur-md">
-            <div className="flex items-center justify-between">
-              <span className="text-label-sm text-on-surface-variant">Seu progresso</span>
-              <span className="text-label-md text-primary">{pct}%</span>
+          {cicloAtual.grupos.length > 0 && (
+            <div className="lg:w-80 flex-shrink-0 p-space-md rounded-xl bg-surface-container-lowest/70 backdrop-blur-md">
+              {!sessao ? (
+                <>
+                  <p className="text-body-md text-on-surface font-semibold">Participa da grade?</p>
+                  <p className="text-body-sm text-on-surface-variant mt-1">Entre para enviar seus feedbacks e ganhar selos.</p>
+                  <Link to="/entrar" state={{ de: '/grade' }} className="btn-primary mt-space-sm w-full">
+                    <Icone nome="login" className="text-[17px]" /> Entrar
+                  </Link>
+                </>
+              ) : situacao.participa ? (
+                <>
+                  <div className="flex items-center justify-between">
+                    <span className="text-label-sm text-on-surface-variant">Sua meta da semana</span>
+                    <span className="text-label-md text-primary">{pct}%</span>
+                  </div>
+                  <p className="text-body-md text-on-surface font-semibold mt-1">
+                    {cumpriu ? 'Meta cumprida! ✨' : `${feitas} de ${metaTotal} feedbacks enviados`}
+                  </p>
+                  <div
+                    className="w-full h-2 mt-2 rounded-full bg-surface-container-highest overflow-hidden"
+                    role="progressbar"
+                    aria-valuenow={pct}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label="Progresso da meta"
+                  >
+                    <div className="h-full bg-gradient-to-r from-primary-container to-primary rounded-full transition-all" style={{ width: `${pct}%` }} />
+                  </div>
+                  <Link to="/conta" className="inline-flex items-center gap-1 text-label-sm text-primary hover:underline mt-2">
+                    <Icone nome="military_tech" className="text-[15px]" /> Ver selos e totens
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p className="text-body-md text-on-surface font-semibold">Você não tem obra nesta grade</p>
+                  <p className="text-body-sm text-on-surface-variant mt-1">
+                    {perfil?.usuario
+                      ? 'Mesmo assim, pode enviar feedbacks e colecionar selos.'
+                      : 'Cadastre seu @ do Wattpad em Minha conta para o site reconhecer suas obras.'}
+                  </p>
+                  {!perfil?.usuario && (
+                    <Link to="/conta" className="btn-ghost mt-space-sm w-full">Minha conta</Link>
+                  )}
+                </>
+              )}
             </div>
-            <p className="text-body-md text-on-surface font-semibold mt-1">
-              {feitas} de {visiveis.length} leituras marcadas
-            </p>
-            <div
-              className="w-full h-2 mt-2 rounded-full bg-surface-container-highest overflow-hidden"
-              role="progressbar"
-              aria-valuenow={pct}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-label="Progresso das leituras"
-            >
-              <div
-                className="h-full bg-gradient-to-r from-primary-container to-primary rounded-full transition-all"
-                style={{ width: `${pct}%` }}
-              />
-            </div>
-            <p className="text-label-sm font-medium text-on-surface-variant/80 mt-2">
-              As marcações ficam salvas só neste aparelho.
-            </p>
-          </div>
           )}
         </div>
       </section>
@@ -144,8 +170,23 @@ export function Grade() {
                 {g.leituras.map((l) => {
                   const obra = obraPorId(l.obra);
                   if (!obra) return <ObraAusente key={l.obra} id={l.obra} />;
-                  const k = chave(g.nome, l);
-                  return <CardLeitura key={k} obra={obra} leitura={l} lida={lidas.has(k)} onAlternar={() => alternar(k)} />;
+                  const estado: EstadoLeitura = !sessao
+                    ? 'visitante'
+                    : eu && autorDaLeitura(l) === eu
+                      ? 'propria'
+                      : enviados.has(l.obra)
+                        ? 'enviado'
+                        : 'pendente';
+                  return (
+                    <CardLeitura
+                      key={l.obra}
+                      obra={obra}
+                      leitura={l}
+                      estado={estado}
+                      naMeta={situacao.alvos.some((a) => a.leitura.obra === l.obra)}
+                      encerrado={restante.encerrado}
+                    />
+                  );
                 })}
               </div>
             </section>
@@ -191,23 +232,34 @@ export function Grade() {
   );
 }
 
-const chave = (grupo: string, l: Leitura) => `${grupo}::${l.obra}`;
+type EstadoLeitura = 'visitante' | 'propria' | 'enviado' | 'pendente';
+
+const ETIQUETA: Record<EstadoLeitura, { texto: string; icone: string; cls: string }> = {
+  visitante: { texto: 'Na grade', icone: 'flare', cls: 'bg-surface-container-high text-on-surface-variant' },
+  propria: { texto: 'Sua obra', icone: 'edit_note', cls: 'bg-secondary-container/50 text-secondary-fixed-dim' },
+  enviado: { texto: 'Feedback enviado', icone: 'check_circle', cls: 'bg-primary-container/20 text-primary' },
+  pendente: { texto: 'Pendente', icone: 'radio_button_unchecked', cls: 'bg-surface-container-high text-on-surface-variant' },
+};
 
 function CardLeitura({
   obra,
   leitura,
-  lida,
-  onAlternar,
+  estado,
+  naMeta,
+  encerrado,
 }: {
   obra: Obra;
   leitura: Leitura;
-  lida: boolean;
-  onAlternar: () => void;
+  estado: EstadoLeitura;
+  naMeta: boolean;
+  encerrado: boolean;
 }) {
+  const e = ETIQUETA[estado];
+  const feito = estado === 'enviado';
   return (
     <article
       className={`group card p-space-sm sm:p-space-md flex gap-space-md transition-colors ${
-        lida ? 'bg-surface-container-low/60' : 'hover:bg-surface-container'
+        feito ? 'bg-surface-container-low/60' : 'hover:bg-surface-container'
       }`}
     >
       <LinkWattpad
@@ -221,13 +273,11 @@ function CardLeitura({
       </LinkWattpad>
 
       <div className="flex flex-col flex-1 min-w-0 gap-1">
-        <span
-          className={`inline-flex w-fit items-center gap-1 px-2 py-0.5 rounded-full text-label-sm ${
-            lida ? 'bg-primary-container/20 text-primary' : 'bg-surface-container-high text-on-surface-variant'
-          }`}
-        >
-          <Icone nome={lida ? 'check_circle' : 'radio_button_unchecked'} preenchido={lida} className="text-[13px]" />
-          {lida ? 'Lida' : 'Pendente'}
+        <span className="flex flex-wrap items-center gap-1">
+          <span className={`inline-flex w-fit items-center gap-1 px-2 py-0.5 rounded-full text-label-sm ${e.cls}`}>
+            <Icone nome={e.icone} preenchido={feito} className="text-[13px]" />
+            {estado === 'pendente' && !naMeta ? 'Extra' : e.texto}
+          </span>
         </span>
         <h3 className="font-display text-[18px] leading-snug text-on-surface line-clamp-2">
           <Link to={`/obra/${obra.id}`} className="hover:text-primary transition-colors">
@@ -237,22 +287,28 @@ function CardLeitura({
         <Autoria obra={obra} />
         <p className="text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
           <Icone nome="menu_book" className="text-[15px] text-primary" />
-          Meta: capítulos {leitura.capitulos}
+          Capítulos {leitura.capitulos}
         </p>
 
         <div className="mt-auto pt-2 flex flex-wrap gap-2">
-          <LinkWattpad obra={obra} className="btn-primary py-2 px-3">
-            <Icone nome="open_in_new" className="text-[15px]" /> Abrir no Wattpad
+          <LinkWattpad obra={obra} className={`${estado === 'pendente' ? 'btn-ghost' : 'btn-primary'} py-2 px-3`}>
+            <Icone nome="open_in_new" className="text-[15px]" /> Ler no Wattpad
           </LinkWattpad>
-          <button
-            type="button"
-            onClick={onAlternar}
-            aria-pressed={lida}
-            className={`btn-ghost py-2 px-3 ${lida ? 'text-primary' : ''}`}
-          >
-            <Icone nome={lida ? 'undo' : 'task_alt'} className="text-[15px]" />
-            {lida ? 'Desmarcar' : 'Marcar como lida'}
-          </button>
+          {estado === 'pendente' && !encerrado && (
+            <Link to={`/feedback/${obra.id}`} className="btn-primary py-2 px-3">
+              <Icone nome="rate_review" className="text-[15px]" /> Dar feedback
+            </Link>
+          )}
+          {estado === 'enviado' && (
+            <Link to={`/feedback/${obra.id}`} className="btn-ghost py-2 px-3 text-primary">
+              <Icone nome={encerrado ? 'visibility' : 'edit'} className="text-[15px]" /> {encerrado ? 'Ver feedback' : 'Editar feedback'}
+            </Link>
+          )}
+          {estado === 'visitante' && !encerrado && (
+            <Link to="/entrar" state={{ de: `/feedback/${obra.id}` }} className="btn-ghost py-2 px-3">
+              <Icone nome="login" className="text-[15px]" /> Entrar para dar feedback
+            </Link>
+          )}
         </div>
       </div>
     </article>

@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { Carregando } from '../components/Carregando';
 import { Alerta, BotaoEnviar, Campo } from '../components/Formulario';
+import { Conquistas } from '../components/Conquistas';
 import { Icone } from '../components/Icone';
 import { useAuth } from '../lib/auth';
 import { iniciais } from '../lib/iniciais';
@@ -37,7 +38,8 @@ export function Conta() {
       .update({ nome: nome.trim(), usuario: usuario.trim().replace(/^@+/, '') })
       .eq('id', perfil.id);
     setSalvando(false);
-    if (error) setMsg({ tipo: 'erro', texto: traduzirErro(error) });
+    if (error)
+      setMsg({ tipo: 'erro', texto: error.code === '23505' ? 'Esse @ já está em uso por outra conta.' : traduzirErro(error) });
     else {
       setMsg({ tipo: 'sucesso', texto: 'Dados atualizados.' });
       recarregarPerfil();
@@ -107,6 +109,8 @@ export function Conta() {
         </Link>
       )}
 
+      {perfil && <Conquistas usuario={perfil.usuario} />}
+
       {perfil && (
         <form onSubmit={salvar} className="card p-space-md sm:p-space-lg flex flex-col gap-space-md">
           <h2 className="font-display text-headline-sm text-on-surface">Meus dados</h2>
@@ -121,6 +125,7 @@ export function Conta() {
               onChange={(e) => setUsuario(e.target.value.replace(/^@+/, ''))}
               autoCapitalize="none"
               spellCheck={false}
+              dica="Use exatamente o seu @ do Wattpad: é por ele que o site reconhece suas obras na grade."
             />
           </div>
           {msg && <Alerta tipo={msg.tipo}>{msg.texto}</Alerta>}

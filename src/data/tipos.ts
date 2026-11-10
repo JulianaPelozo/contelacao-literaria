@@ -42,6 +42,9 @@ export interface Leitura {
   obra: string;
   /** Meta de leitura do ciclo, ex.: "1 ao 5" */
   capitulos: string;
+  /** Copiados da obra ao salvar a grade (o banco usa o @ para saber de quem é a obra) */
+  titulo?: string;
+  usuario?: string;
 }
 
 export interface Grupo {

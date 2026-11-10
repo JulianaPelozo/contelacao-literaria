@@ -7,7 +7,13 @@ import { autoria, obraPorId } from '../data/obras';
 import type { Obra } from '../data/tipos';
 import { formatarPrazo } from '../lib/tempo';
 import { NaoEncontrada } from './NaoEncontrada';
+import { TextoFeedback } from '../components/Conquistas';
+import { Selo } from '../components/Medalhas';
+import { useAuth } from '../lib/auth';
 import { useCiclo } from '../lib/ciclo';
+import { useFeedbacksRecebidos } from '../lib/feedbacks';
+import { normalizarUsuario } from '../lib/grade';
+import { seloDaObra } from '../lib/selos';
 
 export function ObraDetalhes() {
   const { id = '' } = useParams();
@@ -18,6 +24,9 @@ export function ObraDetalhes() {
 
 function Detalhes({ obra }: { obra: Obra }) {
   const { ciclo: cicloAtual } = useCiclo();
+  const { perfil } = useAuth();
+  const recebidos = useFeedbacksRecebidos({ obra: obra.id });
+  const ehMinha = !!perfil?.usuario && normalizarUsuario(perfil.usuario) === normalizarUsuario(obra.usuario);
   const [sinopseAberta, setSinopseAberta] = useState(false);
   const [aviso, setAviso] = useState('');
   const naGrade = cicloAtual.grupos.flatMap((g) =>
@@ -157,9 +166,46 @@ function Detalhes({ obra }: { obra: Obra }) {
                 </p>
               ))}
               <p className="relative text-body-sm text-on-surface-variant mt-1">Prazo: {formatarPrazo(cicloAtual.prazo)}</p>
-              <Link to="/grade" className="relative mt-space-sm inline-flex items-center gap-1 text-label-md text-primary hover:underline">
-                Ver grade completa <Icone nome="arrow_forward" className="text-[15px]" />
-              </Link>
+              <div className="relative mt-space-sm flex flex-wrap items-center gap-space-md">
+                {!ehMinha && (
+                  <Link to={`/feedback/${obra.id}`} className="btn-primary py-2">
+                    <Icone nome="rate_review" className="text-[16px]" /> Dar feedback
+                  </Link>
+                )}
+                <Link to="/grade" className="inline-flex items-center gap-1 text-label-md text-primary hover:underline">
+                  Ver grade completa <Icone nome="arrow_forward" className="text-[15px]" />
+                </Link>
+              </div>
+            </section>
+          )}
+
+          {recebidos.dados && recebidos.dados.length > 0 && (
+            <section className="flex flex-col gap-space-md">
+              <div className="flex items-center gap-2">
+                <Icone nome="forum" className="text-primary text-[22px]" />
+                <h2 className="font-display text-headline-sm lg:text-headline-md text-on-surface">Feedbacks da Constelação</h2>
+                <span className="ml-auto text-label-md text-primary">{recebidos.dados.length}</span>
+              </div>
+              {recebidos.dados.map((f) => (
+                <article key={f.id} className="card p-space-md sm:p-space-lg flex flex-col gap-space-sm">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-full bg-surface-container-highest text-primary flex items-center justify-center text-label-md">
+                      {iniciais(f.leitor_nome || f.leitor_usuario)}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-body-md text-on-surface font-semibold leading-tight truncate">{f.leitor_nome || `@${f.leitor_usuario}`}</p>
+                      <p className="text-label-sm font-medium text-on-surface-variant">
+                        {f.leitor_usuario && `@${f.leitor_usuario} • `}Ciclo {f.ciclo} •{' '}
+                        {new Date(f.criado_em).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })}
+                      </p>
+                    </div>
+                    <Selo selo={seloDaObra(f.obra)} tamanho="sm" />
+                  </div>
+                  <div className="flex flex-col gap-space-sm text-body-sm sm:text-body-md">
+                    <TextoFeedback f={f} />
+                  </div>
+                </article>
+              ))}
             </section>
           )}
 

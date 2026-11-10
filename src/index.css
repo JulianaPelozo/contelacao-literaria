@@ -50,3 +50,31 @@
   .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
   .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
 }
+
+/* Rastro de brilhos do cursor (src/components/Brilhos.tsx) */
+.brilho {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  line-height: 1;
+  color: rgb(var(--c-primary));
+  text-shadow: 0 0 6px rgb(var(--c-primary) / 0.9), 0 0 12px rgb(var(--c-primary-container) / 0.6);
+  transform: translate(-50%, -50%);
+  animation: brilhar 750ms ease-out forwards;
+}
+@keyframes brilhar {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4) rotate(0deg); }
+  20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1) rotate(0deg); }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + 18px)) scale(0.2) rotate(var(--giro));
+  }
+}
+
+/* Selo recém-conquistado */
+@keyframes surgir-selo {
+  0% { opacity: 0; transform: scale(0.3) rotate(-25deg); }
+  60% { opacity: 1; transform: scale(1.15) rotate(6deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.surgir-selo { animation: surgir-selo 700ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }

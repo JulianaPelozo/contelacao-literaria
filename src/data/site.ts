@@ -59,4 +59,4 @@ export const ritmos = [
 
 /** Instruções exibidas na página da grade sobre como comprovar a leitura. */
 export const comoComprovar =
-  'Depois de ler e comentar no Wattpad, envie os prints dos seus comentários às ADMs pelo grupo da comunidade, até o prazo do ciclo.';
+  'Leia e comente no Wattpad e depois registre aqui o seu feedback 2+1, no botão “Dar feedback” de cada obra, até o prazo do ciclo. Cada feedback rende um selo, e quatro semanas seguidas com a meta cumprida rendem um totem.';

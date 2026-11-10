@@ -18,6 +18,7 @@ O protótipo original (gerado no Stitch) continua em [`prototipo/`](prototipo/).
 | `#/cadastro`  | Cadastro como leitora/autora ou como ADM                                  |
 | `#/conta`     | Minha conta: dados, status da solicitação de ADM, sair                    |
 | `#/adm`       | Painel ADM: aprovar/recusar novas ADMs e ver membros (só ADMs aprovadas)  |
+| `#/feedback/<id>` | Formulário de feedback (Fórmula 2+1) de uma obra da grade (precisa entrar)  |
 | `#/adm/grade` | Editor da grade da semana: criar ciclos, montar grupos e publicar (ADMs)  |
 
 Na vitrine e na grade, **clicar na capa abre a obra direto no Wattpad** (nova aba).
@@ -52,6 +53,25 @@ O título leva para a página de detalhes.
 - **Textos** (dica da semana, regras, frase do rodapé) → [`src/data/site.ts`](src/data/site.ts)
 
 Na grade, cada pessoa pode marcar as leituras como lidas; isso fica salvo apenas no navegador dela.
+
+## Feedbacks, selos e totens
+
+- **Quem participa:** cada conta tem o @ do Wattpad. Se o @ for o de alguma obra da grade, a pessoa participa daquele
+  ciclo, seja ela ADM ou não. Por isso o @ não pode se repetir entre contas.
+- **Meta da semana:** enviar feedback para todas as obras do(s) seu(s) grupo(s), menos as suas, entre o início (segunda)
+  e o prazo (domingo 23:59).
+- **Feedback:** é enviado pelo site, no botão "Dar feedback" da grade. Segue a Fórmula 2+1 (dois pontos fortes e uma
+  sugestão), com no mínimo 150 palavras no total. Dá para editar ou apagar até o prazo. Os feedbacks aparecem na
+  página da obra e no perfil de quem escreveu e de quem recebeu.
+- **Selos:** cada feedback rende um selo. O tipo depende do gênero da obra lida: Vênus (romance), Draco (fantasia),
+  Gêmeos (fanfic), Lua Nova (paranormal), Órion (ação), Nebulosa (mistério), Andrômeda (ficção científica) e Estelar
+  (os demais).
+- **Totens:** cada 4 semanas seguidas com a meta cumprida rendem um totem. Uma semana encerrada sem a meta zera a
+  sequência.
+- **Painel ADM:** mostra o acompanhamento do ciclo vigente, com quem já cumpriu a meta e quanto falta para cada pessoa.
+- **Onde as regras são conferidas:** o banco ([`supabase/schema.sql`](supabase/schema.sql)) confere prazo, autoria,
+  Fórmula 2+1 e palavras mínimas. Se as regras mudarem, ajuste lá e em
+  [`src/data/regrasFeedback.ts`](src/data/regrasFeedback.ts).
 
 ## Contas e ADMs
 

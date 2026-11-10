@@ -3,6 +3,7 @@ import { Layout } from './components/Layout';
 import { AuthProvider } from './lib/auth';
 import { CicloProvider } from './lib/ciclo';
 import { EditorGrade } from './pages/EditorGrade';
+import { FeedbackRota } from './pages/Feedback';
 import { Cadastro } from './pages/Cadastro';
 import { Conta } from './pages/Conta';
 import { Entrar } from './pages/Entrar';
@@ -26,6 +27,7 @@ export default function App() {
           <Route index element={<Inicio />} />
           <Route path="grade" element={<Grade />} />
           <Route path="obra/:id" element={<ObraDetalhes />} />
+          <Route path="feedback/:obraId" element={<FeedbackRota />} />
           <Route path="regras" element={<Regras />} />
           <Route path="entrar" element={<Entrar />} />
           <Route path="cadastro" element={<Cadastro />} />

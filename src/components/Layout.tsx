@@ -6,6 +6,7 @@ import { iniciais } from '../lib/iniciais';
 import { useInstalar } from '../lib/instalar';
 import { tempoRestante, useAgora } from '../lib/tempo';
 import logo from '../assets/logo.webp';
+import { Brilhos } from './Brilhos';
 import { Icone } from './Icone';
 import { SeletorTema } from './SeletorTema';
 import { useCiclo } from '../lib/ciclo';
@@ -27,6 +28,7 @@ const NAV_ADM: ItemNav = { para: '/adm', rotulo: 'ADM', rotuloLongo: 'Painel ADM
 /** Item "Início" também fica ativo nas páginas de obra; "Conta" também em entrar/cadastro. */
 const ativoExtra = (para: string, pathname: string) =>
   (para === '/' && pathname.startsWith('/obra/')) ||
+  (para === '/grade' && pathname.startsWith('/feedback/')) ||
   (para === '/conta' && ['/entrar', '/cadastro', '/redefinir-senha'].includes(pathname)) ||
   (para === '/adm' && pathname.startsWith('/adm/'));
 
@@ -52,6 +54,7 @@ export function Layout() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <Brilhos />
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:px-3 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-on-primary"

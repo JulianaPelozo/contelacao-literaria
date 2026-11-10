@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import { Acompanhamento } from '../components/Acompanhamento';
 import { Carregando } from '../components/Carregando';
 import { Alerta } from '../components/Formulario';
 import { Icone } from '../components/Icone';
@@ -115,6 +116,8 @@ export function PainelAdm() {
         </span>
         <Icone nome="chevron_right" className="text-[24px] text-on-surface-variant group-hover:text-primary" />
       </Link>
+
+      <Acompanhamento />
 
       <Alerta tipo="erro">{erro}</Alerta>
       <Alerta tipo="sucesso">{ok}</Alerta>
