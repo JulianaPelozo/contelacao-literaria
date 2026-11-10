@@ -59,7 +59,7 @@ export function Conta() {
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface-container-high via-surface-container to-surface-container-lowest p-space-md sm:p-space-lg shadow-xl">
         <div className="absolute -right-10 -top-10 w-40 h-40 bg-primary-container/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative flex items-center gap-space-md">
-          <div className="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-display text-headline-md shadow-[0_0_24px_rgba(167,139,250,0.35)] flex-shrink-0">
+          <div className="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-display text-headline-md shadow-[0_0_24px_rgb(var(--c-primary-container)/0.35)] flex-shrink-0">
             {iniciais(perfil?.nome || sessao.user.email || '')}
           </div>
           <div className="min-w-0">

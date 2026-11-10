@@ -1,4 +1,7 @@
 /** Tema portado do protótipo (prototipo/mobile/*.html). */
+import plugin from 'tailwindcss/plugin';
+import { coresTailwind, cssTemas } from './temas.js';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
@@ -7,33 +10,7 @@ export default {
     extend: {
       screens: { xs: '400px' },
       colors: {
-        'tertiary-container': '#9e98bd',
-        'inverse-on-surface': '#312e44',
-        'on-secondary': '#3f008d',
-        'surface-container-lowest': '#0e0b20',
-        primary: '#cebdff',
-        surface: '#141125',
-        tertiary: '#c8c2e9',
-        'surface-bright': '#3a364d',
-        'on-surface': '#e6dffc',
-        'surface-container-highest': '#363248',
-        'surface-variant': '#363248',
-        'outline-variant': '#494552',
-        'surface-container': '#201d32',
-        'on-secondary-container': '#c7aaff',
-        'tertiary-fixed-dim': '#c8c2e9',
-        'secondary-fixed-dim': '#d3bbff',
-        error: '#ffb4ab',
-        'secondary-container': '#5d03ca',
-        'surface-container-low': '#1c192e',
-        'primary-container': '#a78bfa',
-        'on-primary': '#381385',
-        outline: '#948e9d',
-        background: '#141125',
-        'on-surface-variant': '#cac4d4',
-        secondary: '#d3bbff',
-        'surface-container-high': '#2b273d',
-        'on-primary-container': '#3c1989',
+        ...coresTailwind,
         wattpad: '#FF6122',
       },
       spacing: {
@@ -65,5 +42,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [plugin(({ addBase }) => addBase(cssTemas()))],
 };

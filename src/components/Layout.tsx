@@ -6,7 +6,9 @@ import { useAuth } from '../lib/auth';
 import { iniciais } from '../lib/iniciais';
 import { useInstalar } from '../lib/instalar';
 import { tempoRestante, useAgora } from '../lib/tempo';
+import logo from '../assets/logo.webp';
 import { Icone } from './Icone';
+import { SeletorTema } from './SeletorTema';
 
 interface ItemNav {
   para: string;
@@ -55,13 +57,15 @@ export function Layout() {
         Pular para o conteúdo
       </a>
 
-      <header className="fixed top-0 inset-x-0 z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(10,7,27,0.45)]">
+      <header className="fixed top-0 inset-x-0 z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgb(var(--c-sombra)/calc(0.45*var(--fx)))]">
         <div className="h-16 lg:h-20 max-w-7xl mx-auto px-gutter-mobile lg:px-margin flex items-center justify-between gap-space-md">
           <Link to="/" className="flex items-center gap-space-sm group min-w-0">
-            <Icone
-              nome="auto_awesome"
-              preenchido
-              className="text-primary text-[26px] lg:text-[28px] group-hover:rotate-45 transition-transform duration-500"
+            <img
+              src={logo}
+              alt=""
+              width={48}
+              height={48}
+              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full flex-shrink-0 ring-1 ring-primary/30 shadow-[0_0_14px_rgb(var(--c-primary)/calc(0.3*var(--fx)))] group-hover:scale-105 transition-transform duration-500"
             />
             <div className="flex flex-col min-w-0">
               <span className="font-display text-headline-sm text-on-surface tracking-tight truncate">
@@ -95,7 +99,7 @@ export function Layout() {
             })}
           </nav>
 
-          <div className="flex items-center gap-space-sm flex-shrink-0">
+          <div className="flex items-center gap-space-xs sm:gap-space-sm flex-shrink-0">
             <Link
               to="/grade"
               className="hidden xs:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/70 text-secondary-fixed-dim hover:text-on-surface transition-colors"
@@ -105,6 +109,7 @@ export function Layout() {
                 Ciclo {cicloAtual.numero} • {restante.curto.replace('Faltam ', '')}
               </span>
             </Link>
+            <SeletorTema />
             {podeInstalar && (
               <button
                 type="button"
@@ -126,7 +131,7 @@ export function Layout() {
                     {ehAdm ? (perfil?.primordial ? 'ADM Primordial' : 'ADM') : perfil?.usuario ? `@${perfil.usuario}` : ''}
                   </span>
                 </span>
-                <span className="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-md shadow-[0_0_12px_rgba(167,139,250,0.3)]">
+                <span className="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-md shadow-[0_0_12px_rgb(var(--c-primary-container)/0.3)]">
                   {iniciais(perfil?.nome || sessao.user.email || '')}
                 </span>
               </Link>
@@ -139,18 +144,18 @@ export function Layout() {
         </div>
       </header>
 
-      <main id="conteudo" className="flex-1 w-full pt-[calc(4rem+env(safe-area-inset-top,0px))] lg:pt-20 pb-28 lg:pb-0">
+      <main id="conteudo" className="flex-1 w-full pt-[calc(4rem+env(safe-area-inset-top,0px))] lg:pt-20 pb-space-md lg:pb-0">
         <Outlet />
       </main>
 
-      <footer className="hidden lg:block bg-surface-container-lowest/60 mt-space-xl">
-        <div className="max-w-7xl mx-auto px-margin py-space-lg flex items-center justify-between gap-space-md">
-          <div className="flex items-center gap-space-sm text-on-surface-variant">
-            <Icone nome="hotel_class" className="text-primary text-[20px]" />
+      <footer className="bg-surface-container-lowest/60 mt-space-xl mb-[calc(72px+env(safe-area-inset-bottom,0px))] lg:mb-0">
+        <div className="max-w-7xl mx-auto px-gutter-mobile lg:px-margin py-space-lg flex flex-col lg:flex-row items-center lg:justify-between gap-space-md text-center lg:text-left">
+          <div className="flex flex-col lg:flex-row items-center gap-space-sm text-on-surface-variant">
+            <img src={logo} alt="" width={32} height={32} className="w-8 h-8 rounded-full" />
             <span className="font-display text-on-surface">Constelação Literária</span>
-            <span className="text-body-sm">— {frase.replace(/[“”"]/g, '')}</span>
+            <span className="text-body-sm hidden lg:inline">— {frase.replace(/[“”"]/g, '')}</span>
           </div>
-          <nav aria-label="Rodapé" className="flex items-center gap-space-md text-label-md text-on-surface-variant">
+          <nav aria-label="Rodapé" className="flex flex-wrap justify-center items-center gap-x-space-md gap-y-space-xs text-label-md text-on-surface-variant">
             <Link className="hover:text-primary" to="/regras">Código de Conduta</Link>
             <Link className="hover:text-primary" to="/grade">Grade da Semana</Link>
             <a className="hover:text-primary" href="https://www.wattpad.com/" target="_blank" rel="noopener noreferrer">
@@ -158,11 +163,20 @@ export function Layout() {
             </a>
           </nav>
         </div>
+        <div className="max-w-7xl mx-auto px-gutter-mobile lg:px-margin pb-space-lg">
+          <p className="pt-space-md border-t border-outline-variant/30 text-center lg:text-left text-body-sm text-on-surface-variant">
+            <span className="block sm:inline">© {new Date().getFullYear()} Constelação Literária</span>
+            <span className="hidden sm:inline"> · </span>
+            <span className="block sm:inline">
+              Criado por <span className="text-on-surface font-semibold whitespace-nowrap">Juliana Pelozo Pacheco</span>
+            </span>
+          </p>
+        </div>
       </footer>
 
       <nav
         aria-label="Principal"
-        className="lg:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-2xl shadow-[0_-8px_32px_rgba(14,11,32,0.7)]"
+        className="lg:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-2xl shadow-[0_-8px_32px_rgb(var(--c-sombra)/calc(0.7*var(--fx)))]"
       >
         <div className="flex justify-around items-center h-[72px] px-space-xs max-w-md mx-auto">
           {navBaixo.map((n) => (
@@ -173,7 +187,7 @@ export function Layout() {
               className={({ isActive }) =>
                 `flex flex-col items-center justify-center gap-1 min-w-[60px] h-12 transition-all select-none group ${
                   isActive || ativoExtra(n.para, pathname)
-                    ? 'text-primary font-bold drop-shadow-[0_0_10px_rgba(206,189,255,0.65)]'
+                    ? 'text-primary font-bold drop-shadow-[0_0_10px_rgb(var(--c-primary)/calc(0.65*var(--fx)))]'
                     : 'text-on-surface-variant hover:text-on-surface'
                 }`
               }

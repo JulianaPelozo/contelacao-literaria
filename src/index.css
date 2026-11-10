@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  html { background: #141125; color-scheme: dark; }
+  html { background: rgb(var(--c-surface)); }
   body {
     @apply bg-surface font-sans text-body-md text-on-surface antialiased min-h-screen;
     overscroll-behavior-y: none;

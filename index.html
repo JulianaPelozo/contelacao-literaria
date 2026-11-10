@@ -1,12 +1,24 @@
 <!doctype html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR" data-theme="noite">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#141125" />
     <meta name="description" content="Ciclos de leitura recíproca entre autores independentes do Wattpad." />
     <title>Constelação Literária</title>
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <script>
+      // Aplica o tema salvo antes da primeira pintura (ver src/lib/tema.ts).
+      (function () {
+        var cores = { noite: '#141125', claro: '#fbf8ff', dourado: '#0f1222', aurora: '#0c1a1d', sepia: '#f6eedd' };
+        var t = 'noite';
+        try { t = localStorage.getItem('tema') || 'noite'; } catch (e) {}
+        if (t === 'sistema') t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noite';
+        if (!cores[t]) t = 'noite';
+        document.documentElement.setAttribute('data-theme', t);
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', cores[t]);
+      })();
+    </script>
+    <link rel="icon" href="./favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

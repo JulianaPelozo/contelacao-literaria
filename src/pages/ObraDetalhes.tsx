@@ -58,7 +58,7 @@ function Detalhes({ obra }: { obra: Obra }) {
         <div className="flex flex-col gap-space-md lg:sticky lg:top-28">
           <LinkWattpad
             obra={obra}
-            className="group relative block w-full max-w-[280px] lg:max-w-none mx-auto aspect-[3/4] rounded-2xl overflow-hidden bg-surface-container-highest shadow-[0_12px_48px_rgba(93,3,202,0.35)]"
+            className="group relative block w-full max-w-[280px] lg:max-w-none mx-auto aspect-[3/4] rounded-2xl overflow-hidden bg-surface-container-highest shadow-[0_12px_48px_rgb(var(--c-secondary-container)/0.35)]"
           >
             <Capa obra={obra} />
             <SeloWattpad className="absolute top-3 right-3" />
